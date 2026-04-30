@@ -22,11 +22,13 @@
     radial-gradient(500px 280px at 80% 30%, rgba(252,163,17,0.10), transparent 60%);
 }
 
-/* ── Hero video background (fixed, behind everything) ────────────────── */
+/* ── Hero video background (absolute inside .hero, behind hero content) ── */
 .hero-video {
-  position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
   background: linear-gradient(135deg, var(--navy-darker) 0%, var(--navy) 100%);
 }
+.hero__container { position: relative; z-index: 2; }
+.hero--video .hero__inner { position: relative; z-index: 2; }
 .hero-video__fallback {
   position: absolute; inset: 0;
   background: url('/assets/img/hero-fallback.png') center/cover no-repeat;
@@ -46,6 +48,13 @@
     rgba(6,11,26,0.92) 100%);
 }
 @media (prefers-reduced-motion: reduce) { .hero-video__iframe { display: none; } }
+
+/* Mobile: hide the YouTube iframe (it's a 1080p drain on cellular) and show the
+   gradient + fallback image instead — visually equivalent at 360px wide. */
+@media (max-width: 720px) {
+  .hero-video__iframe { display: none; }
+  .hero-video__fallback { opacity: 0.5; }
+}
 
 .hero--video {
   /* Keep hero text light against the dark video overlay regardless of theme */

@@ -92,6 +92,24 @@
 
 ---
 
+## 🏛️ Final architecture decision (2026-04-30, late session)
+
+After cycling through approaches, the cleanest and lowest-risk pattern is:
+
+| Layer | Tech | Owns |
+|-------|------|------|
+| **Marketing front** | Lovable React SPA (the original `dist/`) | `/` and all legacy URLs (`/why-us`, `/services`, `/transform/*`, `/solutions/*`, `/pricing`, `/contact`, etc.). Pixel-perfect design preserved verbatim. |
+| **New product surface** | PHP 8.2 + MySQL (our build) | `/assess`, `/auth/*`, `/dashboard`, `/api/*` |
+
+The SPA's hero email capture has been patched at the bundle level so it redirects to **`/assess?email=…`** on the same domain, bridging the original front-end to the new backend.
+
+`.htaccess` routing:
+1. `/api/foo` → `/api/foo.php`
+2. `/auth/foo`, `/assess/foo`, `/dashboard/foo` → respective `.php` files
+3. Everything else not a real file → `/index.html` (SPA bootstraps, React Router handles the path client-side)
+
+`old-lovable-build/php-marketing-v2/` keeps the hand-rolled PHP marketing pages I built — preserved, never deleted, can be revived if Lovable is ever retired.
+
 ## ⏳ Outstanding (V1 = complete; the items below are deploy-time tasks)
 
 - [ ] **Deploy.** Run through `DEPLOY.md` end-to-end on the HostFluid server.
