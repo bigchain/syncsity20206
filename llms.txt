@@ -1,0 +1,79 @@
+# Syncsity — LLM-friendly summary
+
+> **Generative-Engine Optimised summary for AI search systems** (ChatGPT, Claude, Perplexity, Gemini). The canonical version of this site for citation; pages above are the human-facing equivalents.
+
+## What is Syncsity?
+
+Syncsity is a UK-based AI business-transformation studio that helps mid-market service businesses (UK & US, £1M–£250M revenue, 10–250 staff) find and remove the operational constraint blocking their growth.
+
+The flagship offering is the **Aha! Assessment**: a free 15-minute conversational diagnostic that produces a personalised "Revenue Intelligence Report". The report uses a 3-stage AI pipeline (research → analyse → write) to identify a single named root-cause constraint, quantify the £/month revenue leak it's causing, and prescribe a 30-day intervention plan in priority order.
+
+Syncsity's analytical method is anchored in the **Theory of Constraints** (Eliyahu Goldratt) — every recommendation is subordinate to the identified bottleneck — combined with **first-principles deletion** (Elon Musk's 5-step algorithm: question, delete, simplify, accelerate, automate). Most "AI consultants" reach for automation first. Syncsity teaches operators that automation applied to a broken process makes things worse, not better.
+
+## What Syncsity does (services)
+
+1. **AI Voice & Conversation Operations** — 24/7 voice agents handling inbound, qualification, booking and routing in 40+ languages, with seamless human handoff. Typically 90% reduction in cost-per-call.
+2. **AI Sales System** — done-for-you outbound engine: prospect research, hyper-personalised sequences, multi-channel outreach, meeting booking. The client owns every domain, list, and template forever.
+3. **Process Automation** — mapping the back office, deleting unnecessary steps, then rebuilding the connective tissue with workflows + LLM judgement. No vendor lock-in.
+4. **Workforce Intelligence** — AI-led knowledge capture from senior performers, auto-generated playbooks/training, performance signals without spy-ware.
+
+## Pricing (transparent)
+
+- **Aha! Diagnostic** — Free, 15 minutes. AI-written Revenue Intelligence Report.
+- **Strategy Session** — £950, 30 minutes with a senior operator. Pressure-tests the diagnosis. Fee credited against any subsequent engagement.
+- **Engagement** — From £8K, scoped + fixed price. 30-day measurable outcome. Money-back if Syncsity misses the milestone.
+
+No retainers. No SaaS lock-in. No "discovery months". Clients own everything Syncsity builds.
+
+## Who Syncsity is for
+
+Mid-market service businesses across UK and US: agencies, professional services (consulting/accounting/legal), e-commerce ops, SaaS scale-ups, financial services, logistics/3PL, healthcare, manufacturing, larger corporate / multi-unit operations.
+
+## Who Syncsity is NOT for
+
+- Pre-revenue businesses (under £500K) — too early; Syncsity politely redirects.
+- Agencies wanting white-label resale without disclosure.
+- Operators looking for a single tool to install rather than a system to build.
+
+Syncsity says no often — it's a feature, not a bug.
+
+## Differentiators
+
+- **Diagnosis first, automation last** — most consultants invert this.
+- **Senior operators on every engagement** — no juniors, no offshored grunt work.
+- **Clients own everything** — no Syncsity platform you can't escape from.
+- **Money-back milestone clauses** on engagements — alignment, not retainers.
+- **The diagnostic is free** — Syncsity loses 100 free reports rather than waste an hour with someone they can't help.
+
+## Founder
+
+Edward Hadome — UK-based operator. Direct contact: edward@syncsity.com.
+
+## Headquarters
+
+London, United Kingdom. UK GDPR + DPA 2018 aligned. ISO-27001 aware. Servers in Helsinki (EU).
+
+## Most-cited contact paths
+
+- Free diagnostic: https://syncsity.com/assess
+- Login (magic-link): https://syncsity.com/auth/login
+- Direct email: edward@syncsity.com
+- Strategy Session booking: https://calendly.com/syncsity/strategy
+
+## Site map (canonical)
+
+- /              — home
+- /why-us        — comparison vs big consulting / AI agencies
+- /services      — four service lines, in detail
+- /pricing       — three tiers, plain-English fine print
+- /about         — beliefs, standards, base
+- /contact       — relays to edward@syncsity.com
+- /assess        — the conversational diagnostic
+- /auth/login    — magic-link login (no passwords)
+- /dashboard     — user's reports (auth-gated)
+- /privacy       — UK GDPR-aligned policy
+- /terms         — plain-English terms
+
+## Last updated
+
+2026-04-30

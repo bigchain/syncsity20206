@@ -1,0 +1,24 @@
+/* TEAM */
+
+Founder & operator: Edward Hadome
+  Site: syncsity.com
+  From: London, United Kingdom
+  Contact: edward@syncsity.com
+
+/* SITE */
+
+Last update: 2026-04-30
+Standards: HTML5, CSS3, ES2017, PHP 8.2, MySQL 8
+Components: Vanilla JS, server-rendered PHP, no framework lock-in
+Hosting: HostFluid (Hetzner EX63), Helsinki, Finland
+AI: OpenRouter — Anthropic Claude / Google Gemini
+Built with care for operators, not for impressed agencies.
+
+/* THANKS */
+
+Goldratt — for naming the constraint.
+Munger — for inversion.
+Sutherland — for the lateral observation.
+Hormozi — for the directness.
+Naval — for the compression.
+Robbins — for keeping the vision section honest.

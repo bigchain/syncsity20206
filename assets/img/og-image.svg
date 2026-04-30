@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#060b1a"/>
+      <stop offset="1" stop-color="#14213d"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="240" cy="180" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3385DF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#3385DF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="980" cy="500" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCA311" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#FCA311" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ringg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3385DF"/>
+      <stop offset="1" stop-color="#FCA311"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- subtle grid -->
+  <g stroke="rgba(255,255,255,0.04)">
+    <path d="M0 80 H1200 M0 160 H1200 M0 240 H1200 M0 320 H1200 M0 400 H1200 M0 480 H1200 M0 560 H1200"/>
+    <path d="M80 0 V630 M160 0 V630 M240 0 V630 M320 0 V630 M400 0 V630 M480 0 V630 M560 0 V630 M640 0 V630 M720 0 V630 M800 0 V630 M880 0 V630 M960 0 V630 M1040 0 V630 M1120 0 V630"/>
+  </g>
+
+  <!-- mark -->
+  <g transform="translate(80,80)">
+    <circle cx="32" cy="32" r="28" stroke="url(#ringg)" stroke-width="4" fill="none"/>
+    <path d="M16 38c4 3 9 5 14 5 7 0 12-3.7 12-9 0-4.3-3-7-10-8.5l-4.5-1c-6-1.5-9.5-4.6-9.5-9.5 0-5 4.5-8 10-8 4.5 0 8 1.7 10 4" stroke="url(#ringg)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <text x="80" y="42" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#ffffff" letter-spacing="-1">Syncsity</text>
+  </g>
+
+  <!-- eyebrow -->
+  <text x="80" y="240" font-family="JetBrains Mono, monospace" font-size="22" letter-spacing="6" fill="#FCA311" font-weight="500">REVENUE INTELLIGENCE · UK</text>
+
+  <!-- headline -->
+  <text x="80" y="320" font-family="Inter, system-ui, sans-serif" font-size="80" font-weight="800" letter-spacing="-3" fill="#ffffff">In 15 minutes,</text>
+  <text x="80" y="412" font-family="Inter, system-ui, sans-serif" font-size="80" font-weight="800" letter-spacing="-3" fill="#ffffff">we find the constraint</text>
+  <text x="80" y="504" font-family="Inter, system-ui, sans-serif" font-size="80" font-weight="800" letter-spacing="-3" fill="#3385DF">costing you £10K+ a month.</text>
+
+  <!-- subhead -->
+  <text x="80" y="560" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500" fill="rgba(255,255,255,0.7)">Free Revenue Intelligence Report. No call required.</text>
+
+  <!-- url -->
+  <text x="1118" y="585" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="18" fill="rgba(255,255,255,0.6)" letter-spacing="2">syncsity.com/assess</text>
+</svg>

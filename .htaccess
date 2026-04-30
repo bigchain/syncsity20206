@@ -1,0 +1,105 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# Syncsity — Apache config
+# Production: cPanel ea-php82 on HostFluid (Hetzner EX63)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ─── PHP handler ───────────────────────────────────────────────────────────────
+# php -- BEGIN cPanel-generated handler, do not edit
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+# ─── Default page ──────────────────────────────────────────────────────────────
+DirectoryIndex index.php index.html
+
+# ─── Compression ───────────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml font/truetype font/opentype application/vnd.ms-fontobject
+</IfModule>
+
+# ─── Browser caching ───────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 30 days"
+    ExpiresByType application/javascript "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|svg|png|jpg|jpeg|webp|woff2|ttf)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "private, max-age=0, must-revalidate"
+    </FilesMatch>
+
+    # Security headers (CSP is set per-page in lib/config.php where it can include nonces)
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header unset X-Powered-By
+    Header unset Server
+</IfModule>
+
+# ─── Block sensitive files ─────────────────────────────────────────────────────
+<FilesMatch "\.(env|sql|md|log|ini|sh|bak|swp|conf|json|lock)$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(composer|package|CLAUDE|DEPLOY|HostFluid).*">
+    Require all denied
+</FilesMatch>
+
+# Storage directory — never reachable from web
+RewriteRule ^storage/?.* - [F,L]
+RewriteRule ^prompts/?.* - [F,L]
+RewriteRule ^lib/?.* - [F,L]
+RewriteRule ^database/?.* - [F,L]
+RewriteRule ^emails/?.* - [F,L]
+RewriteRule ^old-lovable-build/?.* - [F,L]
+
+# ─── Pretty URLs ───────────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Don't rewrite real files / directories
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Force HTTPS in production (uncomment after SSL is live)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # Strip trailing slash unless the path is a real directory
+    # (so /pricing/ → /pricing, but /assess/ stays so DirectoryIndex serves /assess/index.php)
+    RewriteCond %{REQUEST_URI} !^/$
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+    # /foo → /foo.php  (root-level pages)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+    RewriteRule ^([a-zA-Z0-9_-]+)$ /$1.php [L,QSA]
+
+    # /folder/page → /folder/page.php  (e.g. /auth/login, /api/magic-link, /assess/processing)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/$1/$2.php -f
+    RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ /$1/$2.php [L,QSA]
+
+    # 404 fallback
+    ErrorDocument 404 /404.php
+</IfModule>

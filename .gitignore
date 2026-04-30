@@ -1,0 +1,39 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+service-account*.json
+
+# Storage / runtime
+storage/sessions/*
+storage/logs/*
+storage/cache/*
+!storage/sessions/.gitkeep
+!storage/logs/.gitkeep
+!storage/cache/.gitkeep
+
+# Composer (if added later)
+vendor/
+composer.phar
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Backup files
+*.bak
+*.tmp
+*~
+
+# Old build (kept locally for reference, never deployed)
+old-lovable-build/
+
+# Logs
+*.log

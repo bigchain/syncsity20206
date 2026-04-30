@@ -1,0 +1,63 @@
+# Syncsity — robots.txt
+# Allow public marketing pages. Block private surfaces.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /assess/processing
+Disallow: /assess/report
+Disallow: /dashboard/
+Disallow: /old-lovable-build/
+
+Sitemap: https://syncsity.com/sitemap.xml
+
+# Search bots (explicit allow + same private-surface block)
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /assess/report
+Disallow: /dashboard/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+Disallow: /assess/report
+Disallow: /dashboard/
+
+# AI / LLM crawlers — explicitly allowed for marketing pages.
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+Disallow: /assess/report
+Disallow: /dashboard/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+Disallow: /assess/report
+Disallow: /dashboard/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+Disallow: /assess/report
+Disallow: /dashboard/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
