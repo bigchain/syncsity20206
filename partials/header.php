@@ -13,28 +13,16 @@ $loggedIn = is_logged_in();
   <div class="container">
     <nav class="nav" aria-label="Primary">
       <a href="/" class="nav__brand" aria-label="Syncsity home">
-        <svg class="nav__brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <circle cx="16" cy="16" r="13" stroke="url(#nh1)" stroke-width="2.4" fill="none"/>
-          <path d="M9 19c1.6 1.2 4 2 6.5 2 3 0 5.5-1.6 5.5-4 0-2-1.6-3.2-4.6-4l-2-.5c-3-.7-4.9-2.3-4.9-4.8C9.5 5.2 11.8 4 14.5 4c2.2 0 4.2.8 5.5 2"
-                stroke="url(#nh2)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <defs>
-            <linearGradient id="nh1" x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#3385DF"/><stop offset="1" stop-color="#FCA311"/>
-            </linearGradient>
-            <linearGradient id="nh2" x1="9" y1="4" x2="21" y2="21" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#FCA311"/><stop offset="1" stop-color="#3385DF"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span class="nav__brand-text">Syncsity</span>
+        <img src="/assets/img/logo.png" alt="Syncsity" class="nav__brand-img" width="160" height="40">
       </a>
 
       <ul class="nav__list">
-        <li><a href="/why-us"   class="<?= $activeNav === 'why-us'   ? 'is-active' : '' ?>">Why us</a></li>
-        <li><a href="/services" class="<?= $activeNav === 'services' ? 'is-active' : '' ?>">Services</a></li>
-        <li><a href="/pricing"  class="<?= $activeNav === 'pricing'  ? 'is-active' : '' ?>">Pricing</a></li>
-        <li><a href="/about"    class="<?= $activeNav === 'about'    ? 'is-active' : '' ?>">About</a></li>
-        <li><a href="/contact"  class="<?= $activeNav === 'contact'  ? 'is-active' : '' ?>">Contact</a></li>
+        <li><a href="/services"  class="<?= $activeNav === 'services' ? 'is-active' : '' ?>">Transform</a></li>
+        <li><a href="/services"  class="<?= $activeNav === 'services' ? 'is-active' : '' ?>">Solutions</a></li>
+        <li><a href="/assess"    class="<?= $activeNav === 'diagnose' ? 'is-active' : '' ?>">Diagnose</a></li>
+        <li><a href="/why-us"    class="<?= $activeNav === 'why-us'   ? 'is-active' : '' ?>">Why Syncsity</a></li>
+        <li><a href="/pricing"   class="<?= $activeNav === 'pricing'  ? 'is-active' : '' ?>">Pricing</a></li>
+        <li><a href="/contact"   class="<?= $activeNav === 'contact'  ? 'is-active' : '' ?>">Contact</a></li>
       </ul>
 
       <div class="nav__cta">
@@ -48,7 +36,7 @@ $loggedIn = is_logged_in();
         <?php else: ?>
           <a href="/auth/login" class="btn btn--ghost btn--sm">Login</a>
         <?php endif; ?>
-        <a href="/assess" class="btn btn--primary btn--sm">Free assessment <span class="arrow">→</span></a>
+        <a href="/assess" class="btn btn--accent btn--sm">Book a Session <span class="arrow">→</span></a>
 
         <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>

@@ -22,6 +22,42 @@
     radial-gradient(500px 280px at 80% 30%, rgba(252,163,17,0.10), transparent 60%);
 }
 
+/* ── Hero video background (fixed, behind everything) ────────────────── */
+.hero-video {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  background: linear-gradient(135deg, var(--navy-darker) 0%, var(--navy) 100%);
+}
+.hero-video__fallback {
+  position: absolute; inset: 0;
+  background: url('/assets/img/hero-fallback.png') center/cover no-repeat;
+  opacity: 0.35;
+}
+.hero-video__iframe {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 100vw; height: 56.25vw;          /* 16:9 */
+  min-width: 177.77vh; min-height: 100vh; /* fill on tall screens */
+  pointer-events: none; border: 0;
+}
+.hero-video__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(6,11,26,0.62) 0%,
+    rgba(6,11,26,0.78) 60%,
+    rgba(6,11,26,0.92) 100%);
+}
+@media (prefers-reduced-motion: reduce) { .hero-video__iframe { display: none; } }
+
+.hero--video {
+  /* Keep hero text light against the dark video overlay regardless of theme */
+  --text:          rgba(255,255,255,0.96);
+  --text-muted:    rgba(255,255,255,0.78);
+  --text-dim:      rgba(255,255,255,0.55);
+  --surface:       rgba(255,255,255,0.06);
+  --bg-elev-1:     rgba(255,255,255,0.04);
+  --border:        rgba(255,255,255,0.14);
+  --border-strong: rgba(255,255,255,0.24);
+}
+
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 .hero {
   position: relative;

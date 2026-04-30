@@ -13,24 +13,34 @@ include SYNC_ROOT . '/partials/header.php';
 ?>
 
 <!-- ── HERO ───────────────────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="bg-grid"></div>
-  <div class="bg-glow"></div>
+<!-- Background video (fixed, behind everything) -->
+<div class="hero-video" aria-hidden="true">
+  <div class="hero-video__fallback"></div>
+  <iframe
+    id="background-video"
+    class="hero-video__iframe"
+    src="https://www.youtube-nocookie.com/embed/b-lHRWWUpsY?controls=0&autoplay=1&mute=1&loop=1&playlist=b-lHRWWUpsY&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&vq=hd1080"
+    title="Background"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    loading="lazy"></iframe>
+  <div class="hero-video__overlay"></div>
+</div>
 
+<section class="hero hero--video">
   <div class="container">
     <div class="hero__inner">
       <span class="pill pill--accent">★ Free Revenue Intelligence Report — no call required</span>
 
       <h1 class="hero__title" data-reveal>
-        <span class="line">We find the constraint.</span>
-        <span class="line accent">We remove the waste.</span>
-        <span class="line">You break through.</span>
+        <span class="line">We Find The Constraints.</span>
+        <span class="line accent">We Remove The Waste.</span>
+        <span class="line">You Achieve Breakthrough Growth.</span>
       </h1>
 
       <p class="lead hero__lede">
-        Most "AI consultants" sell you tools. We diagnose what's actually blocking your business —
-        then apply automation only where it multiplies results. Trusted by ambitious operators
-        across the UK and US.
+        Trusted by ambitious companies. First we diagnose what's blocking your growth.
+        Then we apply AI and automation only where it multiplies results.
       </p>
 
       <!-- AHA email capture -->
