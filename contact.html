@@ -32,8 +32,15 @@
           <p class="text-gray-600 mb-8">
             Ready to transform your business with AI and operational excellence? Fill out the form below and our team will get back to you shortly.
           </p>
-          
-          <form>
+
+          <div id="contact-flash" style="display:none;" class="mb-6 px-4 py-3 rounded-md"></div>
+
+          <form action="/api/contact" method="POST">
+            <!-- honeypot (hidden from humans, bots fill it) -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="hidden" name="gdpr_consent" value="1">
+            <!-- combined name set client-side from firstName + lastName -->
+            <input type="hidden" name="name" id="hidden-name">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
@@ -81,8 +88,36 @@
               <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                 Send Message
               </button>
+              <span class="ml-3 text-sm text-gray-500">→ edward@syncsity.com</span>
             </div>
           </form>
+
+          <script>
+          (function(){
+            // Combine firstName + lastName into the hidden 'name' field on submit.
+            var form = document.querySelector('form[action="/api/contact"]');
+            if (form) {
+              form.addEventListener('submit', function(){
+                var fn = (document.getElementById('firstName')||{}).value || '';
+                var ln = (document.getElementById('lastName') ||{}).value || '';
+                var hn = document.getElementById('hidden-name');
+                if (hn) hn.value = (fn + ' ' + ln).trim();
+              });
+            }
+            // Show success/error banner from URL params.
+            var qs = new URLSearchParams(location.search);
+            var flash = document.getElementById('contact-flash');
+            if (flash && qs.get('sent') === '1') {
+              flash.style.display = 'block';
+              flash.style.cssText += 'background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;';
+              flash.textContent = "Thanks — message received. We'll be in touch within one business day.";
+            } else if (flash && qs.get('error')) {
+              flash.style.display = 'block';
+              flash.style.cssText += 'background:#fef2f2;border:1px solid #fca5a5;color:#991b1b;';
+              flash.textContent = qs.get('error');
+            }
+          })();
+          </script>
         </div>
       </div>
     </div>

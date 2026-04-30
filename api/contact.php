@@ -21,7 +21,7 @@ require_once SYNC_ROOT . '/lib/sheets.php';
 
 set_exception_handler(function (Throwable $e) {
     error_log('[contact FATAL] ' . $e->getMessage());
-    redirect('/contact?error=' . urlencode('Server error. Please try again.'));
+    redirect('/contact.html?error=' . urlencode('Server error. Please try again.'));
 });
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -29,15 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Method not allowed.');
 }
 
-if (!csrf_verify($_POST['_csrf'] ?? '')) {
-    redirect('/contact?error=' . urlencode('Session expired — please refresh and try again.'));
+// CSRF is required when present (PHP-rendered forms); optional for the static
+// contact.html form (which can't generate a session token). When CSRF isn't
+// supplied we fall back to honeypot + stricter rate limiting.
+$hasCsrf = !empty($_POST['_csrf']);
+if ($hasCsrf && !csrf_verify((string)$_POST['_csrf'])) {
+    redirect('/contact.html?error=' . urlencode('Session expired — please refresh and try again.'));
 }
 
 // Honeypot
 if (!empty($_POST['website'])) {
     error_log('[contact] honeypot triggered');
-    redirect('/contact?sent=1'); // appear normal to bots
+    redirect('/contact.html?sent=1'); // appear normal to bots
 }
+
+// Combine firstName + lastName when 'name' isn't set (static form pattern)
+$nameRaw = (string)($_POST['name'] ?? '');
+if ($nameRaw === '') {
+    $first = clean($_POST['firstName'] ?? '', 80);
+    $last  = clean($_POST['lastName']  ?? '', 80);
+    $nameRaw = trim($first . ' ' . $last);
+}
+$_POST['name'] = $nameRaw; // so the rest of the file works unchanged
 
 $name    = clean($_POST['name']    ?? '', 120);
 $email   = clean_email($_POST['email'] ?? '');
@@ -47,18 +60,22 @@ $message = trim((string)($_POST['message'] ?? ''));
 $message = mb_substr($message, 0, 5000);
 $gdpr    = !empty($_POST['gdpr_consent']) ? 1 : 0;
 
-if (mb_strlen($name) < 2)            redirect('/contact?error=' . urlencode('Please tell us your name.'));
-if (!$email)                          redirect('/contact?error=' . urlencode('Please enter a valid email address.'));
-if (mb_strlen($message) < 10)        redirect('/contact?error=' . urlencode('Please write a slightly longer message.'));
-if (!$gdpr)                          redirect('/contact?error=' . urlencode('Please tick the consent box.'));
+if (mb_strlen($name) < 2)            redirect('/contact.html?error=' . urlencode('Please tell us your name.'));
+if (!$email)                          redirect('/contact.html?error=' . urlencode('Please enter a valid email address.'));
+if (mb_strlen($message) < 10)        redirect('/contact.html?error=' . urlencode('Please write a slightly longer message.'));
+if (!$gdpr)                          redirect('/contact.html?error=' . urlencode('Please tick the consent box.'));
 
-$validSubjects = ['Engagement','Strategy session','Partnership','Press','General'];
-if (!in_array($subject, $validSubjects, true)) $subject = 'General';
+// Accept any non-empty subject (the static form has different options like
+// 'AI Voice Solutions', 'Lead Generation', etc. — keep them as-is).
+if ($subject === '') $subject = 'General';
 
-// Rate limit: 5 per IP per hour
+// When CSRF isn't supplied, tighten rate limit (3/hr instead of 5/hr).
+$rlMax = $hasCsrf ? (int)env('CONTACT_PER_IP_PER_HOUR', 5) : 3;
+
+// Rate limit by IP per hour (tightened above when CSRF not present)
 $rlKey = 'contact:' . hash_ip();
-if (!rate_limit($rlKey, (int)env('CONTACT_PER_IP_PER_HOUR', 5), 3600)) {
-    redirect('/contact?error=' . urlencode('Too many messages from this network. Please try again in an hour.'));
+if (!rate_limit($rlKey, $rlMax, 3600)) {
+    redirect('/contact.html?error=' . urlencode('Too many messages from this network. Please try again in an hour.'));
 }
 
 // Persist
@@ -113,4 +130,4 @@ if ($relayed) {
     DB::run("UPDATE contact_messages SET relayed_to_email = 1 WHERE id = ?", [$id]);
 }
 
-redirect('/contact?sent=1');
+redirect('/contact.html?sent=1');
