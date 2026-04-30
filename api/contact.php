@@ -29,18 +29,25 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Method not allowed.');
 }
 
+// Where to bounce the user after success/error. Defaults to /contact.html.
+// Static forms (contact.html, demo.html, booking.html) pass _return so each
+// lands back on its own page.
+$returnPage = (string)($_POST['_return'] ?? '/contact.html');
+$allowedReturns = ['/contact.html', '/demo.html', '/booking.html', '/contact'];
+if (!in_array($returnPage, $allowedReturns, true)) $returnPage = '/contact.html';
+
 // CSRF is required when present (PHP-rendered forms); optional for the static
 // contact.html form (which can't generate a session token). When CSRF isn't
 // supplied we fall back to honeypot + stricter rate limiting.
 $hasCsrf = !empty($_POST['_csrf']);
 if ($hasCsrf && !csrf_verify((string)$_POST['_csrf'])) {
-    redirect('/contact.html?error=' . urlencode('Session expired — please refresh and try again.'));
+    redirect($returnPage . '?error=' . urlencode('Session expired — please refresh and try again.'));
 }
 
 // Honeypot
 if (!empty($_POST['website'])) {
     error_log('[contact] honeypot triggered');
-    redirect('/contact.html?sent=1'); // appear normal to bots
+    redirect($returnPage . '?sent=1'); // appear normal to bots
 }
 
 // Combine firstName + lastName when 'name' isn't set (static form pattern)
@@ -60,10 +67,10 @@ $message = trim((string)($_POST['message'] ?? ''));
 $message = mb_substr($message, 0, 5000);
 $gdpr    = !empty($_POST['gdpr_consent']) ? 1 : 0;
 
-if (mb_strlen($name) < 2)            redirect('/contact.html?error=' . urlencode('Please tell us your name.'));
-if (!$email)                          redirect('/contact.html?error=' . urlencode('Please enter a valid email address.'));
-if (mb_strlen($message) < 10)        redirect('/contact.html?error=' . urlencode('Please write a slightly longer message.'));
-if (!$gdpr)                          redirect('/contact.html?error=' . urlencode('Please tick the consent box.'));
+if (mb_strlen($name) < 2)            redirect($returnPage . '?error=' . urlencode('Please tell us your name.'));
+if (!$email)                          redirect($returnPage . '?error=' . urlencode('Please enter a valid email address.'));
+if (mb_strlen($message) < 10)        redirect($returnPage . '?error=' . urlencode('Please write a slightly longer message.'));
+if (!$gdpr)                          redirect($returnPage . '?error=' . urlencode('Please tick the consent box.'));
 
 // Accept any non-empty subject (the static form has different options like
 // 'AI Voice Solutions', 'Lead Generation', etc. — keep them as-is).
@@ -75,7 +82,7 @@ $rlMax = $hasCsrf ? (int)env('CONTACT_PER_IP_PER_HOUR', 5) : 3;
 // Rate limit by IP per hour (tightened above when CSRF not present)
 $rlKey = 'contact:' . hash_ip();
 if (!rate_limit($rlKey, $rlMax, 3600)) {
-    redirect('/contact.html?error=' . urlencode('Too many messages from this network. Please try again in an hour.'));
+    redirect($returnPage . '?error=' . urlencode('Too many messages from this network. Please try again in an hour.'));
 }
 
 // Persist
@@ -130,4 +137,4 @@ if ($relayed) {
     DB::run("UPDATE contact_messages SET relayed_to_email = 1 WHERE id = ?", [$id]);
 }
 
-redirect('/contact.html?sent=1');
+redirect($returnPage . '?sent=1');

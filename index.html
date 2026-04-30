@@ -171,8 +171,9 @@
     
     <div id="root"></div>
     
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <!-- Syncsity SPA shim: injects auth-aware nav buttons (Dashboard/Login + Free assessment)
+         and bridges the SPA to our PHP product surface (/auth/login, /dashboard, /assess). -->
+    <script src="/assets/js/spa-shim.js" defer></script>
     
     <!-- CUSTOMER.IO TRACKING - REPLACE SITE_ID WITH YOUR ACTUAL ID -->
     <!-- <script type="text/javascript">

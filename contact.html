@@ -38,6 +38,7 @@
           <form action="/api/contact" method="POST">
             <!-- honeypot (hidden from humans, bots fill it) -->
             <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="hidden" name="_return" value="/contact.html">
             <input type="hidden" name="gdpr_consent" value="1">
             <!-- combined name set client-side from firstName + lastName -->
             <input type="hidden" name="name" id="hidden-name">
