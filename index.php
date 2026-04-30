@@ -13,7 +13,6 @@ include SYNC_ROOT . '/partials/header.php';
 ?>
 
 <!-- ── HERO ───────────────────────────────────────────────────────────── -->
-<!-- Background video (fixed, behind everything) -->
 <div class="hero-video" aria-hidden="true">
   <div class="hero-video__fallback"></div>
   <iframe
@@ -77,6 +76,120 @@ include SYNC_ROOT . '/partials/header.php';
   </div>
 </section>
 
+<!-- ── THREE FUNNEL CARDS (Diagnose / Solutions / Transform) ───────────── -->
+<section class="section">
+  <div class="container">
+    <div class="funnel-grid">
+      <a href="/assess" class="funnel-card" data-reveal>
+        <div class="funnel-card__top">
+          <div class="funnel-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <div>
+            <span class="funnel-card__num">01</span>
+            <h3>Diagnose</h3>
+          </div>
+        </div>
+        <h4 class="funnel-card__h">Find Your £50M Opportunity</h4>
+        <p class="funnel-card__p">Uncover the hidden constraints blocking your exponential growth.</p>
+        <ul class="funnel-card__list">
+          <li>Executive strategy session</li>
+          <li>Bottleneck analysis</li>
+          <li>Competitive positioning</li>
+          <li>90-day quick wins</li>
+        </ul>
+        <span class="funnel-card__cta">Book Diagnostic Session</span>
+      </a>
+
+      <a href="/services" class="funnel-card" data-reveal>
+        <div class="funnel-card__top">
+          <div class="funnel-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div>
+            <span class="funnel-card__num">02</span>
+            <h3>Solutions</h3>
+          </div>
+        </div>
+        <h4 class="funnel-card__h">Fix Specific Problems</h4>
+        <p class="funnel-card__p">Deploy targeted AI solutions for immediate impact.</p>
+        <ul class="funnel-card__list">
+          <li>AI Voice Operations</li>
+          <li>AI Sales System</li>
+          <li>Workforce Intelligence</li>
+          <li>Custom Development</li>
+        </ul>
+        <span class="funnel-card__cta">Explore Solutions</span>
+      </a>
+
+      <a href="/how-we-work" class="funnel-card" data-reveal>
+        <div class="funnel-card__top">
+          <div class="funnel-card__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+          </div>
+          <div>
+            <span class="funnel-card__num">03</span>
+            <h3>Transform</h3>
+          </div>
+        </div>
+        <h4 class="funnel-card__h">Become The Market Leader</h4>
+        <p class="funnel-card__p">Complete business transformation with C-suite partnership.</p>
+        <ul class="funnel-card__list">
+          <li>Market Domination</li>
+          <li>Revenue Acceleration</li>
+          <li>Operational Supremacy</li>
+          <li>Custom Programmes</li>
+        </ul>
+        <span class="funnel-card__cta">Start Transformation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLIENT LOGOS — "Clients We've Worked With" ────────────────────── -->
+<section class="section section--tight clients">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2>Clients We've Worked With</h2>
+      <div class="clients__rule" aria-hidden="true"></div>
+      <p>Some of the clients we've had the privilege to collaborate with directly and indirectly.</p>
+    </div>
+
+    <div class="clients__marquee" data-reveal>
+      <div class="clients__track">
+        <?php
+        $logos = [
+          ['name' => 'PE',     'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/pe.jpg'],
+          ['name' => 'SEC',    'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/sec.jpg'],
+          ['name' => 'KEW',    'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/kew.jpg'],
+          ['name' => 'Elite',  'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/elite.jpg'],
+          ['name' => 'Lola',   'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/lola.jpg'],
+          ['name' => 'AIS',    'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/ais.jpg'],
+          ['name' => 'SR-1',   'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/sr-1.jpg'],
+          ['name' => 'Nejob',  'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/nejob.jpg'],
+          ['name' => 'Lavy',   'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/lavy.jpg'],
+          ['name' => 'Rosco',  'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/rosco.jpg'],
+          ['name' => 'WU',     'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/wu.jpg'],
+          ['name' => 'SO',     'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/so.jpg'],
+          ['name' => 'Medi',   'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/medi.jpg'],
+          ['name' => 'Stell',  'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/stell.jpg'],
+          ['name' => 'TTI',    'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/tti.jpg'],
+          ['name' => 'TDO',    'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/tdo.jpg'],
+          ['name' => 'Hadav',  'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/hadav.jpg'],
+          ['name' => 'SR',     'src' => 'https://www.syncsity.com/wp-content/uploads/2024/07/sr.jpg'],
+        ];
+        // Render the list twice so the CSS marquee loops seamlessly
+        foreach ([0, 1] as $loop):
+          foreach ($logos as $lg): ?>
+            <div class="clients__logo" aria-hidden="<?= $loop ? 'true' : 'false' ?>">
+              <img src="<?= e($lg['src']) ?>" alt="<?= $loop ? '' : e($lg['name'] . ' logo') ?>" loading="lazy" width="160" height="80">
+            </div>
+        <?php endforeach; endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── STATS ─────────────────────────────────────────────────────────── -->
 <section class="section section--tight">
   <div class="container">
@@ -101,176 +214,27 @@ include SYNC_ROOT . '/partials/header.php';
   </div>
 </section>
 
-<!-- ── THE THREE THINGS ─────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">The Syncsity method</span>
-      <h2>Three moves. In order. No fluff.</h2>
-      <p>Most growth advice skips the first two and starts with tools. That's why most "transformation" projects burn cash and produce nothing.</p>
-    </div>
-
-    <div class="grid-3">
-      <div class="card card--feature card--hover" data-reveal>
-        <div class="card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </div>
-        <h3>1. Find the constraint</h3>
-        <p class="muted">
-          The thing throttling growth is rarely the thing you think it is. We diagnose your operation —
-          revenue, ops, retention, founder time — and name the exact bottleneck. With evidence.
-        </p>
-      </div>
-      <div class="card card--feature card--hover" data-reveal>
-        <div class="card__icon card__icon--orange">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18l-2 13H5L3 6Z"/><path d="M8 6V4a4 4 0 0 1 8 0v2"/></svg>
-        </div>
-        <h3>2. Remove the waste</h3>
-        <p class="muted">
-          Then we cut. Manual ops that should be automated. Decisions made on vibes that should be data.
-          Hand-offs that should be deletions. Every removed inefficiency widens the constraint.
-        </p>
-      </div>
-      <div class="card card--feature card--hover" data-reveal>
-        <div class="card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 12 4-4 4 4 6-6"/></svg>
-        </div>
-        <h3>3. Compound the breakthrough</h3>
-        <p class="muted">
-          With the bottleneck gone and the waste cut, AI and automation finally do what they're supposed
-          to: multiply. We layer them in only where they compound the gain — never as cosmetics.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PROCESS ──────────────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">How a Syncsity engagement runs</span>
-      <h2>Four phases. Each one earns the next.</h2>
-    </div>
-
-    <div class="steps">
-      <div class="step" data-reveal>
-        <div class="step__num">1</div>
-        <h4>Aha! Diagnostic</h4>
-        <p>15-minute assessment. Free. AI-written Revenue Intelligence Report names the exact constraint costing you money — with evidence.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step__num">2</div>
-        <h4>Strategy Session</h4>
-        <p>£950 paid 30-minute deep dive. We pressure-test the diagnosis with a senior operator and map the 90-day intervention.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step__num">3</div>
-        <h4>30-Day Quick Win</h4>
-        <p>One scoped intervention. Done with you, not at you. Measurable revenue or capacity impact in the first month or your money back.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step__num">4</div>
-        <h4>18-Month Compounding</h4>
-        <p>Phase-by-phase rollout — automation, AI, processes, hires. You own everything we build. We're an accelerator, not a dependency.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── SERVICES ──────────────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">What we actually build</span>
-      <h2>AI where it multiplies. Process where it scales. People where it matters.</h2>
-    </div>
-
-    <div class="grid-2">
-      <div class="card card--hover" data-reveal>
-        <div class="card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
-        </div>
-        <h3>AI Voice & Conversation Operations</h3>
-        <p class="muted">24/7 voice agents that handle inbound, qualify, book and route. 40+ languages. Branded, on-script, with human handoff. Cuts call-handling cost ~90%.</p>
-      </div>
-      <div class="card card--hover" data-reveal>
-        <div class="card__icon card__icon--orange">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
-        </div>
-        <h3>AI Sales System</h3>
-        <p class="muted">A done-for-you outbound engine: prospect, personalise, sequence, book. Owned by you, controlled by you, measurable to the meeting.</p>
-      </div>
-      <div class="card card--hover" data-reveal>
-        <div class="card__icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
-        </div>
-        <h3>Process Automation</h3>
-        <p class="muted">We map your back office, kill the manual seams, and rebuild the tendons with workflow + AI. You don't add headcount — you add capacity.</p>
-      </div>
-      <div class="card card--hover" data-reveal>
-        <div class="card__icon card__icon--orange">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
-        </div>
-        <h3>Workforce Intelligence</h3>
-        <p class="muted">Capture tribal knowledge from your senior people, generate training, monitor performance — without adding management overhead.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── INDUSTRIES ────────────────────────────────────────────────────── -->
-<section class="section">
+<!-- ── WHY US TEASER ────────────────────────────────────────────────── -->
+<section class="section section--tight">
   <div class="container container--md">
     <div class="section-head" data-reveal>
-      <span class="eyebrow">Built for operators in</span>
-      <h2>Who we work with</h2>
-      <p>Mid-market service businesses. UK & US. £1M–£250M. Ops-heavy. Growth-blocked.</p>
+      <span class="eyebrow">Why Syncsity</span>
+      <h2>We're not a consultancy. We're an operator's leverage.</h2>
+      <p>Big consulting sells decks. AI agencies sell tools. We diagnose first, build second, automate last.</p>
     </div>
-    <div class="logos" data-reveal>
-      <div>Agencies</div>
-      <div>Professional Services</div>
-      <div>E-commerce Ops</div>
-      <div>SaaS Scale-ups</div>
-      <div>Financial Services</div>
-      <div>Logistics &amp; 3PL</div>
+    <div style="display:flex; gap: var(--s-3); flex-wrap:wrap; justify-content:center;" data-reveal>
+      <span class="pill pill--accent">Diagnosis first</span>
+      <span class="pill pill--orange">Senior operators only</span>
+      <span class="pill">You own everything we build</span>
+      <span class="pill pill--success">Money-back milestones</span>
     </div>
-  </div>
-</section>
-
-<!-- ── FAQ ───────────────────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container container--md">
-    <div class="section-head" data-reveal>
-      <span class="eyebrow">Sceptical? Good.</span>
-      <h2>Hard questions, plainly answered.</h2>
-    </div>
-    <div class="faq" data-reveal>
-      <details>
-        <summary>Is the assessment really free?</summary>
-        <p>Yes. The 15-minute assessment and the AI-written Revenue Intelligence Report are both free. There is no card, no sales call required, no follow-up nag if the report tells you we can't help. We do this because the report is the most honest demo we can give you.</p>
-      </details>
-      <details>
-        <summary>Why would you give it away?</summary>
-        <p>Because if the diagnosis lands, you'll want the team that wrote it. And because we'd rather lose 100 free reports than waste an hour on the phone with someone we can't actually help.</p>
-      </details>
-      <details>
-        <summary>Who is Syncsity NOT for?</summary>
-        <p>Pre-revenue businesses, agencies that resell us as their "AI partner" without disclosure, and anyone looking for a tool to install rather than a system to build. We say no often.</p>
-      </details>
-      <details>
-        <summary>Do you really use AI, or is this just packaging?</summary>
-        <p>The Revenue Intelligence Report is generated by a multi-step AI pipeline that researches your business, your industry, and your specific answers. The strategic engagements that follow are led by a human operator — AI is a tool we deploy, not a product we sell.</p>
-      </details>
-      <details>
-        <summary>What happens to my data?</summary>
-        <p>UK-based, GDPR-compliant, ISO-27001-aligned. Your answers are yours. We don't train on them, sell them, or share them. See our <a href="/privacy">privacy policy</a>.</p>
-      </details>
+    <div style="text-align:center; margin-top: var(--s-8);" data-reveal>
+      <a href="/why-us" class="btn btn--ghost">See the full comparison <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
 
-<!-- ── FINAL CTA ─────────────────────────────────────────────────────── -->
+<!-- ── FINAL CTA (Aha Moment) ───────────────────────────────────────── -->
 <section class="section">
   <div class="container">
     <div class="cta-strip" data-reveal>
@@ -279,7 +243,7 @@ include SYNC_ROOT . '/partials/header.php';
       <p class="lead">No call. No card. Free Revenue Intelligence Report, written for your business, in your inbox.</p>
       <div class="hero__cta-row" style="justify-content:center; margin-top: var(--s-8);">
         <a href="/assess" class="btn btn--primary btn--lg">Start my Aha! Assessment <span class="arrow">→</span></a>
-        <a href="/services" class="btn btn--ghost btn--lg">See how we work</a>
+        <a href="/how-we-work" class="btn btn--ghost btn--lg">See how we work</a>
       </div>
     </div>
   </div>

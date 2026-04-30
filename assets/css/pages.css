@@ -115,6 +115,147 @@
 [data-theme="light"] .hero__pillar h3 { color: var(--blue-500); }
 .hero__pillar p { color: var(--text-muted); font-size: 0.95rem; }
 
+/* ── Funnel cards (Diagnose / Solutions / Transform) ─────────────────── */
+.funnel-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6);
+}
+@media (max-width: 880px) { .funnel-grid { grid-template-columns: 1fr; } }
+.funnel-card {
+  display: flex; flex-direction: column;
+  padding: var(--s-8);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: var(--r-2xl);
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  transition: transform var(--t-base) var(--ease), border-color var(--t-base) var(--ease), background-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.30);
+}
+[data-theme="light"] .funnel-card {
+  background: #ffffff;
+  border-color: rgba(20,33,61,0.08);
+  color: var(--text);
+  box-shadow: 0 14px 40px rgba(20,33,61,0.08);
+}
+.funnel-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.20);
+  background: rgba(255,255,255,0.06);
+}
+[data-theme="light"] .funnel-card:hover { border-color: rgba(20,33,61,0.18); background: #fafbfd; }
+.funnel-card__top { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-6); }
+.funnel-card__icon {
+  width: 56px; height: 56px; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--r-md);
+  color: rgba(255,255,255,0.85);
+}
+[data-theme="light"] .funnel-card__icon { background: rgba(51,133,223,0.10); color: var(--accent); }
+.funnel-card__num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+[data-theme="light"] .funnel-card__num { color: var(--text-dim); }
+.funnel-card__top h3 {
+  font-size: 1.55rem; font-weight: 300; letter-spacing: -0.02em;
+  color: inherit; margin-top: 2px;
+}
+.funnel-card__h {
+  font-size: 1.2rem; font-weight: 600; line-height: 1.3;
+  color: inherit; margin-bottom: var(--s-3);
+}
+.funnel-card__p {
+  color: rgba(255,255,255,0.70);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--s-6);
+}
+[data-theme="light"] .funnel-card__p { color: var(--text-muted); font-weight: 400; }
+.funnel-card__list {
+  display: grid; gap: 10px; flex: 1; margin-bottom: var(--s-8);
+  padding: 0; list-style: none;
+}
+.funnel-card__list li {
+  position: relative; padding-left: 16px;
+  color: rgba(255,255,255,0.60); font-size: 0.92rem;
+}
+[data-theme="light"] .funnel-card__list li { color: var(--text-muted); }
+.funnel-card__list li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.40);
+}
+[data-theme="light"] .funnel-card__list li::before { background: var(--accent); }
+.funnel-card__cta {
+  display: block;
+  text-align: center;
+  padding: 14px 22px;
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: var(--r-md);
+  font-weight: 500;
+  color: inherit;
+  transition: background-color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+[data-theme="light"] .funnel-card__cta { border-color: rgba(20,33,61,0.18); }
+.funnel-card:hover .funnel-card__cta {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.30);
+}
+[data-theme="light"] .funnel-card:hover .funnel-card__cta {
+  background: rgba(51,133,223,0.06);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Client logos marquee ────────────────────────────────────────────── */
+.clients .section-head { margin-bottom: var(--s-8); }
+.clients__rule {
+  width: 56px; height: 3px; background: var(--accent);
+  margin: var(--s-3) auto var(--s-4);
+  border-radius: 2px;
+}
+.clients__marquee {
+  position: relative; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+}
+.clients__track {
+  display: flex; gap: var(--s-4);
+  width: max-content;
+  animation: clients-scroll 90s linear infinite;
+}
+.clients__marquee:hover .clients__track { animation-play-state: paused; }
+.clients__logo {
+  flex: 0 0 auto;
+  width: 180px; height: 96px;
+  display: grid; place-items: center;
+  padding: var(--s-4);
+  background: var(--bg-elev-1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: border-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.clients__logo:hover { border-color: var(--accent); transform: translateY(-2px); }
+.clients__logo img {
+  max-width: 100%; max-height: 56px; width: auto; height: auto;
+  object-fit: contain;
+  filter: grayscale(0.2) opacity(0.92);
+  transition: filter var(--t-fast) var(--ease);
+}
+.clients__logo:hover img { filter: grayscale(0) opacity(1); }
+@keyframes clients-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clients__track { animation: none; flex-wrap: wrap; width: 100%; justify-content: center; }
+}
+
 /* ── Stats strip ─────────────────────────────────────────────────────────── */
 .stats {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-6);
