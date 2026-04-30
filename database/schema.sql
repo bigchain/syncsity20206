@@ -110,6 +110,35 @@ CREATE TABLE IF NOT EXISTS audit_log (
     KEY idx_audit_action (action, created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- ── Follow-up email log ─────────────────────────────────────────────────
+-- One row per (user × sequence_step) actually sent. The worker uses this to
+-- know what's been delivered so it never sends the same touch twice.
+CREATE TABLE IF NOT EXISTS email_log (
+    id              INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id         INT UNSIGNED NOT NULL,
+    assessment_id   INT UNSIGNED NULL,
+    sequence_key    VARCHAR(40) NOT NULL,        -- 'followup_day1', 'followup_day3', etc.
+    status          ENUM('sent','failed','skipped','unsubscribed') NOT NULL DEFAULT 'sent',
+    error_message   VARCHAR(500) NULL,
+    sent_at         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_user_seq (user_id, sequence_key, assessment_id),
+    KEY idx_email_log_status (status, sent_at),
+    KEY idx_email_log_assess (assessment_id),
+    CONSTRAINT fk_email_log_user   FOREIGN KEY (user_id)       REFERENCES users(id)       ON DELETE CASCADE,
+    CONSTRAINT fk_email_log_assess FOREIGN KEY (assessment_id) REFERENCES assessments(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ── Email opt-out ───────────────────────────────────────────────────────
+-- A simple per-email global opt-out. The worker checks this before sending
+-- any non-transactional message (magic link + report-ready always send).
+CREATE TABLE IF NOT EXISTS email_optout (
+    email           VARCHAR(254) NOT NULL,
+    opted_out_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    reason          VARCHAR(200) NULL,
+    PRIMARY KEY (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ── Contact messages ─────────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS contact_messages (
     id                  INT UNSIGNED NOT NULL AUTO_INCREMENT,
