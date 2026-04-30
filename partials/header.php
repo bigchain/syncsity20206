@@ -36,7 +36,7 @@ $loggedIn = is_logged_in();
         <?php else: ?>
           <a href="/auth/login" class="btn btn--ghost btn--sm">Login</a>
         <?php endif; ?>
-        <a href="/assess" class="btn btn--accent btn--sm">Book a Session <span class="arrow">→</span></a>
+        <a href="/assess" class="btn btn--primary btn--sm">Free assessment <span class="arrow">→</span></a>
 
         <button type="button" class="nav__toggle" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
