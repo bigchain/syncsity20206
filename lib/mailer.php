@@ -58,18 +58,25 @@ class Mailer
             $mail->isSMTP();
             $mail->Host       = (string)env('SMTP_HOST', 'localhost');
             $mail->Port       = (int)env('SMTP_PORT', 587);
-            $mail->SMTPAuth   = !empty(env('SMTP_USER'));
-            $mail->Username   = (string)env('SMTP_USER', '');
-            $mail->Password   = (string)env('SMTP_PASS', '');
 
-            $enc = strtolower((string)env('SMTP_ENCRYPTION', 'tls'));
+            // Read SMTP_ENCRYPTION directly so an empty string means "no encryption"
+            // (Exim local relay on port 25 — Fund Collective's working pattern).
+            $enc = strtolower(trim((string)($_ENV['SMTP_ENCRYPTION'] ?? 'tls')));
             $mail->SMTPSecure = match ($enc) {
                 'ssl'  => \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS,
                 'tls'  => \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS,
-                default => '',
+                default => '',                  // 'none' / '' / unrecognised => plain
             };
+            if ($mail->SMTPSecure === '') {
+                $mail->SMTPAutoTLS = false;     // don't try to upgrade on port 25
+            }
 
-            if (APP_ENV === 'production') {
+            $smtpUser = (string)env('SMTP_USER', '');
+            $mail->SMTPAuth = $smtpUser !== '';
+            $mail->Username = $smtpUser;
+            $mail->Password = (string)env('SMTP_PASS', '');
+
+            if (APP_ENV === 'production' && $mail->SMTPSecure !== '') {
                 $mail->SMTPOptions = ['ssl' => [
                     'verify_peer'      => true,
                     'verify_peer_name' => true,
