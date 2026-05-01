@@ -73,23 +73,8 @@
 
   injectStyles();
 
-  /* ── Home-page slimming ─────────────────────────────────────────────────
-     The Lovable Index.tsx packs About + WhyChooseUs + Features + Industry
-     Testimonials + AhaMomentCTA + ClientLogos all on the home. Trim it: keep
-     the cool stuff (Hero, ServiceCards, ClientLogos, AhaMomentCTA), hide the
-     heavy blocks that already have dedicated pages (/about-us, /why-us). */
-  function slimHome() {
-    if (location.pathname !== '/' && location.pathname !== '/index.html') return;
-    var hide = ['#about', '#testimonials'];
-    hide.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(function (el) {
-        el.style.display = 'none';
-      });
-    });
-  }
-  slimHome();
-  // Re-run after SPA rerenders
-  setInterval(slimHome, 1000);
+  /* Home page — DO NOT slim. The user wants the full original layout
+     (testimonials, about, etc.) visible on the home. */
 
   // Try immediately, then watch for SPA hydration.
   if (inject()) return;
