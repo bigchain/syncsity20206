@@ -77,6 +77,20 @@ ul, ol { list-style: none; }
 .nav__links a { color: var(--text-muted); font-size: 14px; font-weight: 500; }
 .nav__links a:hover, .nav__links a.is-active { color: #fff; }
 .nav__cta { display: flex; align-items: center; gap: 10px; }
+
+/* Chevron for menu items that point at sections with sub-pages on the SPA.
+   Matches the visual indicator on the SPA's Transform / Solutions / Resources
+   menus. Pure CSS, no dropdown — clicking the link takes you to the index. */
+.nav__links a.has-chevron { display: inline-flex; align-items: center; gap: 6px; }
+.nav__links a.has-chevron::after {
+  content: ''; display: inline-block; width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  opacity: 0.55;
+  transition: opacity 150ms ease;
+}
+.nav__links a.has-chevron:hover::after { opacity: 0.95; }
 @media (min-width: 880px) { .nav__links { display: flex; } }
 
 /* ── Buttons ── */
