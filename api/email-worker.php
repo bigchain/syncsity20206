@@ -20,6 +20,25 @@
 declare(strict_types=1);
 define('SYNC_ROOT', dirname(__DIR__));
 require_once SYNC_ROOT . '/lib/config.php';
+
+// CLI-only by default. HTTP access requires an HMAC kick token (so a future
+// "trigger from health-check" pattern works without exposing the worker).
+if (PHP_SAPI !== 'cli') {
+    $kick     = (string)($_GET['kick'] ?? '');
+    $expected = hash_hmac('sha256', 'email-worker', (string)env('SESSION_SECRET', 'syncsity'));
+    if (!hash_equals($expected, $kick)) {
+        http_response_code(403);
+        exit('forbidden');
+    }
+    if (function_exists('fastcgi_finish_request')) {
+        echo 'kicked'; @fastcgi_finish_request();
+    } else {
+        ignore_user_abort(true);
+        ob_start(); echo 'kicked'; header('Content-Length: ' . ob_get_length()); header('Connection: close');
+        ob_end_flush(); @ob_flush(); @flush();
+    }
+}
+
 require_once SYNC_ROOT . '/lib/db.php';
 require_once SYNC_ROOT . '/lib/functions.php';
 require_once SYNC_ROOT . '/lib/mailer.php';

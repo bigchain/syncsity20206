@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://syncsity.com/</loc>           <changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://syncsity.com/why-us</loc>     <changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://syncsity.com/services</loc>   <changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://syncsity.com/pricing</loc>    <changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://syncsity.com/about</loc>      <changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://syncsity.com/contact</loc>    <changefreq>yearly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://syncsity.com/assess</loc>     <changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://syncsity.com/auth/login</loc> <changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://syncsity.com/privacy</loc>    <changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://syncsity.com/terms</loc>      <changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <!-- Marketing -->
+  <url><loc>https://syncsity.com/</loc>                              <changefreq>weekly</changefreq>  <priority>1.0</priority></url>
+  <url><loc>https://syncsity.com/why-syncsity</loc>                  <changefreq>monthly</changefreq> <priority>0.9</priority></url>
+  <url><loc>https://syncsity.com/why-us</loc>                        <changefreq>monthly</changefreq> <priority>0.9</priority></url>
+  <url><loc>https://syncsity.com/pricing</loc>                       <changefreq>monthly</changefreq> <priority>0.9</priority></url>
+  <url><loc>https://syncsity.com/about-us</loc>                      <changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/blog</loc>                          <changefreq>weekly</changefreq>  <priority>0.8</priority></url>
+
+  <!-- Solutions -->
+  <url><loc>https://syncsity.com/solutions</loc>                     <changefreq>monthly</changefreq> <priority>0.9</priority></url>
+  <url><loc>https://syncsity.com/solutions/voice-solutions</loc>     <changefreq>monthly</changefreq> <priority>0.8</priority></url>
+  <url><loc>https://syncsity.com/solutions/lead-generation</loc>     <changefreq>monthly</changefreq> <priority>0.8</priority></url>
+  <url><loc>https://syncsity.com/solutions/process-optimization</loc><changefreq>monthly</changefreq> <priority>0.8</priority></url>
+  <url><loc>https://syncsity.com/solutions/workforce-transformation</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Transform programmes -->
+  <url><loc>https://syncsity.com/transform</loc>                     <changefreq>monthly</changefreq> <priority>0.8</priority></url>
+  <url><loc>https://syncsity.com/transform/market-domination</loc>   <changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/transform/revenue-acceleration</loc><changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/transform/operational-supremacy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Tools / product -->
+  <url><loc>https://syncsity.com/assess</loc>                        <changefreq>monthly</changefreq> <priority>1.0</priority></url>
+  <url><loc>https://syncsity.com/calculators</loc>                   <changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/booking.html</loc>                  <changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/demo.html</loc>                     <changefreq>monthly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://syncsity.com/contact.html</loc>                  <changefreq>yearly</changefreq>  <priority>0.6</priority></url>
+
+  <!-- Account -->
+  <url><loc>https://syncsity.com/auth/login</loc>                    <changefreq>yearly</changefreq>  <priority>0.4</priority></url>
+
+  <!-- Legal -->
+  <url><loc>https://syncsity.com/privacy.html</loc>                  <changefreq>yearly</changefreq>  <priority>0.3</priority></url>
+  <url><loc>https://syncsity.com/terms.html</loc>                    <changefreq>yearly</changefreq>  <priority>0.3</priority></url>
+  <url><loc>https://syncsity.com/sitemap.html</loc>                  <changefreq>monthly</changefreq> <priority>0.4</priority></url>
 </urlset>

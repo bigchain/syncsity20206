@@ -65,7 +65,10 @@ $company = clean($_POST['company'] ?? '', 200);
 $subject = clean($_POST['subject'] ?? 'General', 60);
 $message = trim((string)($_POST['message'] ?? ''));
 $message = mb_substr($message, 0, 5000);
-$gdpr    = !empty($_POST['gdpr_consent']) ? 1 : 0;
+// Accept BOTH the hidden gdpr_consent (from PHP-rendered forms) and the
+// explicit visible checkbox gdpr_consent_visible (from the static .html
+// premium contact form). Either one signals real consent.
+$gdpr    = (!empty($_POST['gdpr_consent']) || !empty($_POST['gdpr_consent_visible'])) ? 1 : 0;
 
 if (mb_strlen($name) < 2)            redirect($returnPage . '?error=' . urlencode('Please tell us your name.'));
 if (!$email)                          redirect($returnPage . '?error=' . urlencode('Please enter a valid email address.'));
