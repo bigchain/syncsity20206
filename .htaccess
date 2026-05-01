@@ -11,9 +11,13 @@
 # php -- END cPanel-generated handler, do not edit
 
 # ─── Default page ──────────────────────────────────────────────────────────────
-# Lovable React SPA serves the marketing front (pixel-perfect design).
-# PHP serves the new product surfaces: /api, /auth, /assess, /dashboard.
-DirectoryIndex index.html index.php
+# 2026-05-01 strategy pivot: hand-written PHP/HTML serves /, replacing the SPA.
+# Other not-yet-rebuilt routes (/why-syncsity, /pricing, /transform/*, etc.)
+# still hit the SPA via the .htaccess fallback at the bottom of this file
+# (RewriteRule ^ /index.html [L]). As each route is rebuilt as its own .php /
+# .html, that fallback fires less often. When the rebuild is fully done we
+# can delete /index.html (the SPA loader) entirely.
+DirectoryIndex index.php index.html
 
 # ─── Compression ───────────────────────────────────────────────────────────────
 <IfModule mod_deflate.c>
