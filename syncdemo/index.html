@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Syncsity — We Find The Constraints. We Remove The Waste.</title>
+<meta name="description" content="In 15 minutes we uncover the hidden constraint costing you £10K+ a month and tell you exactly how to fix it. Even if you never speak to us again." />
+<link rel="canonical" href="https://syncsity.com/syncdemo/" />
+
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://syncsity.com/syncdemo/" />
+<meta property="og:title" content="Syncsity — We Find The Constraints. We Remove The Waste." />
+<meta property="og:description" content="In 15 minutes we uncover the hidden constraint costing you £10K+ a month and tell you exactly how to fix it." />
+<meta property="og:image" content="https://syncsity.com/assets/img/og-image.svg" />
+<meta property="og:locale" content="en_GB" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="stylesheet" href="/assets/css/static-page.css" />
+<style>
+/* ── Page-local: home hero, stats, pillars ──────────────────────────── */
+
+.hero-home {
+  position: relative; overflow: hidden;
+  padding: 80px 0 60px;
+  isolation: isolate;
+}
+.hero-home::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(51,133,223,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(252,163,17,0.10) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1022 0%, #050814 60%, #050814 100%);
+}
+.hero-home::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    repeating-linear-gradient(0deg,  rgba(255,255,255,0.03) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 96px);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  opacity: 0.6;
+}
+
+.hero-home__title {
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1.05; letter-spacing: -0.02em;
+  font-weight: 800; text-align: center;
+  margin: 24px auto 20px; max-width: 1100px;
+  color: #fff;
+}
+.hero-home__title .accent { color: var(--blue-400); display: block; }
+.hero-home__title span { display: block; }
+
+.hero-home__lede {
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.6; color: var(--text-muted);
+  text-align: center; max-width: 760px;
+  margin: 0 auto 40px;
+}
+
+.outcome-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  max-width: 980px; margin: 0 auto 36px;
+  padding: 18px;
+  background: rgba(10,16,34,0.55);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.outcome {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 18px;
+}
+.outcome__icon {
+  width: 44px; height: 44px; flex: 0 0 44px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  background: rgba(252,163,17,0.16);
+  color: var(--orange);
+  font-weight: 700;
+}
+.outcome--blue .outcome__icon {
+  background: rgba(51,133,223,0.18);
+  color: var(--blue-400);
+}
+.outcome__label {
+  display: block; font-size: 13px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 2px;
+}
+.outcome--blue .outcome__label { color: var(--blue-400); }
+.outcome__copy { color: #fff; font-size: 15px; }
+@media (max-width: 720px) { .outcome-row { grid-template-columns: 1fr; } }
+
+.aha-card {
+  max-width: 720px; margin: 0 auto;
+  background: rgba(10,16,34,0.70);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.aha-card__copy {
+  color: var(--text-muted); font-size: 15px; line-height: 1.6;
+  margin: 0 0 18px;
+}
+.aha-form { display: flex; gap: 10px; }
+.aha-form input[type="email"] {
+  flex: 1 1 auto;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  color: #fff; font-size: 15px;
+}
+.aha-form input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+.aha-form input[type="email"]:focus {
+  outline: none; border-color: var(--blue-400);
+  box-shadow: 0 0 0 3px rgba(51,133,223,0.18);
+}
+.aha-form button { white-space: nowrap; }
+.aha-card__fineprint {
+  margin: 14px 0 0; text-align: center;
+  font-size: 13px; color: var(--text-muted);
+}
+@media (max-width: 560px) { .aha-form { flex-direction: column; } }
+
+/* ── Stats strip ─────────────────────────────────────────────────────── */
+.stats-strip {
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, #050814 0%, #0a1022 100%);
+}
+.stats-strip__inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px;
+}
+.stat { text-align: center; }
+.stat__icon {
+  width: 56px; height: 56px; margin: 0 auto 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+}
+.stat__icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
+.stat__value { color: #fff; font-size: 26px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+.stat__label { color: var(--text-muted); font-size: 13px; }
+@media (max-width: 980px) { .stats-strip__inner { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .stats-strip__inner { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Pillars (3 cards) ───────────────────────────────────────────────── */
+.pillars { padding: 80px 0 100px; background: #050814; }
+.pillars__inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.pillars__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.pillar {
+  background: rgba(15,23,45,0.85);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex; flex-direction: column;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.pillar:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.pillar__head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px; }
+.pillar__iconwrap {
+  width: 52px; height: 52px; flex: 0 0 52px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 12px; color: #fff;
+}
+.pillar__num { font-size: 13px; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 4px; }
+.pillar__kind { font-size: 19px; font-weight: 700; color: #fff; }
+.pillar__title { font-size: 22px; font-weight: 700; color: #fff; margin: 0 0 12px; }
+.pillar__desc  { color: var(--text-muted); font-size: 15px; line-height: 1.55; margin: 0 0 20px; }
+.pillar__list  { list-style: none; padding: 0; margin: 0 0 28px; flex: 1 1 auto; }
+.pillar__list li {
+  position: relative; padding-left: 18px; margin-bottom: 10px;
+  color: #cbd5e1; font-size: 14.5px;
+}
+.pillar__list li::before {
+  content: '•'; color: var(--blue-400); position: absolute; left: 0; top: 0;
+  font-size: 22px; line-height: 1;
+}
+.pillar .btn { width: 100%; }
+.pillar .btn--dark {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-strong);
+  color: #fff;
+}
+.pillar .btn--dark:hover { background: rgba(255,255,255,0.10); }
+@media (max-width: 980px) { .pillars__grid { grid-template-columns: 1fr; } }
+
+.section-eyebrow {
+  text-align: center; color: var(--text-muted);
+  font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.section-eyebrow .chev {
+  display: inline-block; width: 8px; height: 8px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); margin-left: 8px; vertical-align: 2px;
+}
+
+/* ── Footer (matches static pages) ───────────────────────────────────── */
+.footer-home { background: #050814; border-top: 1px solid var(--border); padding: 56px 0 32px; }
+.footer-home__inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.footer-home__cols {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;
+}
+.footer-home h4 { color: #fff; font-size: 15px; margin: 0 0 14px; }
+.footer-home ul { list-style: none; padding: 0; margin: 0; }
+.footer-home li { margin-bottom: 8px; }
+.footer-home a { color: var(--text-muted); font-size: 14px; }
+.footer-home a:hover { color: #fff; }
+.footer-home__brand p { color: var(--text-muted); font-size: 14px; line-height: 1.55; margin: 12px 0 16px; }
+.footer-home__bottom {
+  margin-top: 40px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--text-muted); font-size: 13px;
+}
+@media (max-width: 720px) {
+  .footer-home__cols { grid-template-columns: 1fr 1fr; }
+  .footer-home__bottom { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-stage" aria-hidden="true"></div>
+
+<!-- ── NAV (matches contact.html / SPA home) ──────────────────────────── -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__brand" aria-label="Syncsity home"><img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="/transform" class="has-chevron">Transform</a>
+      <a href="/solutions" class="has-chevron">Solutions</a>
+      <a href="/assess">Diagnose</a>
+      <a href="/why-syncsity">Why Syncsity</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/blog" class="has-chevron">Resources</a>
+    </nav>
+    <div class="nav__cta">
+      <a href="/auth/login" class="btn btn--ghost btn--sm" id="auth-btn">Log in</a>
+      <a href="/assess" class="btn btn--primary btn--sm">Free assessment &rarr;</a>
+      <a href="/booking.html" class="btn btn--orange btn--sm">Book a Session</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="hero-home">
+    <div class="container">
+      <h1 class="hero-home__title">
+        <span>We Find The Constraints.</span>
+        <span class="accent">We Remove The Waste.</span>
+        <span>You Achieve Breakthrough Growth.</span>
+      </h1>
+      <p class="hero-home__lede">
+        Trusted by ambitious companies. First we diagnose what&rsquo;s blocking your growth.
+        Then we apply AI and automation only where it multiplies results.
+      </p>
+
+      <div class="outcome-row">
+        <div class="outcome">
+          <span class="outcome__icon" aria-hidden="true">1</span>
+          <div>
+            <span class="outcome__label">Immediate</span>
+            <span class="outcome__copy">30 day quick wins that prove ROI</span>
+          </div>
+        </div>
+        <div class="outcome outcome--blue">
+          <span class="outcome__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+          </span>
+          <div>
+            <span class="outcome__label">Exponential</span>
+            <span class="outcome__copy">18 month market domination plan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="aha-card">
+        <p class="aha-card__copy">
+          You already sense something&rsquo;s blocking your growth&mdash;you just can&rsquo;t pinpoint
+          what. In 15 minutes, we&rsquo;ll uncover the hidden constraint costing you
+          <strong style="color:#fff">£10K+ monthly</strong> and show you exactly how to fix it. Even if
+          you never speak to us again.
+        </p>
+        <form class="aha-form" action="/assess" method="get" novalidate>
+          <input type="email" name="email" required placeholder="Your email" aria-label="Email address" />
+          <button type="submit" class="btn btn--primary">Get Your Free Aha! Moment &rarr;</button>
+        </form>
+        <p class="aha-card__fineprint">
+          <span style="color:var(--orange)">&#9733;</span> No obligation. Guaranteed actionable insight. No additional cost to implement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS STRIP ──────────────────────────────────────────────────── -->
+  <section class="stats-strip">
+    <div class="stats-strip__inner">
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+        </span>
+        <div class="stat__value">40%</div>
+        <div class="stat__label">Efficiency Gain</div>
+      </div>
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9"/></svg>
+        </span>
+        <div class="stat__value">30 Days</div>
+        <div class="stat__label">To First Results</div>
+      </div>
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        </span>
+        <div class="stat__value">3x</div>
+        <div class="stat__label">ROI in Year 1</div>
+      </div>
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5A3.5 3.5 0 0 0 6 8.5v0A3.5 3.5 0 0 0 9.5 12h5A3.5 3.5 0 0 1 18 15.5v0a3.5 3.5 0 0 1-3.5 3.5H6"/></svg>
+        </span>
+        <div class="stat__value">$700k+</div>
+        <div class="stat__label">Monthly Revenue</div>
+      </div>
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <div class="stat__value">400k+</div>
+        <div class="stat__label">Leads Generated</div>
+      </div>
+
+      <div class="stat">
+        <span class="stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
+        <div class="stat__value">90%</div>
+        <div class="stat__label">Cost Reduction</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 3 PILLARS ────────────────────────────────────────────────────── -->
+  <section class="pillars">
+    <div class="pillars__inner">
+
+      <p class="section-eyebrow">Explore <span class="chev"></span></p>
+
+      <div class="pillars__grid">
+
+        <article class="pillar">
+          <div class="pillar__head">
+            <span class="pillar__iconwrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </span>
+            <div>
+              <div class="pillar__num">01</div>
+              <div class="pillar__kind">Diagnose</div>
+            </div>
+          </div>
+          <h2 class="pillar__title">Find Your &pound;50M Opportunity</h2>
+          <p class="pillar__desc">Uncover the hidden constraints blocking your exponential growth</p>
+          <ul class="pillar__list">
+            <li>Executive strategy session</li>
+            <li>Bottleneck analysis</li>
+            <li>Competitive positioning</li>
+            <li>90-day quick wins</li>
+          </ul>
+          <a href="/booking.html" class="btn btn--dark">Book Diagnostic Session</a>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar__head">
+            <span class="pillar__iconwrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <div>
+              <div class="pillar__num">02</div>
+              <div class="pillar__kind">Solutions</div>
+            </div>
+          </div>
+          <h2 class="pillar__title">Fix Specific Problems</h2>
+          <p class="pillar__desc">Deploy targeted AI solutions for immediate impact</p>
+          <ul class="pillar__list">
+            <li>AI Voice Operations</li>
+            <li>AI Sales System</li>
+            <li>Workforce Intelligence</li>
+            <li>Custom Development</li>
+          </ul>
+          <a href="/solutions" class="btn btn--dark">Explore Solutions</a>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar__head">
+            <span class="pillar__iconwrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 12h14l3-12-6 5-4-7-4 7-6-5z"/><path d="M5 20h14"/></svg>
+            </span>
+            <div>
+              <div class="pillar__num">03</div>
+              <div class="pillar__kind">Transform</div>
+            </div>
+          </div>
+          <h2 class="pillar__title">Become The Market Leader</h2>
+          <p class="pillar__desc">Complete business transformation with C-suite partnership</p>
+          <ul class="pillar__list">
+            <li>Market Domination</li>
+            <li>Revenue Acceleration</li>
+            <li>Operational Supremacy</li>
+            <li>Custom Programmes</li>
+          </ul>
+          <a href="/transform" class="btn btn--dark">Start Transformation</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────────── -->
+<footer class="footer-home">
+  <div class="footer-home__inner">
+    <div class="footer-home__cols">
+      <div class="footer-home__brand">
+        <img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:32px;width:auto;">
+        <p>AI business transformation for ambitious companies. We find the constraints, remove the waste, and help you achieve breakthrough growth.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/why-syncsity">Why Syncsity</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/blog">Resources</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Our Solutions</h4>
+        <ul>
+          <li><a href="/solutions/voice-solutions">AI Voice Operations</a></li>
+          <li><a href="/solutions/lead-generation">AI Sales System</a></li>
+          <li><a href="/solutions/workforce-transformation">Workforce Intelligence</a></li>
+          <li><a href="/solutions/process-optimization">Process Automation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/assess">Free Assessment</a></li>
+          <li><a href="/booking.html">Book a Session</a></li>
+          <li><a href="/transform">Transformation</a></li>
+          <li><a href="/calculators">Calculators</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-home__bottom">
+      <span>&copy; <span id="year">2026</span> Syncsity. All rights reserved.</span>
+      <span><a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/sitemap.html">Sitemap</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+if (/(?:^|;\s*)(?:syncsity_session|PHPSESSID)=/.test(document.cookie || '')) {
+  var b = document.getElementById('auth-btn'); if (b) { b.href='/dashboard'; b.textContent='Dashboard'; }
+}
+</script>
+<script src="/assets/js/nav-mobile.js" defer></script>
+</body>
+</html>
