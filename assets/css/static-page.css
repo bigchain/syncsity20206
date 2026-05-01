@@ -93,6 +93,62 @@ ul, ol { list-style: none; }
 .nav__links a.has-chevron:hover::after { opacity: 0.95; }
 @media (min-width: 880px) { .nav__links { display: flex; } }
 
+/* ── Mobile menu (hamburger + overlay) ── */
+.nav__burger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  background: transparent; border: 1px solid var(--border-strong);
+  border-radius: 10px; color: #fff; cursor: pointer;
+  padding: 0; margin-left: 8px;
+}
+.nav__burger:hover { background: rgba(255,255,255,0.06); }
+.nav__burger span {
+  display: block; width: 18px; height: 1.5px; background: currentColor;
+  position: relative; transition: transform 200ms ease, opacity 200ms ease;
+}
+.nav__burger span::before, .nav__burger span::after {
+  content: ''; position: absolute; left: 0; width: 18px; height: 1.5px;
+  background: currentColor; transition: transform 200ms ease, top 200ms ease;
+}
+.nav__burger span::before { top: -6px; }
+.nav__burger span::after  { top:  6px; }
+.nav__burger.is-open span { background: transparent; }
+.nav__burger.is-open span::before { top: 0; transform: rotate(45deg); }
+.nav__burger.is-open span::after  { top: 0; transform: rotate(-45deg); }
+@media (min-width: 880px) { .nav__burger { display: none; } }
+
+/* Hide the desktop CTA cluster on narrow screens; the menu drawer holds them */
+@media (max-width: 879px) { .nav__cta { gap: 6px; } .nav__cta .btn--ghost { display: none; } }
+@media (max-width: 559px) { .nav__cta .btn--orange { display: none; } }
+
+.nav__drawer {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(5,8,20,0.92);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  display: none;
+  opacity: 0; transition: opacity 200ms ease;
+}
+.nav__drawer.is-open { display: flex; opacity: 1; }
+.nav__drawer__inner {
+  margin: 0 auto; width: 100%; max-width: 480px;
+  padding: 96px 28px 40px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.nav__drawer a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 8px;
+  color: #fff; font-size: 18px; font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav__drawer a:hover { color: var(--blue-400); }
+.nav__drawer__ctas {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 24px;
+}
+.nav__drawer__ctas .btn { width: 100%; }
+body.menu-open { overflow: hidden; }
+
 /* ── Buttons ── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
