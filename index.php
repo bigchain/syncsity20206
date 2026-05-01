@@ -525,41 +525,41 @@
       <div class="marquee">
         <div class="marquee__track">
           <?php /* Render twice for seamless loop */ ?>
-          <div class="marquee__item"><img src="/assets/img/clients/pe.svg"     alt="PE" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/sec.svg"    alt="SEC" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/kew.svg"    alt="KEW" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/elite.svg"  alt="Elite" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/lola.svg"   alt="Lola" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/ais.svg"    alt="AIS" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/sr.svg"     alt="SR" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/nejob.svg"  alt="Nejob" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/lavy.svg"   alt="Lavy" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/rosco.svg"  alt="Rosco" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/wu.svg"     alt="WU" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/so.svg"     alt="SO" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/medi.svg"   alt="Medi" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/stell.svg"  alt="Stell" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/tti.svg"    alt="TTI" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/tdo.svg"    alt="TDO" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/hadav.svg"  alt="Hadav" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/pe.jpg"     alt="PE" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/sec.jpg"    alt="SEC" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/kew.jpg"    alt="KEW" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/elite.jpg"  alt="Elite" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/lola.jpg"   alt="Lola" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/ais.jpg"    alt="AIS" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/sr.jpg"     alt="SR" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/nejob.jpg"  alt="Nejob" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/lavy.jpg"   alt="Lavy" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/rosco.jpg"  alt="Rosco" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/wu.jpg"     alt="WU" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/so.jpg"     alt="SO" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/medi.jpg"   alt="Medi" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/stell.jpg"  alt="Stell" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/tti.jpg"    alt="TTI" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/tdo.jpg"    alt="TDO" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/hadav.jpg"  alt="Hadav" loading="lazy"></div>
           <!-- duplicate for seamless loop -->
-          <div class="marquee__item"><img src="/assets/img/clients/pe.svg"     alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/sec.svg"    alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/kew.svg"    alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/elite.svg"  alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/lola.svg"   alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/ais.svg"    alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/sr.svg"     alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/nejob.svg"  alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/lavy.svg"   alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/rosco.svg"  alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/wu.svg"     alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/so.svg"     alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/medi.svg"   alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/stell.svg"  alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/tti.svg"    alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/tdo.svg"    alt="" aria-hidden="true" loading="lazy"></div>
-          <div class="marquee__item"><img src="/assets/img/clients/hadav.svg"  alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/pe.jpg"     alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/sec.jpg"    alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/kew.jpg"    alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/elite.jpg"  alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/lola.jpg"   alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/ais.jpg"    alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/sr.jpg"     alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/nejob.jpg"  alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/lavy.jpg"   alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/rosco.jpg"  alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/wu.jpg"     alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/so.jpg"     alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/medi.jpg"   alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/stell.jpg"  alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/tti.jpg"    alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/tdo.jpg"    alt="" aria-hidden="true" loading="lazy"></div>
+          <div class="marquee__item"><img src="/assets/img/clients/hadav.jpg"  alt="" aria-hidden="true" loading="lazy"></div>
         </div>
       </div>
     </div>
