@@ -8,8 +8,8 @@
 <meta name="description" content="In 15 minutes we uncover the hidden constraint costing you £10K+ a month and tell you exactly how to fix it. Even if you never speak to us again." />
 <link rel="canonical" href="https://syncsity.com/syncdemo/" />
 
-<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="../favicon.ico" />
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://syncsity.com/syncdemo/" />
@@ -19,7 +19,7 @@
 <meta property="og:locale" content="en_GB" />
 <meta name="twitter:card" content="summary_large_image" />
 
-<link rel="stylesheet" href="/assets/css/static-page.css" />
+<link rel="stylesheet" href="../assets/css/static-page.css" />
 <style>
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
 
@@ -27,22 +27,27 @@
   position: relative; overflow: hidden;
   padding: 80px 0 60px;
   isolation: isolate;
+  min-height: 720px;
+  background: #050814;
 }
-.hero-home::before {
-  content: ''; position: absolute; inset: 0; z-index: -2;
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(51,133,223,0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 80%, rgba(252,163,17,0.10) 0%, transparent 60%),
-    linear-gradient(180deg, #0a1022 0%, #050814 60%, #050814 100%);
+/* YouTube background video — sized to cover hero, behind content, click-through. */
+.hero-home__video {
+  position: absolute; inset: 0; z-index: -2;
+  pointer-events: none; overflow: hidden;
 }
+.hero-home__video iframe {
+  position: absolute; top: 50%; left: 50%;
+  width: max(100%, 177.78vh);
+  height: max(56.25vw, 100%);
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
+  border: 0; pointer-events: none;
+}
+/* Dark overlay so the headline stays readable on top of the video. */
 .hero-home::after {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background:
-    repeating-linear-gradient(0deg,  rgba(255,255,255,0.03) 0 1px, transparent 1px 96px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 96px);
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  opacity: 0.6;
+    radial-gradient(ellipse at center, rgba(5,8,20,0.35) 0%, rgba(5,8,20,0.75) 70%, rgba(5,8,20,0.92) 100%);
 }
 
 .hero-home__title {
@@ -240,7 +245,7 @@
 <!-- ── NAV (matches contact.html / SPA home) ──────────────────────────── -->
 <header class="nav">
   <div class="nav__inner">
-    <a href="/" class="nav__brand" aria-label="Syncsity home"><img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
+    <a href="/" class="nav__brand" aria-label="Syncsity home"><img src="../lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
     <nav class="nav__links" aria-label="Primary">
       <a href="/transform" class="has-chevron">Transform</a>
       <a href="/solutions" class="has-chevron">Solutions</a>
@@ -252,7 +257,7 @@
     <div class="nav__cta">
       <a href="/auth/login" class="btn btn--ghost btn--sm" id="auth-btn">Log in</a>
       <a href="/assess" class="btn btn--primary btn--sm">Free assessment &rarr;</a>
-      <a href="/booking.html" class="btn btn--orange btn--sm">Book a Session</a>
+      <a href="../booking.html" class="btn btn--orange btn--sm">Book a Session</a>
     </div>
   </div>
 </header>
@@ -261,6 +266,14 @@
 
   <!-- ── HERO ─────────────────────────────────────────────────────────── -->
   <section class="hero-home">
+    <div class="hero-home__video" aria-hidden="true">
+      <iframe
+        src="https://www.youtube.com/embed/b-lHRWWUpsY?controls=0&autoplay=1&mute=1&loop=1&playlist=b-lHRWWUpsY&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&vq=hd1080"
+        title="Syncsity background"
+        allow="autoplay; encrypted-media"
+        loading="eager"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
     <div class="container">
       <h1 class="hero-home__title">
         <span>We Find The Constraints.</span>
@@ -390,7 +403,7 @@
             <li>Competitive positioning</li>
             <li>90-day quick wins</li>
           </ul>
-          <a href="/booking.html" class="btn btn--dark">Book Diagnostic Session</a>
+          <a href="../booking.html" class="btn btn--dark">Book Diagnostic Session</a>
         </article>
 
         <article class="pillar">
@@ -446,7 +459,7 @@
   <div class="footer-home__inner">
     <div class="footer-home__cols">
       <div class="footer-home__brand">
-        <img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:32px;width:auto;">
+        <img src="../lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:32px;width:auto;">
         <p>AI business transformation for ambitious companies. We find the constraints, remove the waste, and help you achieve breakthrough growth.</p>
       </div>
       <div>
@@ -455,7 +468,7 @@
           <li><a href="/why-syncsity">Why Syncsity</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/blog">Resources</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="../contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -471,7 +484,7 @@
         <h4>Services</h4>
         <ul>
           <li><a href="/assess">Free Assessment</a></li>
-          <li><a href="/booking.html">Book a Session</a></li>
+          <li><a href="../booking.html">Book a Session</a></li>
           <li><a href="/transform">Transformation</a></li>
           <li><a href="/calculators">Calculators</a></li>
         </ul>
@@ -479,7 +492,7 @@
     </div>
     <div class="footer-home__bottom">
       <span>&copy; <span id="year">2026</span> Syncsity. All rights reserved.</span>
-      <span><a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/sitemap.html">Sitemap</a></span>
+      <span><a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; <a href="../sitemap.html">Sitemap</a></span>
     </div>
   </div>
 </footer>
@@ -490,6 +503,6 @@ if (/(?:^|;\s*)(?:syncsity_session|PHPSESSID)=/.test(document.cookie || '')) {
   var b = document.getElementById('auth-btn'); if (b) { b.href='/dashboard'; b.textContent='Dashboard'; }
 }
 </script>
-<script src="/assets/js/nav-mobile.js" defer></script>
+<script src="../assets/js/nav-mobile.js" defer></script>
 </body>
 </html>
