@@ -35,16 +35,9 @@ if (!empty($_GET['email'])) {
 <main class="assess" data-assess>
   <div class="assess__top">
     <div class="assess__top-inner">
-      <a href="/" class="assess__brand" aria-label="Syncsity home">
-        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
-          <circle cx="16" cy="16" r="13" stroke="url(#ag1)" stroke-width="2.4" fill="none"/>
-          <path d="M9 19c1.6 1.2 4 2 6.5 2 3 0 5.5-1.6 5.5-4 0-2-1.6-3.2-4.6-4l-2-.5c-3-.7-4.9-2.3-4.9-4.8C9.5 5.2 11.8 4 14.5 4c2.2 0 4.2.8 5.5 2" stroke="url(#ag2)" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-          <defs>
-            <linearGradient id="ag1" x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3385DF"/><stop offset="1" stop-color="#FCA311"/></linearGradient>
-            <linearGradient id="ag2" x1="9" y1="4" x2="21" y2="21" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FCA311"/><stop offset="1" stop-color="#3385DF"/></linearGradient>
-          </defs>
-        </svg>
-        <span>Syncsity · Aha! Assessment</span>
+      <a href="/" class="assess__brand" aria-label="Syncsity home" style="display:flex; align-items:center; gap:12px;">
+        <img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:28px; width:auto;">
+        <span style="opacity:0.6; font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:0.08em;">· Aha! Assessment</span>
       </a>
       <div class="assess__progress" aria-label="Progress"><div class="assess__progress-bar" data-progress-bar></div></div>
       <span class="assess__count" data-counter>1 / ~21</span>
