@@ -23,23 +23,38 @@
 <style>
 /* ── Nav overrides — match live SPA Radix nav exactly ────────────────── */
 .nav { background: rgba(10,16,34,0.65); border-bottom: 1px solid rgba(255,255,255,0.08); }
-.nav__links { gap: 4px; }   /* space-x-1 */
-.nav__links a {
+.nav__links { gap: 4px; align-items: center; }   /* space-x-1 + vertical centering */
+
+/* Top-level nav items only (NOT anchors inside the dropdown panels).
+   Two cases: direct anchor child of .nav__links, OR direct anchor child
+   of the .nav__has-menu wrapper which itself is a direct child of .nav__links. */
+.nav__links > a,
+.nav__has-menu > a {
   display: inline-flex; align-items: center;
   height: 40px; padding: 0 16px;        /* h-10 px-4 py-2 */
   font-size: 14px; font-weight: 600;    /* text-sm font-semibold */
   color: #fff;
   border-radius: 6px;                   /* rounded-md */
   transition: background-color 150ms ease;
+  text-decoration: none;
+  white-space: nowrap;
 }
-.nav__links a:hover { background: rgba(255,255,255,0.10); color: #fff; }
-.nav__links a.has-chevron::after {
-  width: 12px; height: 12px;            /* h-3 w-3 */
+.nav__links > a:hover,
+.nav__has-menu > a:hover {
+  background: rgba(255,255,255,0.10); color: #fff;
+}
+.nav__links > a.has-chevron::after,
+.nav__has-menu > a.has-chevron::after {
+  content: '';
+  width: 8px; height: 8px;
   border-right: 1.6px solid currentColor;
   border-bottom: 1.6px solid currentColor;
-  transform: rotate(45deg);
-  margin-left: 4px; opacity: 0.85;
+  transform: rotate(45deg) translateY(-1px);
+  margin-left: 6px; opacity: 0.85;
+  display: inline-block;
 }
+/* Override the legacy .nav__links a.has-chevron rule from static-page.css
+   which used a different chevron sizing. */
 .nav__cta { gap: 16px; }                /* space-x-4 */
 .nav__cta .btn--orange {
   height: 40px; padding: 0 24px;        /* h-10 px-6 */
@@ -74,12 +89,16 @@
   content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px;
 }
 .nav__menu--solutions { width: min(720px, 92vw); padding: 24px; }
-.nav__menu--transform { width: min(360px, 92vw); padding: 14px; }
-.nav__menu--resources { width: min(280px, 92vw); padding: 14px; }
+.nav__menu--transform { width: min(1080px, 94vw); padding: 24px; }
+.nav__menu--resources { width: min(720px, 92vw); padding: 24px; }
+.nav__menu--resources .nav__menu__grid { grid-template-columns: 1fr 1fr; gap: 16px; }
 
-/* Solutions: 2x2 grid of cards */
+/* Solutions: 2x2 grid of cards. Transform: 3-col grid of cards. */
 .nav__menu__grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.nav__menu--transform .nav__menu__grid {
+  grid-template-columns: repeat(3, 1fr); gap: 16px;
 }
 .nav__menu__card {
   display: block; padding: 14px;
@@ -88,22 +107,31 @@
 }
 .nav__menu__card:hover { background: #f5f7fa; }
 .nav__menu__card__head {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px;
 }
-.nav__menu__card__head svg { width: 20px; height: 20px; color: #14213D; }
+.nav__menu__card__head svg {
+  width: 22px; height: 22px; color: #14213D;
+  flex-shrink: 0; margin-top: 2px;
+}
 .nav__menu__card__head h3 {
   font-size: 15px; font-weight: 700; color: #14213D; margin: 0;
+  line-height: 1.3;
 }
+/* Transform cards: bigger icons, line-broken titles */
+.nav__menu--transform .nav__menu__card__head svg { width: 28px; height: 28px; }
+.nav__menu--transform .nav__menu__card__head h3 { font-size: 16px; }
+.nav__menu--transform .nav__menu__card { padding: 8px 10px; }
+
 .nav__menu__card__tag {
   font-size: 14px; font-weight: 600; color: #FCA311;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 .nav__menu__card__body {
-  font-size: 13px; line-height: 1.5; color: #475569; margin: 0 0 10px;
+  font-size: 13.5px; line-height: 1.5; color: #475569; margin: 0 0 12px;
 }
 .nav__menu__card__more {
   font-size: 13px; font-weight: 600; color: #14213D;
-  display: inline-flex; align-items: center; gap: 4px;
+  display: inline-flex; align-items: center; gap: 6px;
 }
 .nav__menu__card__more::after { content: '→'; }
 
@@ -126,6 +154,63 @@
 
 /* Hide dropdowns under 880px (mobile drawer takes over) */
 @media (max-width: 879px) { .nav__menu { display: none !important; } }
+
+/* ── Client logos section — live spec: py-12 bg-syncsity-black/30 (dark)
+   border-t border-gray-100, embla carousel ──────────────────────────── */
+.clients {
+  padding: 48px 0;                              /* py-12 */
+  background: rgba(36,49,74,0.30);              /* dark:bg-syncsity-black/30 */
+  border-top: 1px solid rgba(255,255,255,0.06); /* dark:border-gray-800 */
+}
+.clients__head { text-align: center; margin-bottom: 32px; }
+.clients__head h2 {
+  font-size: 24px; font-weight: 700; color: #fff;
+  margin: 0 0 12px;
+}
+@media (min-width: 768px) { .clients__head h2 { font-size: 30px; } }
+.clients__divider {
+  width: 64px; height: 4px; background: #3385DF;
+  margin: 0 auto 16px; border-radius: 2px;
+}
+.clients__head p {
+  color: rgba(229,231,235,0.85); font-size: 15px;
+  margin: 0; max-width: 640px; margin-left: auto; margin-right: auto;
+  line-height: 1.5;
+}
+.clients__marquee {
+  max-width: 1024px; margin: 0 auto; overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.clients__track {
+  display: flex; gap: 16px;
+  animation: clientsScroll 60s linear infinite;
+  width: max-content;
+}
+.clients:hover .clients__track { animation-play-state: paused; }
+.clients__slide {
+  flex: 0 0 auto; width: 168px; height: 96px;            /* h-24, ~basis-1/6 */
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  background: rgba(17,24,39,0.50);                       /* dark:bg-gray-900/50 */
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;                                    /* rounded-lg */
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+.clients__slide:hover {
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+}
+.clients__slide img {
+  max-height: 48px; max-width: 100%;
+  object-fit: contain; opacity: 0.9;
+  transition: opacity 200ms ease;
+}
+.clients__slide:hover img { opacity: 1; }
+@keyframes clientsScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
 
@@ -398,22 +483,41 @@
       <div class="nav__has-menu">
         <a href="/transform" class="has-chevron">Transform</a>
         <div class="nav__menu nav__menu--transform" role="menu" aria-label="Transform">
-          <div class="nav__menu__list">
-            <a href="/transform/market-domination" role="menuitem">
-              Market Domination
-              <small>Become the undisputed leader in your market</small>
+          <div class="nav__menu__grid">
+
+            <a class="nav__menu__card" href="/transform/market-domination" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FCA311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+                <h3>Market Domination<br>Programme</h3>
+              </div>
+              <p class="nav__menu__card__tag">Own Your Industry in 18 Months</p>
+              <p class="nav__menu__card__body">Transform from competitor to category king with comprehensive AI integration, competitive intelligence, and strategic positioning.</p>
+              <span class="nav__menu__card__more">Learn More</span>
             </a>
-            <a href="/transform/revenue-acceleration" role="menuitem">
-              Revenue Acceleration
-              <small>Scale revenue without expanding teams</small>
+
+            <a class="nav__menu__card" href="/transform/revenue-acceleration" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FCA311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+                <h3>Revenue Acceleration<br>Programme</h3>
+              </div>
+              <p class="nav__menu__card__tag">10X Growth Without 10X Headcount</p>
+              <p class="nav__menu__card__body">Build self-multiplying revenue engines that generate leads, close deals, and expand accounts 24/7 through intelligent automation.</p>
+              <span class="nav__menu__card__more">Learn More</span>
             </a>
-            <a href="/transform/operational-supremacy" role="menuitem">
-              Operational Supremacy
-              <small>Eliminate waste, remove constraints</small>
+
+            <a class="nav__menu__card" href="/transform/operational-supremacy" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FCA311" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <h3>Operational Supremacy<br>Programme</h3>
+              </div>
+              <p class="nav__menu__card__tag">Cut Costs 40% While Scaling Infinitely</p>
+              <p class="nav__menu__card__body">Achieve 10X operational efficiency through intelligent process automation, workforce optimization, and AI systems.</p>
+              <span class="nav__menu__card__more">Learn More</span>
             </a>
+
           </div>
           <div class="nav__menu__footer">
-            <a href="/transform">View All Programmes</a>
+            <a href="/transform">Compare All Transformations</a>
           </div>
         </div>
       </div>
@@ -477,10 +581,26 @@
       <div class="nav__has-menu">
         <a href="/blog" class="has-chevron">Resources</a>
         <div class="nav__menu nav__menu--resources" role="menu" aria-label="Resources">
-          <div class="nav__menu__list">
-            <a href="/blog" role="menuitem">Blog<small>Insights & manifesto</small></a>
-            <a href="/calculators" role="menuitem">Calculators<small>ROI &amp; constraint cost</small></a>
-            <a href="/case-studies" role="menuitem">Case Studies<small>Customer results</small></a>
+          <div class="nav__menu__grid">
+
+            <a class="nav__menu__card" href="/calculators" role="menuitem">
+              <div class="nav__menu__card__head">
+                <h3>ROI Calculator</h3>
+              </div>
+              <p class="nav__menu__card__tag">Calculate your potential savings</p>
+              <p class="nav__menu__card__body">Interactive tool showing exactly how much you could save with our AI solutions. Takes 2 minutes.</p>
+              <span class="nav__menu__card__more">Calculate Your ROI</span>
+            </a>
+
+            <a class="nav__menu__card" href="/blog" role="menuitem">
+              <div class="nav__menu__card__head">
+                <h3>Blog &amp; Insights</h3>
+              </div>
+              <p class="nav__menu__card__tag">Latest thinking on AI &amp; growth</p>
+              <p class="nav__menu__card__body">Weekly insights on constraints, automation, market domination, and breakthrough growth.</p>
+              <span class="nav__menu__card__more">Read Latest Insights</span>
+            </a>
+
           </div>
         </div>
       </div>
@@ -685,6 +805,60 @@
           <a href="/transform" class="btn btn--dark">Start Transformation</a>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CLIENT LOGOS — live spec: section py-12 bg-syncsity-black/30,
+       18 logos in marquee, blue-400 divider ─────────────────────────── -->
+  <section class="clients" id="client-logos">
+    <div class="container">
+      <div class="clients__head">
+        <h2>Clients We've Worked With</h2>
+        <div class="clients__divider" aria-hidden="true"></div>
+        <p>Some of the clients we've had the privilege to collaborate with directly and indirectly</p>
+      </div>
+      <div class="clients__marquee" role="region" aria-roledescription="carousel" aria-label="Client logos">
+        <div class="clients__track">
+          <!-- Track 1: 18 logos -->
+          <div class="clients__slide"><img src="../assets/img/clients/pe.jpg"    alt="PE — fintech client"    width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/sec.jpg"   alt="SEC client"             width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/kew.jpg"   alt="KEW client"             width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/elite.jpg" alt="Elite client"           width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/lola.jpg"  alt="Lola client"            width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/ais.jpg"   alt="AIS client"             width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/sr-1.jpg"  alt="SR client"              width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/nejob.jpg" alt="Nejob client"           width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/lavy.jpg"  alt="Lavy client"            width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/rosco.jpg" alt="Rosco client"           width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/wu.jpg"    alt="WU client"              width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/so.jpg"    alt="SO client"              width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/medi.jpg"  alt="Medi client"            width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/stell.jpg" alt="Stell client"           width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/tti.jpg"   alt="TTI client"             width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/tdo.jpg"   alt="TDO client"             width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/hadav.jpg" alt="Hadav client"           width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide"><img src="../assets/img/clients/sr.jpg"    alt="SR client"              width="208" height="115" loading="lazy"></div>
+          <!-- Track 2: same 18 duplicated for seamless loop -->
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/pe.jpg"    alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/sec.jpg"   alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/kew.jpg"   alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/elite.jpg" alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/lola.jpg"  alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/ais.jpg"   alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/sr-1.jpg"  alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/nejob.jpg" alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/lavy.jpg"  alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/rosco.jpg" alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/wu.jpg"    alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/so.jpg"    alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/medi.jpg"  alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/stell.jpg" alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/tti.jpg"   alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/tdo.jpg"   alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/hadav.jpg" alt="" width="208" height="115" loading="lazy"></div>
+          <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/sr.jpg"    alt="" width="208" height="115" loading="lazy"></div>
+        </div>
       </div>
     </div>
   </section>
