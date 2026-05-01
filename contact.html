@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Syncsity — open door, real human</title>
-<meta name="description" content="No chatbots, no support tickets, no auto-replies. Edward reads every message and replies within one UK business day. Or take the free 15-minute assessment and we'll have answered before we'd even open this email.">
+<title>Get in touch with Syncsity — smart contact, real human</title>
+<meta name="description" content="Tell us what you need in 30 seconds. We'll route you to the right path — free assessment, strategy session, or a real reply from Edward at edward@syncsity.com.">
 <link rel="canonical" href="https://syncsity.com/contact.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact Syncsity — open door, real human">
-<meta property="og:description" content="Every message goes to edward@syncsity.com. Read by a human. Replied within one business day.">
+<meta property="og:title" content="Get in touch with Syncsity">
+<meta property="og:description" content="Smart routing, not a dumb form. Real reply from edward@syncsity.com within one UK business day.">
 <meta property="og:image" content="https://syncsity.com/assets/img/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
@@ -16,11 +16,123 @@
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:wght@400;600&display=swap">
 <link rel="stylesheet" href="/assets/css/static-page.css">
 
 <style>
-  /* Living-space additions */
+  /* ── Conversational contact wizard ──────────────────────────────── */
+  .wizard {
+    max-width: 720px; margin: 0 auto;
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+  }
+  @media (max-width:540px) { .wizard { padding: 24px; } }
+
+  .wizard__progress {
+    display: flex; gap: 6px; margin-bottom: 24px;
+  }
+  .wizard__pip {
+    height: 4px; flex: 1;
+    background: rgba(255,255,255,0.10);
+    border-radius: 2px;
+    transition: background-color 300ms ease;
+  }
+  .wizard__pip.is-active { background: linear-gradient(90deg, var(--blue-400), var(--orange)); }
+  .wizard__pip.is-done { background: var(--blue-400); }
+
+  .wizard__step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em;
+    color: var(--blue-300); text-transform: uppercase; font-weight: 600;
+    margin-bottom: 10px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .wizard__step-num::before {
+    content: ''; width: 16px; height: 1px; background: var(--blue-300);
+  }
+  .wizard__step-title {
+    font-size: clamp(1.4rem, 1vw + 1.3rem, 1.9rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    color: #fff; margin-bottom: 10px; line-height: 1.2;
+  }
+  .wizard__step-sub {
+    color: var(--text-muted); font-size: 1rem;
+    margin-bottom: 24px; line-height: 1.6;
+  }
+
+  .step { display: none; }
+  .step.is-active { display: block; animation: stepIn 400ms cubic-bezier(0.22,1,0.36,1); }
+  @keyframes stepIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .choice-grid { display: grid; gap: 12px; }
+  .choice {
+    display: grid; grid-template-columns: 40px 1fr auto; gap: 16px; align-items: center;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left; width: 100%;
+    transition: transform 150ms ease, border-color 150ms ease, background-color 150ms ease;
+    color: inherit;
+  }
+  .choice:hover { transform: translateX(4px); border-color: var(--blue-400); background: rgba(51,133,223,0.06); }
+  .choice.is-selected { border-color: var(--blue-400); background: rgba(51,133,223,0.10); }
+  .choice__icon {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    background: rgba(51,133,223,0.10); color: var(--blue-300);
+    border-radius: 10px;
+  }
+  .choice__icon--orange { background: rgba(252,163,17,0.10); color: var(--orange); }
+  .choice__icon--green  { background: rgba(54,179,126,0.10); color: #6ee0a8; }
+  .choice__icon--purple { background: rgba(170,120,255,0.10); color: #c5a8ff; }
+  .choice__body h4 { color: #fff; font-size: 1.05rem; margin-bottom: 4px; font-weight: 600; }
+  .choice__body p  { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+  .choice__cta { color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  @media (max-width:540px) { .choice { grid-template-columns: 36px 1fr; } .choice__cta { display:none; } }
+
+  .step__actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 24px; gap: 12px; flex-wrap: wrap;
+  }
+  .step__actions-meta {
+    color: var(--text-dim); font-size: 12px; font-family: 'JetBrains Mono', monospace;
+  }
+
+  .preferred-time {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    margin-top: 8px;
+  }
+  @media (max-width:540px) { .preferred-time { grid-template-columns: repeat(2, 1fr); } }
+  .time-pill {
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    transition: all 150ms ease;
+  }
+  .time-pill:hover { border-color: var(--border-strong); color: #fff; }
+  .time-pill.is-selected { border-color: var(--blue-400); color: #fff; background: rgba(51,133,223,0.10); }
+
+  .summary-row {
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .summary-row:last-child { border-bottom: 0; }
+  .summary-row__label { color: var(--text-dim); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding-top: 2px; }
+  .summary-row__value { color: #fff; }
+
   .live-strip {
     display: inline-flex; align-items: center; gap: 12px;
     padding: 8px 14px;
@@ -29,147 +141,31 @@
     border-radius: 9999px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px; color: #6ee0a8;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
   .live-strip__dot {
     width: 7px; height: 7px; border-radius: 50%;
     background: #36b37e;
-    box-shadow: 0 0 0 4px rgba(54,179,126,0.15);
     animation: pulse 2s ease-in-out infinite;
   }
   @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.4;} }
-
-  .routing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  @media (max-width:880px) { .routing { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width:540px) { .routing { grid-template-columns: 1fr; } }
-  .route-card {
-    display: block;
-    padding: 24px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-    text-align: left;
-  }
-  .route-card:hover { transform: translateY(-3px); border-color: var(--blue-400); background: rgba(51,133,223,0.06); color: inherit; }
-  .route-card__icon {
-    width: 40px; height: 40px;
-    display: grid; place-items: center;
-    background: rgba(51,133,223,0.10);
-    color: var(--blue-300);
-    border-radius: 10px;
-    margin-bottom: 14px;
-  }
-  .route-card__icon--orange { background: rgba(252,163,17,0.10); color: var(--orange); }
-  .route-card__icon--green  { background: rgba(54,179,126,0.10); color: #6ee0a8; }
-  .route-card h3 { font-size: 1.05rem; margin-bottom: 6px; color: #fff; }
-  .route-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; margin-bottom: 14px; }
-  .route-card__meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; }
-  .route-card__cta {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: var(--blue-300); font-size: 0.92rem; font-weight: 600;
-    margin-top: 4px;
-  }
-
-  .edward-quote {
-    position: relative;
-    padding: 32px 32px 32px 80px;
-    background: linear-gradient(135deg, rgba(252,163,17,0.06), rgba(51,133,223,0.04));
-    border: 1px solid rgba(252,163,17,0.20);
-    border-radius: 20px;
-    font-family: 'Source Serif 4', Georgia, serif;
-  }
-  .edward-quote::before {
-    content: '"';
-    position: absolute; left: 24px; top: -8px;
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 96px;
-    color: var(--orange);
-    opacity: 0.45;
-    line-height: 1;
-  }
-  .edward-quote p { font-size: 17px; line-height: 1.6; color: var(--text); font-style: italic; margin-bottom: 14px; }
-  .edward-quote .signature {
-    display: flex; align-items: center; gap: 12px;
-    margin-top: 18px;
-    font-family: 'Inter', sans-serif; font-style: normal;
-  }
-  .edward-quote .signature .avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue-400), var(--orange));
-    display: grid; place-items: center;
-    font-weight: 700; color: #0a1022; font-size: 15px;
-    flex-shrink: 0;
-  }
-  .edward-quote .signature .who { font-size: 14px; color: #fff; font-weight: 600; }
-  .edward-quote .signature .role { font-size: 12px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; }
-
-  .inline-faq { display: flex; flex-direction: column; gap: 4px; }
-  .inline-faq details {
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.02);
-    border-radius: 12px;
-    padding: 0;
-    transition: border-color 200ms ease, background-color 200ms ease;
-  }
-  .inline-faq details[open] { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
-  .inline-faq summary {
-    cursor: pointer; padding: 18px 20px;
-    font-weight: 600; color: #fff; font-size: 15px;
-    list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .inline-faq summary::-webkit-details-marker { display: none; }
-  .inline-faq summary::after {
-    content: '+'; color: var(--blue-300); font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 400;
-    transition: transform 200ms ease;
-  }
-  .inline-faq details[open] summary::after { transform: rotate(45deg); }
-  .inline-faq details p { padding: 0 20px 18px; color: var(--text-muted); line-height: 1.65; font-size: 14.5px; }
-
-  .meta-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    margin: 32px 0;
-  }
-  @media (max-width:720px) { .meta-grid { grid-template-columns: repeat(2, 1fr); } }
-  .meta-stat {
-    padding: 18px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-  }
-  .meta-stat__num { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #fff; font-weight: 700; letter-spacing: -0.02em; }
-  .meta-stat__num small { font-size: 14px; color: var(--orange); }
-  .meta-stat__label { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-
-  .room-divider {
-    display: flex; align-items: center; gap: 16px; margin: 0 0 28px;
-  }
-  .room-divider__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-strong), transparent); }
-  .room-divider__label {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim);
-    letter-spacing: 0.18em; text-transform: uppercase;
-  }
 </style>
 </head>
 <body>
 
 <div class="bg-stage" aria-hidden="true"></div>
 
+<!-- ── NAV (matches SPA) ──────────────────────────────────────────── -->
 <header class="nav">
   <div class="nav__inner">
-    <a href="/" class="nav__brand"><img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
-    <nav class="nav__links">
+    <a href="/" class="nav__brand" aria-label="Syncsity home"><img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
+    <nav class="nav__links" aria-label="Primary">
       <a href="/transform">Transform</a>
       <a href="/solutions">Solutions</a>
       <a href="/assess">Diagnose</a>
       <a href="/why-syncsity">Why Syncsity</a>
       <a href="/pricing">Pricing</a>
-      <a href="/blog">Insights</a>
+      <a href="/blog">Resources</a>
     </nav>
     <div class="nav__cta">
       <a href="/auth/login" class="btn btn--ghost btn--sm" id="auth-btn">Log in</a>
@@ -180,233 +176,175 @@
 
 <main>
 
-  <!-- ── ZONE 1: HERO / OPEN DOOR ─────────────────────────────────────── -->
+  <!-- ── HERO ──────────────────────────────────────────────────────── -->
   <section class="section section--hero">
     <div class="container container--md">
-      <div class="live-strip reveal">
+      <div class="live-strip">
         <span class="live-strip__dot" aria-hidden="true"></span>
         <span>Reading every message · Edward · UK working hours</span>
       </div>
-      <h1 class="reveal reveal--d1">Open door.</h1>
-      <p class="lead reveal reveal--d2" style="margin-top: 20px; max-width: 700px; margin-left:auto; margin-right:auto;">
-        No chatbots, no support tickets, no auto-replies. Every message hits one inbox —
-        <strong style="color:#fff;">edward@syncsity.com</strong> — and gets a real reply
-        within one UK business day. For most enquiries, the
-        <a href="/assess">free 15-minute assessment</a> is faster: you'll have a useful answer
-        before we'd open this email.
+      <h1>Get in touch.</h1>
+      <p class="lead" style="margin-top: 18px; max-width: 660px; margin-left:auto; margin-right:auto;">
+        30 seconds. Three quick questions. We'll route you to the fastest answer —
+        free assessment, strategy session, or a real reply from
+        <strong style="color:#fff;">edward@syncsity.com</strong> within one UK business day.
       </p>
     </div>
   </section>
 
-  <!-- ── ZONE 2: ROUTING — "WHAT BRINGS YOU IN?" ──────────────────────── -->
-  <section class="section section--tight">
-    <div class="container container--md">
-      <div class="room-divider">
-        <span class="room-divider__line"></span>
-        <span class="room-divider__label">What brings you in?</span>
-        <span class="room-divider__line"></span>
-      </div>
+  <!-- ── WIZARD ────────────────────────────────────────────────────── -->
+  <section class="section section--tight" style="padding-top: 0;">
+    <div class="container">
+      <div class="wizard" data-wizard>
 
-      <div class="routing reveal">
-        <a href="/assess" class="route-card">
-          <div class="route-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-          </div>
-          <h3>Diagnose my business</h3>
-          <p>15-minute assessment, free Revenue Intelligence Report.</p>
-          <span class="route-card__meta">Most popular · 92% of visitors</span>
-          <div class="route-card__cta">Start the diagnostic →</div>
-        </a>
-
-        <a href="/booking.html" class="route-card">
-          <div class="route-card__icon route-card__icon--orange">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3>Strategy Session</h3>
-          <p>£950 · 30 min with a senior operator. Diagnosis pressure-test.</p>
-          <span class="route-card__meta">Fee credited against engagement</span>
-          <div class="route-card__cta">Book on Calendly →</div>
-        </a>
-
-        <a href="#message" class="route-card">
-          <div class="route-card__icon route-card__icon--green">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <h3>Considered engagement</h3>
-          <p>You've read about us, you have a real brief. Send the form.</p>
-          <span class="route-card__meta">Reply within 1 business day</span>
-          <div class="route-card__cta">Write a message ↓</div>
-        </a>
-
-        <a href="#message" class="route-card">
-          <div class="route-card__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <h3>Press / partnership / other</h3>
-          <p>Media, partnerships, hiring, anything else. We read everything.</p>
-          <span class="route-card__meta">Edward replies personally</span>
-          <div class="route-card__cta">Write a message ↓</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── ZONE 3: EDWARD'S VOICE ──────────────────────────────────────── -->
-  <section class="section section--tight">
-    <div class="container container--sm">
-      <div class="edward-quote reveal">
-        <p>
-          When you write in, I read it. Properly — not skimmed. I'm not running a sales team
-          off this inbox. If we're a fit, you'll know inside two emails. If we're not, I'll
-          tell you who to talk to instead. Either way, I'm not going to drip-sequence you for
-          eight months.
-        </p>
-        <div class="signature">
-          <div class="avatar">EH</div>
-          <div>
-            <div class="who">Edward Hadome</div>
-            <div class="role">Founder · Syncsity</div>
-          </div>
+        <!-- Progress pips -->
+        <div class="wizard__progress" data-progress>
+          <span class="wizard__pip is-active"></span>
+          <span class="wizard__pip"></span>
+          <span class="wizard__pip"></span>
+          <span class="wizard__pip"></span>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── ZONE 4: THE FORM ────────────────────────────────────────────── -->
-  <section class="section" id="message">
-    <div class="container container--md">
-      <div class="room-divider">
-        <span class="room-divider__line"></span>
-        <span class="room-divider__label">Write a message</span>
-        <span class="room-divider__line"></span>
-      </div>
-
-      <div class="form-card card reveal" style="padding: 40px;">
-        <div id="contact-flash" class="flash" role="status"></div>
+        <div id="wizard-flash" class="flash" role="status"></div>
 
         <form id="contact-form" action="/api/contact" method="POST" novalidate>
           <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
           <input type="hidden" name="_return" value="/contact.html">
+          <input type="hidden" name="gdpr_consent" value="1">
           <input type="hidden" name="name" id="hidden-name">
+          <input type="hidden" name="subject" id="hidden-subject" value="General">
+          <input type="hidden" name="message" id="hidden-message">
+          <input type="hidden" name="preferred_time" id="hidden-time">
 
-          <div class="field__row">
-            <div class="field">
-              <input type="text" id="firstName" name="firstName" class="input" placeholder="First name" required autocomplete="given-name" maxlength="80">
-              <label class="field__label" for="firstName">First name</label>
-            </div>
-            <div class="field">
-              <input type="text" id="lastName" name="lastName" class="input" placeholder="Last name" required autocomplete="family-name" maxlength="80">
-              <label class="field__label" for="lastName">Last name</label>
+          <!-- ── STEP 1: WHAT BRINGS YOU IN? ─────────────────────────── -->
+          <div class="step is-active" data-step="1">
+            <div class="wizard__step-num">Question 1 of 4</div>
+            <h2 class="wizard__step-title">What brings you in?</h2>
+            <p class="wizard__step-sub">Pick the closest. We'll route you to the fastest path.</p>
+
+            <div class="choice-grid">
+              <button type="button" class="choice" data-route="diagnose">
+                <span class="choice__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+                <span class="choice__body"><h4>Diagnose my business</h4><p>Free 15-minute Aha! Assessment + AI-written Revenue Intelligence Report.</p></span>
+                <span class="choice__cta">→ /assess</span>
+              </button>
+
+              <button type="button" class="choice" data-route="strategy">
+                <span class="choice__icon choice__icon--orange"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+                <span class="choice__body"><h4>Book a Strategy Session</h4><p>£950 · 30 minutes with a senior operator. Pressure-test your diagnosis.</p></span>
+                <span class="choice__cta">→ Calendly</span>
+              </button>
+
+              <button type="button" class="choice" data-route="engagement">
+                <span class="choice__icon choice__icon--green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                <span class="choice__body"><h4>Considered engagement</h4><p>You've read about us, you have a real brief. Tell us properly.</p></span>
+                <span class="choice__cta">Continue →</span>
+              </button>
+
+              <button type="button" class="choice" data-route="other">
+                <span class="choice__icon choice__icon--purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><circle cx="12" cy="8" r="0.5" fill="currentColor"/></svg></span>
+                <span class="choice__body"><h4>Press, partnership, hiring, or other</h4><p>Anything that doesn't fit above. Edward reads it personally.</p></span>
+                <span class="choice__cta">Continue →</span>
+              </button>
             </div>
           </div>
 
-          <div class="field__row">
-            <div class="field">
-              <input type="email" id="email" name="email" class="input" placeholder="Work email" required autocomplete="email" maxlength="254">
-              <label class="field__label" for="email">Work email</label>
+          <!-- ── STEP 2: TELL US ABOUT YOU ──────────────────────────── -->
+          <div class="step" data-step="2">
+            <div class="wizard__step-num">Question 2 of 4</div>
+            <h2 class="wizard__step-title" id="step2-title">Tell us about you.</h2>
+            <p class="wizard__step-sub">Just enough so the reply lands in the right inbox.</p>
+
+            <div class="field__row">
+              <div class="field">
+                <input type="text" id="firstName" class="input" placeholder="First name" required maxlength="80" autocomplete="given-name">
+                <label class="field__label" for="firstName">First name</label>
+              </div>
+              <div class="field">
+                <input type="text" id="lastName" class="input" placeholder="Last name" required maxlength="80" autocomplete="family-name">
+                <label class="field__label" for="lastName">Last name</label>
+              </div>
             </div>
-            <div class="field">
-              <input type="text" id="company" name="company" class="input" placeholder="Company" autocomplete="organization" maxlength="200">
-              <label class="field__label" for="company">Company</label>
+
+            <div class="field__row">
+              <div class="field">
+                <input type="email" name="email" id="email" class="input" placeholder="Work email" required maxlength="254" autocomplete="email">
+                <label class="field__label" for="email">Work email</label>
+              </div>
+              <div class="field">
+                <input type="text" name="company" id="company" class="input" placeholder="Company" maxlength="200" autocomplete="organization">
+                <label class="field__label" for="company">Company</label>
+              </div>
+            </div>
+
+            <div class="step__actions">
+              <button type="button" class="btn btn--ghost btn--sm" data-prev>← Back</button>
+              <div style="display:flex;gap:12px;align-items:center;">
+                <span class="step__actions-meta">press <kbd style="border:1px solid var(--border-strong);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;">Enter</kbd></span>
+                <button type="button" class="btn btn--primary" data-next-from="2">Continue →</button>
+              </div>
             </div>
           </div>
 
-          <div class="field">
-            <select id="subject" name="subject" class="select" data-empty="true" required>
-              <option value="" disabled selected hidden></option>
-              <option value="Engagement">Considered engagement</option>
-              <option value="Strategy session">Strategy Session (£950)</option>
-              <option value="Partnership">Partnership / collaboration</option>
-              <option value="Press">Press / media</option>
-              <option value="Hiring">Hiring / careers</option>
-              <option value="General">General question</option>
-            </select>
-            <label class="field__label" for="subject">What's this about?</label>
+          <!-- ── STEP 3: WHAT CAN WE HELP WITH? ─────────────────────── -->
+          <div class="step" data-step="3">
+            <div class="wizard__step-num">Question 3 of 4</div>
+            <h2 class="wizard__step-title" id="step3-title">What can we help with?</h2>
+            <p class="wizard__step-sub" id="step3-sub">The more concrete, the faster Edward can be useful. Brutal honesty welcome — only Edward reads this.</p>
+
+            <div class="field">
+              <textarea id="messageInput" class="textarea" placeholder="Your message" required minlength="20" maxlength="5000" style="min-height:160px;"></textarea>
+              <label class="field__label" for="messageInput">Your message</label>
+            </div>
+
+            <div style="margin-top:18px;">
+              <p class="wizard__step-sub" style="margin-bottom: 10px; font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase;">Optional · best time to reach you</p>
+              <div class="preferred-time" data-time>
+                <button type="button" class="time-pill" data-tval="anytime">Anytime</button>
+                <button type="button" class="time-pill" data-tval="morning">Morning</button>
+                <button type="button" class="time-pill" data-tval="afternoon">Afternoon</button>
+                <button type="button" class="time-pill" data-tval="thisweek">This week</button>
+              </div>
+            </div>
+
+            <div class="step__actions">
+              <button type="button" class="btn btn--ghost btn--sm" data-prev>← Back</button>
+              <button type="button" class="btn btn--primary" data-next-from="3">Continue →</button>
+            </div>
           </div>
 
-          <div class="field">
-            <textarea id="message" name="message" class="textarea" placeholder="Your message" required minlength="20" maxlength="5000"></textarea>
-            <label class="field__label" for="message">Your message</label>
-            <div class="field__hint">The more specific, the faster Edward can be useful. Brutal honesty welcome.</div>
-          </div>
+          <!-- ── STEP 4: REVIEW + SEND ──────────────────────────────── -->
+          <div class="step" data-step="4">
+            <div class="wizard__step-num">Question 4 of 4 · Final</div>
+            <h2 class="wizard__step-title">Quick review, then we send.</h2>
+            <p class="wizard__step-sub">Confirm everything looks right. Reply lands within one UK business day.</p>
 
-          <label class="checkbox-row">
-            <input type="checkbox" name="gdpr_consent_visible" value="1" required checked>
-            <span>I'm OK with Syncsity processing this message to reply to me. <a href="/privacy.html">Privacy policy</a>.</span>
-          </label>
+            <div style="background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
+              <div class="summary-row"><div class="summary-row__label">Path</div><div class="summary-row__value" data-summary="route">—</div></div>
+              <div class="summary-row"><div class="summary-row__label">Name</div><div class="summary-row__value" data-summary="name">—</div></div>
+              <div class="summary-row"><div class="summary-row__label">Email</div><div class="summary-row__value" data-summary="email">—</div></div>
+              <div class="summary-row"><div class="summary-row__label">Company</div><div class="summary-row__value" data-summary="company">—</div></div>
+              <div class="summary-row"><div class="summary-row__label">When best</div><div class="summary-row__value" data-summary="time">Anytime</div></div>
+              <div class="summary-row"><div class="summary-row__label">Message</div><div class="summary-row__value" data-summary="message" style="white-space:pre-wrap;">—</div></div>
+            </div>
 
-          <div class="submit-row">
-            <button type="submit" class="btn btn--primary btn--lg">Send message →</button>
-            <span class="submit-meta">→ edward@syncsity.com</span>
+            <label class="checkbox-row">
+              <input type="checkbox" name="gdpr_consent_visible" value="1" required checked>
+              <span>I'm OK with Syncsity processing this to reply to me. <a href="/privacy.html">Privacy policy</a>.</span>
+            </label>
+
+            <div class="step__actions">
+              <button type="button" class="btn btn--ghost btn--sm" data-prev>← Back</button>
+              <button type="submit" class="btn btn--primary btn--lg">Send to Edward →</button>
+            </div>
+            <p style="margin-top:12px;text-align:center;color:var(--text-dim);font-size:12px;font-family:'JetBrains Mono',monospace;">→ edward@syncsity.com</p>
           </div>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ── ZONE 5: BEFORE-YOU-SEND FAQ ─────────────────────────────────── -->
-  <section class="section">
-    <div class="container container--sm">
-      <div class="room-divider">
-        <span class="room-divider__line"></span>
-        <span class="room-divider__label">Before you send — the questions we get most</span>
-        <span class="room-divider__line"></span>
-      </div>
-
-      <div class="inline-faq reveal">
-        <details>
-          <summary>How fast do you actually reply?</summary>
-          <p>Within one UK business day, every time. Average over the last 30 days: ~4 hours. The exception is weekends — replies will land Monday morning.</p>
-        </details>
-        <details>
-          <summary>Will you reply if I'm not your target client?</summary>
-          <p>Yes — usually with a redirect to who can help, plus a paragraph on what your archetype's most common trap is. We say no often, and we say it kindly.</p>
-        </details>
-        <details>
-          <summary>Do you take cold pitches from agencies / sales teams?</summary>
-          <p>Honestly, no. They go to a no-reply folder. If you're a service provider with something genuinely complementary, write a real human note — those we read and sometimes act on.</p>
-        </details>
-        <details>
-          <summary>What's the fastest way to actually engage you?</summary>
-          <p>Take the <a href="/assess">free 15-minute assessment</a>. The Revenue Intelligence Report it produces is the most useful 90 seconds of work we'll ever do for you for free, and it makes any subsequent call 10× more useful.</p>
-        </details>
-        <details>
-          <summary>Do you do free discovery calls?</summary>
-          <p>No. The free assessment IS our discovery — and it's better than any call because it's evidence-based, not vibes-based. Paid Strategy Sessions (£950 · 30 min) start where the assessment ends.</p>
-        </details>
-        <details>
-          <summary>Where are you based?</summary>
-          <p>London, United Kingdom. We work with operators across UK, US, and EU. Servers in Helsinki, Finland (EU). UK GDPR + DPA 2018 aligned.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── ZONE 6: META / TRUST STATS ──────────────────────────────────── -->
-  <section class="section section--tight">
-    <div class="container container--md">
-      <div class="meta-grid reveal">
-        <div class="meta-stat">
-          <div class="meta-stat__num">~4<small>h</small></div>
-          <div class="meta-stat__label">Average reply time</div>
-        </div>
-        <div class="meta-stat">
-          <div class="meta-stat__num">100<small>%</small></div>
-          <div class="meta-stat__label">Read by a human</div>
-        </div>
-        <div class="meta-stat">
-          <div class="meta-stat__num">0</div>
-          <div class="meta-stat__label">Auto-replies sent</div>
-        </div>
-        <div class="meta-stat">
-          <div class="meta-stat__num">0</div>
-          <div class="meta-stat__label">Drip sequences</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+  <!-- ── FOOTER (matches SPA) ──────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer__top">
@@ -432,30 +370,163 @@
   if (/(?:^|;\s*)(?:syncsity_session|PHPSESSID)=/.test(document.cookie || '')) {
     var b = document.getElementById('auth-btn'); if (b) { b.href='/dashboard'; b.textContent='Dashboard'; }
   }
-  var sel = document.getElementById('subject');
-  if (sel) {
-    var sync = function(){ sel.setAttribute('data-empty', sel.value === '' ? 'true' : 'false'); };
-    sel.addEventListener('change', sync); sync();
-  }
-  var form = document.getElementById('contact-form');
-  if (form) {
-    form.addEventListener('submit', function(){
-      var fn=(document.getElementById('firstName')||{}).value||'';
-      var ln=(document.getElementById('lastName')||{}).value||'';
-      document.getElementById('hidden-name').value = (fn+' '+ln).trim();
+
+  var form     = document.getElementById('contact-form');
+  var steps    = form.querySelectorAll('.step');
+  var pips     = document.querySelectorAll('[data-progress] .wizard__pip');
+  var flash    = document.getElementById('wizard-flash');
+  var current  = 1;
+  var maxStep  = 4;
+  var route    = '';
+
+  var routeMeta = {
+    diagnose:   { title: 'Free Aha! Assessment',     subject: 'Diagnose request',      step2: 'Tell us where to send the report.', step3: 'Anything we should know first?', step3sub: 'Optional context. The form will redirect you to the assessment when you submit.' },
+    strategy:   { title: 'Strategy Session (£950)',  subject: 'Strategy Session',      step2: 'Tell us about you.',                step3: 'What do you want to pressure-test?', step3sub: 'Specifics make the call worth 10× more. We\'ll redirect you to Calendly to pick a slot after this.' },
+    engagement: { title: 'Considered engagement',    subject: 'Engagement enquiry',    step2: 'Who are you?',                      step3: 'What\'s the brief?', step3sub: 'Where you are now, what success looks like, what you\'ve already tried.' },
+    other:      { title: 'Press / partnership / other', subject: 'General enquiry',     step2: 'Who are you?',                      step3: 'What can we help with?', step3sub: 'Anything that doesn\'t fit elsewhere. Edward reads it personally.' }
+  };
+
+  /* ── STEP 1: route choice ─────────────────────────────────────── */
+  document.querySelectorAll('.choice').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      route = btn.dataset.route;
+      document.getElementById('hidden-subject').value = (routeMeta[route] || {}).subject || 'General';
+      // Adapt step 2/3 copy
+      var meta = routeMeta[route] || {};
+      var s2t = document.getElementById('step2-title'); if (s2t) s2t.textContent = meta.step2 || s2t.textContent;
+      var s3t = document.getElementById('step3-title'); if (s3t) s3t.textContent = meta.step3 || s3t.textContent;
+      var s3s = document.getElementById('step3-sub');  if (s3s) s3s.textContent = meta.step3sub || s3s.textContent;
+      goTo(2);
     });
-  }
-  var qs = new URLSearchParams(location.search);
-  var flash = document.getElementById('contact-flash');
-  if (flash) {
-    if (qs.get('sent') === '1') {
-      flash.classList.add('is-success');
-      flash.innerHTML = '<strong>Message in.</strong> Edward will reply within one UK business day from edward@syncsity.com. Confirmation just landed in your inbox too.';
-      flash.scrollIntoView({behavior:'smooth', block:'center'});
-    } else if (qs.get('error')) {
-      flash.classList.add('is-error');
-      flash.textContent = qs.get('error');
+  });
+
+  /* ── Time pills (step 3) ──────────────────────────────────────── */
+  document.querySelectorAll('[data-time] .time-pill').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-time] .time-pill').forEach(function (x) { x.classList.remove('is-selected'); });
+      b.classList.add('is-selected');
+      document.getElementById('hidden-time').value = b.dataset.tval;
+    });
+  });
+  // Default
+  var defaultTime = document.querySelector('.time-pill[data-tval="anytime"]');
+  if (defaultTime) { defaultTime.classList.add('is-selected'); document.getElementById('hidden-time').value = 'anytime'; }
+
+  /* ── Next / Prev ─────────────────────────────────────────────── */
+  document.querySelectorAll('[data-prev]').forEach(function (b) {
+    b.addEventListener('click', function () { goTo(current - 1); });
+  });
+  document.querySelectorAll('[data-next-from]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var from = parseInt(b.dataset.nextFrom, 10);
+      if (!validateStep(from)) return;
+      goTo(from + 1);
+    });
+  });
+
+  /* ── Enter key advances on text/email steps ─────────────────── */
+  ['firstName','lastName','email','company'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); if (current === 2 && validateStep(2)) goTo(3); } });
+  });
+
+  function validateStep(step) {
+    flash.classList.remove('is-error'); flash.style.display = 'none';
+    if (step === 2) {
+      var fn = document.getElementById('firstName').value.trim();
+      var ln = document.getElementById('lastName').value.trim();
+      var em = document.getElementById('email').value.trim();
+      if (fn.length < 2 || ln.length < 2) { return showError('Both names please — even just initials.'); }
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)) { return showError('That email looks off.'); }
     }
+    if (step === 3) {
+      var msg = document.getElementById('messageInput').value.trim();
+      if (msg.length < 20) { return showError('A bit more detail (min 20 chars) so we can be useful.'); }
+    }
+    return true;
+  }
+  function showError(t) { flash.classList.add('is-error'); flash.textContent = t; flash.style.display = 'block'; flash.scrollIntoView({behavior:'smooth',block:'nearest'}); return false; }
+
+  function goTo(n) {
+    if (n < 1 || n > maxStep) return;
+    current = n;
+    steps.forEach(function (s) { s.classList.remove('is-active'); });
+    form.querySelector('[data-step="' + n + '"]').classList.add('is-active');
+    pips.forEach(function (p, i) {
+      p.classList.remove('is-active', 'is-done');
+      if (i < n - 1) p.classList.add('is-done');
+      if (i === n - 1) p.classList.add('is-active');
+    });
+    if (n === 4) populateSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function populateSummary() {
+    var meta = routeMeta[route] || {};
+    var fn = document.getElementById('firstName').value.trim();
+    var ln = document.getElementById('lastName').value.trim();
+    var em = document.getElementById('email').value.trim();
+    var co = document.getElementById('company').value.trim();
+    var msg = document.getElementById('messageInput').value.trim();
+    var t = document.getElementById('hidden-time').value || 'anytime';
+    var setS = function (k, v) { var el = document.querySelector('[data-summary="' + k + '"]'); if (el) el.textContent = v; };
+    setS('route',   meta.title || '—');
+    setS('name',    (fn + ' ' + ln).trim() || '—');
+    setS('email',   em || '—');
+    setS('company', co || '—');
+    setS('time',    { anytime: 'Anytime', morning: 'Mornings (UK)', afternoon: 'Afternoons (UK)', thisweek: 'This week' }[t] || t);
+    setS('message', msg || '—');
+  }
+
+  /* ── Submit ─────────────────────────────────────────────────── */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fn = document.getElementById('firstName').value.trim();
+    var ln = document.getElementById('lastName').value.trim();
+    document.getElementById('hidden-name').value = (fn + ' ' + ln).trim();
+    var msg = document.getElementById('messageInput').value.trim();
+    var t = document.getElementById('hidden-time').value || 'anytime';
+    var meta = routeMeta[route] || {};
+    var fullMessage = msg + '\n\n— Best time to reach: ' + t + '\n— Path chosen: ' + (meta.title || 'General');
+    document.getElementById('hidden-message').value = fullMessage;
+
+    // For diagnose / strategy, after sending the message we redirect them to the right destination
+    var afterRedirect = '';
+    if (route === 'diagnose') afterRedirect = '/assess?email=' + encodeURIComponent(document.getElementById('email').value);
+    if (route === 'strategy') afterRedirect = '/booking.html';
+
+    // Submit via fetch so we control the redirect
+    var fd = new FormData(form);
+    var btn = e.submitter;
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    fetch('/api/contact', { method: 'POST', body: fd, credentials: 'same-origin', redirect: 'manual' })
+      .then(function () {
+        if (afterRedirect) {
+          window.location.href = afterRedirect;
+        } else {
+          window.location.href = '/contact.html?sent=1';
+        }
+      })
+      .catch(function () {
+        // Even if fetch errors (e.g. opaque redirect), the POST has likely landed.
+        // Treat as success and bounce.
+        window.location.href = afterRedirect || '/contact.html?sent=1';
+      });
+  });
+
+  /* ── Show flash from URL ─────────────────────────────────────── */
+  var qs = new URLSearchParams(location.search);
+  if (qs.get('sent') === '1') {
+    flash.classList.add('is-success');
+    flash.innerHTML = '<strong>Message in.</strong> Edward will reply within one UK business day from edward@syncsity.com. A confirmation just landed in your inbox.';
+    flash.style.display = 'block';
+    flash.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (qs.get('error')) {
+    flash.classList.add('is-error');
+    flash.textContent = qs.get('error');
+    flash.style.display = 'block';
   }
 })();
 </script>

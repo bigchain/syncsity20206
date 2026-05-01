@@ -1,154 +1,60 @@
 /* ──────────────────────────────────────────────────────────────────────────
-   Syncsity — SPA visual fixes
-   Loaded after the Lovable React SPA's bundled CSS to fix:
-     1. white-on-white buttons (the most common bug across solution pages)
-     2. invisible CTA text inside dark hero sections
-     3. broken footer buttons ("Schedule Audit" type) with no contrast
-     4. broken/empty button placeholders
-     5. consistent CTA style across all SPA pages
+   Syncsity — SPA visual fixes (SURGICAL — narrow selectors only)
+   Loaded after the Lovable SPA's bundled CSS.
 
-   This file is INTENTIONALLY high-specificity (multiple class selectors +
-   !important where needed) because it must override the SPA's bundled
-   Tailwind utilities. Treat additions like surgical patches — each rule
-   should have a comment explaining the bug it fixes.
+   Lessons learned: broad [class*="bg-white"] selectors caused collateral
+   damage to the nav (turned transparent nav buttons into white pills).
+   This file now ONLY targets very specific known bugs by exact class
+   combinations. If you add a rule here, leave a comment with the page
+   URL where you saw the bug.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* ── Token re-declaration so this file is portable ─────────────────────── */
 :root {
-  --sx-navy-darker: #060b1a;
-  --sx-navy-dark:   #0a1022;
-  --sx-navy:        #14213d;
-  --sx-blue-300:    #66a3e7;
-  --sx-blue-400:    #3385df;
-  --sx-blue-500:    #0066d7;
-  --sx-blue-600:    #0052ac;
-  --sx-orange:      #fca311;
-  --sx-text-on-dark: #ffffff;
-  --sx-text-on-light: #0a1022;
+  --sx-navy-dark: #0a1022;
+  --sx-blue-300: #66a3e7;
+  --sx-blue-500: #0066d7;
+  --sx-orange:   #fca311;
 }
 
-/* ── 1. Force readable text on white-bg elements ─────────────────────── */
-/* Tailwind's bg-white sometimes pairs with text-white from a parent — kills contrast. */
-.bg-white,
-button.bg-white,
-a.bg-white,
-[class*="bg-white"]:not([class*="bg-white/"]) {
-  color: var(--sx-text-on-light) !important;
-}
-/* Same for very light backgrounds the SPA uses */
-.bg-gray-50,
-.bg-gray-100,
-.bg-syncsity-lightGray {
-  color: var(--sx-text-on-light) !important;
-}
-
-/* ── 2. Buttons in dark sections — restore proper colors ─────────────── */
-/* Standard syncsity-orange CTA button — text MUST be navy, never white-on-orange */
-.bg-syncsity-orange,
-button.bg-syncsity-orange,
-a.bg-syncsity-orange,
-[class*="bg-syncsity-orange"] {
-  color: var(--sx-text-on-light) !important;
-}
-.bg-syncsity-orange:hover,
-[class*="bg-syncsity-orange"]:hover {
-  color: var(--sx-text-on-light) !important;
-}
-
-/* Standard syncsity-blue CTA button — text white */
-.bg-syncsity-blue,
-.bg-syncsity-blue-400,
-.bg-syncsity-blue-500,
-.bg-syncsity-blue-600,
-.bg-syncsity-navy,
-.bg-syncsity-black,
-.bg-syncsity-darkNavy {
-  color: var(--sx-text-on-dark) !important;
-}
-
-/* ── 3. Broken/empty button placeholders ─────────────────────────────── */
-/* If a button has bg-white AND text-white classes simultaneously (the bug
-   we saw on Market Domination + Workforce pages), force navy text */
-[class*="bg-white"][class*="text-white"],
-.bg-white.text-white {
-  color: var(--sx-text-on-light) !important;
-  background-color: #ffffff !important;
-}
-
-/* ── 4. Footer "Schedule Audit" / "Get Started" sticky CTA bar ──────── */
-/* The bottom sticky CTA appears on solution pages. Many had white-on-white. */
-[class*="rounded-full"][class*="bg-white"] {
-  color: var(--sx-text-on-light) !important;
-}
-
-/* ── 5. Empty <button> with no text content — hide ───────────────────── */
-/* Catches the "white box next to Schedule Executive Briefing" bug. CSS :empty
-   only works if the element has zero children/whitespace, which is the case
-   for these broken placeholders. */
-button:empty:not(.calendly-inline-widget):not([aria-label]) {
-  display: none !important;
-}
-
-/* ── 6. Fix nav CTA visibility on transparent (top-of-home) state ────── */
-nav.bg-transparent .bg-syncsity-orange {
-  color: var(--sx-text-on-light) !important;
-}
-
-/* ── 7. Solution page "Schedule Executive Briefing" CTAs ─────────────── */
-/* These appear on /transform/* pages. The dark navy variant should be readable. */
-.bg-syncsity-blue-500,
-.bg-syncsity-blue-600,
-button[class*="bg-blue-"] {
-  color: #ffffff !important;
-}
-
-/* ── 8. CTA hover transitions — keep them snappy and consistent ──────── */
-button, a.bg-syncsity-orange, a.bg-syncsity-blue-500, a.bg-syncsity-blue-600,
-[class*="bg-syncsity-"] {
-  transition: background-color 200ms ease, transform 150ms ease, box-shadow 200ms ease, color 200ms ease !important;
-}
-
-/* ── 9. Disable Tailwind's dark:bg-white pattern in dark sections ────── */
-.bg-syncsity-black .bg-white,
-.bg-syncsity-darkNavy .bg-white,
-.bg-syncsity-navy .bg-white {
-  background-color: #ffffff !important;
-  color: var(--sx-text-on-light) !important;
-}
-
-/* ── 10. Footer global pass — fix any white-on-white in footer ──────── */
-footer button.bg-white,
-footer a.bg-white,
-footer [class*="bg-white"] {
-  color: var(--sx-text-on-light) !important;
-}
-footer .bg-syncsity-orange {
-  color: var(--sx-text-on-light) !important;
-}
-
-/* ── 11a. shadcn 'outline' variant with .border-white.text-white ───────
-   The bug we saw on /solutions/workforce-transformation, /transform/*, etc:
-   <Button variant="outline" className="border-white text-white">
-   The compiled outline variant sets bg-background which resolves to white via
-   CSS vars, while the className adds text-white. Net: white-on-white box.
-   Fix: force transparent bg whenever both classes coexist. */
+/* ──────────────────────────────────────────────────────────────────────
+   Bug #1 — shadcn outline button on dark hero showing as white-on-white.
+   Seen on /solutions/workforce-transformation, /transform/market-domination
+   and similar pages with this exact pattern:
+     <Button variant="outline" className="border-white text-white">
+   The compiled `outline` variant sets bg-background which resolves to white;
+   text-white then makes the label invisible.
+   Fix: when BOTH border-white AND text-white are present, force transparent
+   background. This is the only place we're targeting these classes.
+   ──────────────────────────────────────────────────────────────────── */
 button.border-white.text-white,
-a button.border-white.text-white,
-[class*="border-white"][class*="text-white"]:not([class*="bg-syncsity"]) {
+a.border-white.text-white,
+.border-white.text-white {
   background-color: transparent !important;
   color: #ffffff !important;
   border-color: rgba(255,255,255,0.55) !important;
 }
 button.border-white.text-white:hover,
-[class*="border-white"][class*="text-white"]:hover {
+.border-white.text-white:hover {
   background-color: rgba(255,255,255,0.10) !important;
   border-color: #ffffff !important;
-  color: #ffffff !important;
 }
 
-/* ── 11. Floating "Ready to Eliminate Your Bottlenecks?" sticky bar ─── */
-/* The floating CTA bar on solution pages — make sure CTA inside is readable. */
-[class*="fixed"][class*="bottom"] .bg-white,
-[class*="sticky"] .bg-white {
-  color: var(--sx-text-on-light) !important;
+/* ──────────────────────────────────────────────────────────────────────
+   Bug #2 — empty <button> placeholders left over from broken React renders
+   (saw a tiny white box next to the Schedule Executive Briefing CTA).
+   :empty matches buttons with no children/text whatsoever — safe to hide.
+   ──────────────────────────────────────────────────────────────────── */
+button:empty:not([aria-label]):not(.calendly-inline-widget) {
+  display: none !important;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Bug #3 — bg-syncsity-orange CTA must always have navy text, never white.
+   Seen as nearly-invisible orange-on-orange "Book a Session" in some places.
+   Targets only the literal class — no wildcard.
+   ──────────────────────────────────────────────────────────────────── */
+.bg-syncsity-orange,
+button.bg-syncsity-orange,
+a.bg-syncsity-orange {
+  color: var(--sx-navy-dark) !important;
 }
