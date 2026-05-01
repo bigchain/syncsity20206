@@ -155,30 +155,30 @@
 /* Hide dropdowns under 880px (mobile drawer takes over) */
 @media (max-width: 879px) { .nav__menu { display: none !important; } }
 
-/* ── Client logos section — live spec: py-12 bg-syncsity-black/30 (dark)
-   border-t border-gray-100, embla carousel ──────────────────────────── */
+/* ── Client logos section — light theme (matches live screenshot):
+   bg-white, border-t gray-100, navy heading, blue divider ───────────── */
 .clients {
-  padding: 48px 0;                              /* py-12 */
-  background: rgba(36,49,74,0.30);              /* dark:bg-syncsity-black/30 */
-  border-top: 1px solid rgba(255,255,255,0.06); /* dark:border-gray-800 */
+  padding: 64px 0;
+  background: #fff;
+  border-top: 1px solid rgb(243, 244, 246);
 }
-.clients__head { text-align: center; margin-bottom: 32px; }
+.clients__head { text-align: center; margin-bottom: 40px; }
 .clients__head h2 {
-  font-size: 24px; font-weight: 700; color: #fff;
+  font-size: 28px; font-weight: 700; color: #14213D;
   margin: 0 0 12px;
 }
-@media (min-width: 768px) { .clients__head h2 { font-size: 30px; } }
+@media (min-width: 768px) { .clients__head h2 { font-size: 32px; } }
 .clients__divider {
   width: 64px; height: 4px; background: #3385DF;
   margin: 0 auto 16px; border-radius: 2px;
 }
 .clients__head p {
-  color: rgba(229,231,235,0.85); font-size: 15px;
-  margin: 0; max-width: 640px; margin-left: auto; margin-right: auto;
+  color: #4b5563; font-size: 15px;
+  margin: 0 auto; max-width: 640px;
   line-height: 1.5;
 }
 .clients__marquee {
-  max-width: 1024px; margin: 0 auto; overflow: hidden;
+  max-width: 1100px; margin: 0 auto; overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
@@ -189,27 +189,200 @@
 }
 .clients:hover .clients__track { animation-play-state: paused; }
 .clients__slide {
-  flex: 0 0 auto; width: 168px; height: 96px;            /* h-24, ~basis-1/6 */
+  flex: 0 0 auto; width: 168px; height: 96px;
   display: flex; align-items: center; justify-content: center;
   padding: 16px;
-  background: rgba(17,24,39,0.50);                       /* dark:bg-gray-900/50 */
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 8px;                                    /* rounded-lg */
+  background: #fff;
+  border: 1px solid rgb(243, 244, 246);
+  border-radius: 8px;
   transition: box-shadow 200ms ease, border-color 200ms ease;
 }
 .clients__slide:hover {
-  border-color: rgba(255,255,255,0.18);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  border-color: #e5e7eb;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 .clients__slide img {
   max-height: 48px; max-width: 100%;
-  object-fit: contain; opacity: 0.9;
-  transition: opacity 200ms ease;
+  object-fit: contain;
 }
-.clients__slide:hover img { opacity: 1; }
 @keyframes clientsScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ABOUT SYNCSITY — light section: hero, mission, values, results, CTA
+   ════════════════════════════════════════════════════════════════════ */
+.about {
+  position: relative;
+  padding: 80px 0 100px;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(51,133,223,0.06), transparent 38%),
+    radial-gradient(circle at 85% 90%, rgba(252,163,17,0.05), transparent 40%),
+    linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  color: #14213D;
+}
+.about__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero block */
+.about__hero { text-align: center; margin-bottom: 64px; }
+.about__hero h1 {
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700; color: #14213D;
+  margin: 0 0 16px; letter-spacing: -0.02em; line-height: 1.05;
+}
+.about__hero-divider {
+  width: 96px; height: 4px; background: #FCA311;
+  margin: 0 auto 24px; border-radius: 2px;
+}
+.about__hero h2 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 600; color: #14213D;
+  margin: 0 0 14px;
+}
+.about__hero p {
+  font-size: 17px; line-height: 1.6; color: #475569;
+  max-width: 760px; margin: 0 auto;
+}
+
+/* Mission + What Sets Us Apart 2-col */
+.about__mission {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  margin-bottom: 80px;
+}
+@media (max-width: 880px) { .about__mission { grid-template-columns: 1fr; } }
+
+.mission__title {
+  font-size: 28px; font-weight: 700; color: #14213D;
+  margin: 0 0 18px;
+}
+.mission__body {
+  font-size: 16px; line-height: 1.65; color: #475569;
+  margin: 0 0 28px;
+}
+.mission__stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+}
+.mission__stat {
+  padding: 24px; border-radius: 14px;
+  color: #fff; text-align: center;
+  box-shadow: 0 6px 20px rgba(20,33,61,0.10);
+}
+.mission__stat--blue   { background: linear-gradient(135deg, #3385DF 0%, #0066D7 100%); }
+.mission__stat--purple { background: linear-gradient(135deg, #7c5bff 0%, #5b3fea 100%); }
+.mission__stat svg { width: 24px; height: 24px; margin-bottom: 8px; opacity: 0.95; }
+.mission__stat-value { display: block; font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+.mission__stat-label { display: block; font-size: 13px; opacity: 0.92; font-weight: 500; }
+
+/* Right: What Sets Us Apart card */
+.sets-apart {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 12px 36px rgba(20,33,61,0.06);
+}
+.sets-apart__title {
+  font-size: 24px; font-weight: 700; color: #14213D;
+  margin: 0 0 12px;
+}
+.sets-apart__body {
+  font-size: 15px; color: #475569; line-height: 1.55;
+  margin: 0 0 24px;
+}
+.sets-apart__row {
+  display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
+}
+.sets-apart__icon {
+  width: 40px; height: 40px; flex: 0 0 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.sets-apart__icon svg { width: 20px; height: 20px; }
+.sets-apart__icon--blue   { background: rgba(51,133,223,0.12); color: #3385DF; }
+.sets-apart__icon--purple { background: rgba(124,91,255,0.12); color: #7c5bff; }
+.sets-apart__icon--green  { background: rgba(54,179,126,0.14); color: #36B37E; }
+.sets-apart__row h4 { margin: 0 0 4px; font-size: 16px; font-weight: 700; color: #14213D; }
+.sets-apart__row p  { margin: 0; font-size: 14px; line-height: 1.5; color: #475569; }
+
+/* Section heading — used by Core Values, Proven Results, Join */
+.about-h2 {
+  text-align: center; font-size: 32px; font-weight: 700;
+  color: #14213D; margin: 0 0 40px;
+}
+.about-h2 + .about-sub {
+  text-align: center; color: #475569; font-size: 16px;
+  max-width: 620px; margin: -28px auto 40px;
+}
+
+/* Core Values grid 3x2 — dark cards */
+.values-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-bottom: 80px;
+}
+@media (max-width: 880px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .values-grid { grid-template-columns: 1fr; } }
+.value-card {
+  background: #2b3445;
+  border-radius: 12px; padding: 36px 24px;
+  text-align: center; color: #fff;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.value-card:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(20,33,61,0.18); }
+.value-card__icon {
+  width: 48px; height: 48px; margin: 0 auto 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+}
+.value-card__icon svg { width: 22px; height: 22px; color: #fff; }
+.value-card h3 { font-size: 19px; font-weight: 700; margin: 0 0 10px; color: #fff; }
+.value-card p  { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.78); margin: 0; }
+
+/* Proven Results — 4 white cards */
+.results-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  margin-bottom: 80px;
+}
+@media (max-width: 980px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .results-grid { grid-template-columns: 1fr; } }
+.result-card {
+  background: #fff; border: 1px solid #eef2f7;
+  border-radius: 14px; padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(20,33,61,0.05);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.result-card:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(20,33,61,0.10); }
+.result-card__icon {
+  width: 48px; height: 48px; margin: 0 auto 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.result-card__icon svg { width: 22px; height: 22px; }
+.result-card__icon--blue   { background: rgba(51,133,223,0.14); color: #3385DF; }
+.result-card__icon--purple { background: rgba(124,91,255,0.14); color: #7c5bff; }
+.result-card__icon--green  { background: rgba(54,179,126,0.14); color: #36B37E; }
+.result-card__icon--yellow { background: rgba(252,163,17,0.16); color: #FCA311; }
+.result-card h3 { font-size: 17px; font-weight: 700; color: #14213D; margin: 0 0 8px; }
+.result-card p  { font-size: 14px; line-height: 1.5; color: #475569; margin: 0; }
+
+/* Join Our Journey */
+.about__cta { text-align: center; }
+.about__cta p {
+  font-size: 16px; line-height: 1.6; color: #475569;
+  max-width: 720px; margin: 0 auto 28px;
+}
+.about__cta .btn {
+  background: #14213D; color: #fff;
+  padding: 14px 32px; border-radius: 9999px;
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+.about__cta .btn:hover {
+  background: #1a2c52; transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(20,33,61,0.20);
 }
 
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
@@ -860,6 +1033,179 @@
           <div class="clients__slide" aria-hidden="true"><img src="../assets/img/clients/sr.jpg"    alt="" width="208" height="115" loading="lazy"></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT SYNCSITY (Mission / Values / Results / Join) ────────── -->
+  <section class="about" id="about">
+    <div class="about__container">
+
+      <!-- Hero block -->
+      <header class="about__hero">
+        <h1>About Syncsity</h1>
+        <div class="about__hero-divider" aria-hidden="true"></div>
+        <h2>Human-Centric AI for Deeper Business Connections</h2>
+        <p>At Syncsity, we bridge the gap between cutting-edge AI technology and authentic human connections, empowering businesses to scale without losing their personal touch.</p>
+      </header>
+
+      <!-- Mission + What Sets Us Apart -->
+      <div class="about__mission">
+
+        <div>
+          <h3 class="mission__title">Our Mission</h3>
+          <p class="mission__body">With over $10 million invested in market testing and research, we've pioneered an approach that combines advanced AI with deep understanding of business relationships. Our mission is to empower businesses with intelligent automation that enhances, rather than replaces, the human element of operations.</p>
+
+          <div class="mission__stats">
+            <div class="mission__stat mission__stat--blue">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              <span class="mission__stat-value">25+</span>
+              <span class="mission__stat-label">Years Experience</span>
+            </div>
+            <div class="mission__stat mission__stat--purple">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span class="mission__stat-value">$10M+</span>
+              <span class="mission__stat-label">Market Testing</span>
+            </div>
+          </div>
+
+          <a href="../booking.html" class="btn btn--primary">Book a Session</a>
+        </div>
+
+        <aside class="sets-apart">
+          <h3 class="sets-apart__title">What Sets Us Apart</h3>
+          <p class="sets-apart__body">Our unique approach combines technological innovation with human insight</p>
+
+          <div class="sets-apart__row">
+            <span class="sets-apart__icon sets-apart__icon--blue" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg>
+            </span>
+            <div>
+              <h4>AI-Powered Intelligence</h4>
+              <p>Our systems learn and adapt, mirroring human decision-making to create genuine connections at scale.</p>
+            </div>
+          </div>
+
+          <div class="sets-apart__row">
+            <span class="sets-apart__icon sets-apart__icon--purple" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </span>
+            <div>
+              <h4>Precision Targeting</h4>
+              <p>We tap into advanced data analytics to ensure your message reaches and resonates with the right audience.</p>
+            </div>
+          </div>
+
+          <div class="sets-apart__row" style="margin-bottom:0;">
+            <span class="sets-apart__icon sets-apart__icon--green" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+            </span>
+            <div>
+              <h4>Scalable Growth</h4>
+              <p>Reach thousands while maintaining the personal touch that makes each interaction meaningful.</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Core Values -->
+      <h2 class="about-h2">Our Core Values</h2>
+
+      <div class="values-grid">
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/></svg>
+          </div>
+          <h3>Innovation</h3>
+          <p>We constantly push the boundaries of what's possible with AI and technology.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Integrity</h3>
+          <p>We operate with transparency and honesty in all our client relationships.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Human-Centered</h3>
+          <p>We believe in technology that enhances human potential, not replaces it.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <h3>Excellence</h3>
+          <p>We strive for the highest quality in everything we deliver to our clients.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Collaboration</h3>
+          <p>We work together with our clients to achieve transformative results.</p>
+        </article>
+
+        <article class="value-card">
+          <div class="value-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><circle cx="18" cy="19" r="3"/><path d="M9 19h6"/><path d="M18 8v8"/><path d="M9 19a6 6 0 0 1 6-11"/></svg>
+          </div>
+          <h3>Adaptability</h3>
+          <p>We embrace change and help our clients navigate technological evolution.</p>
+        </article>
+      </div>
+
+      <!-- Proven Results -->
+      <h2 class="about-h2">Proven Results</h2>
+      <p class="about-sub">We've helped businesses across industries achieve remarkable growth</p>
+
+      <div class="results-grid">
+        <article class="result-card">
+          <div class="result-card__icon result-card__icon--blue" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+          </div>
+          <h3>Consistent Growth</h3>
+          <p>Deliver high-quality leads and experiences across all touchpoints</p>
+        </article>
+
+        <article class="result-card">
+          <div class="result-card__icon result-card__icon--purple" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Efficient Scaling</h3>
+          <p>Allocate resources more effectively, focusing on strategic initiatives</p>
+        </article>
+
+        <article class="result-card">
+          <div class="result-card__icon result-card__icon--green" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          </div>
+          <h3>Deeper Insights</h3>
+          <p>Gain comprehensive understanding of your clients' needs</p>
+        </article>
+
+        <article class="result-card">
+          <div class="result-card__icon result-card__icon--yellow" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/></svg>
+          </div>
+          <h3>Future-Ready</h3>
+          <p>Stay ahead with AI that evolves with market demands</p>
+        </article>
+      </div>
+
+      <!-- Join Our Journey -->
+      <h2 class="about-h2">Join Our Journey</h2>
+      <div class="about__cta">
+        <p>Partner with us to transform your business operations, implement strategic AI solutions, and achieve sustainable growth in today's rapidly evolving digital landscape.</p>
+        <a href="/assess" class="btn">Get Started Today</a>
+      </div>
+
     </div>
   </section>
 
