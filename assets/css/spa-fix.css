@@ -126,6 +126,26 @@ footer .bg-syncsity-orange {
   color: var(--sx-text-on-light) !important;
 }
 
+/* ── 11a. shadcn 'outline' variant with .border-white.text-white ───────
+   The bug we saw on /solutions/workforce-transformation, /transform/*, etc:
+   <Button variant="outline" className="border-white text-white">
+   The compiled outline variant sets bg-background which resolves to white via
+   CSS vars, while the className adds text-white. Net: white-on-white box.
+   Fix: force transparent bg whenever both classes coexist. */
+button.border-white.text-white,
+a button.border-white.text-white,
+[class*="border-white"][class*="text-white"]:not([class*="bg-syncsity"]) {
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border-color: rgba(255,255,255,0.55) !important;
+}
+button.border-white.text-white:hover,
+[class*="border-white"][class*="text-white"]:hover {
+  background-color: rgba(255,255,255,0.10) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
 /* ── 11. Floating "Ready to Eliminate Your Bottlenecks?" sticky bar ─── */
 /* The floating CTA bar on solution pages — make sure CTA inside is readable. */
 [class*="fixed"][class*="bottom"] .bg-white,
