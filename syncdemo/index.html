@@ -91,25 +91,46 @@ body { max-width: 100vw; }
 .nav__has-menu { position: relative; }
 .nav__menu {
   position: absolute; top: calc(100% + 6px);
-  left: 50%; transform: translateX(-50%) translateY(-6px);
   background: #fff; color: #14213D;
   border-radius: 12px; box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.15);
   opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(-6px);
   transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
   z-index: 200;
+  /* Hard cap so dropdown never wider than viewport */
+  max-width: calc(100vw - 32px);
 }
 .nav__has-menu:hover .nav__menu,
 .nav__has-menu:focus-within .nav__menu {
   opacity: 1; visibility: visible; pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 /* Hover-bridge so cursor can travel the gap between button and panel */
 .nav__has-menu::before {
   content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px;
 }
-.nav__menu--solutions { width: min(720px, 92vw); padding: 24px; }
-.nav__menu--transform { width: min(1080px, 94vw); padding: 24px; }
-.nav__menu--resources { width: min(720px, 92vw); padding: 24px; }
+
+/* Per-menu anchor + size — each dropdown is positioned so it can't escape viewport.
+   Transform is the leftmost trigger, Resources is rightmost, Solutions is between. */
+.nav__menu--transform {
+  width: min(1080px, calc(100vw - 32px));
+  padding: 24px;
+  left: 0;                        /* anchor to left edge of trigger */
+}
+.nav__menu--solutions {
+  width: min(720px, calc(100vw - 32px));
+  padding: 24px;
+  left: 50%; transform: translateX(-50%) translateY(-6px);
+}
+.nav__has-menu:hover .nav__menu--solutions,
+.nav__has-menu:focus-within .nav__menu--solutions {
+  transform: translateX(-50%) translateY(0);
+}
+.nav__menu--resources {
+  width: min(720px, calc(100vw - 32px));
+  padding: 24px;
+  right: 0; left: auto;          /* anchor to right edge of trigger */
+}
 .nav__menu--resources .nav__menu__grid { grid-template-columns: 1fr 1fr; gap: 16px; }
 
 /* Solutions: 2x2 grid of cards. Transform: 3-col grid of cards. */
