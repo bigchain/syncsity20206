@@ -17,7 +17,7 @@
 # (RewriteRule ^ /index.html [L]). As each route is rebuilt as its own .php /
 # .html, that fallback fires less often. When the rebuild is fully done we
 # can delete /index.html (the SPA loader) entirely.
-DirectoryIndex index.php index.html
+DirectoryIndex index.html index.php
 
 # ─── Compression ───────────────────────────────────────────────────────────────
 <IfModule mod_deflate.c>
