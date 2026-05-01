@@ -385,6 +385,339 @@
   box-shadow: 0 12px 28px rgba(20,33,61,0.20);
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   WHY CHOOSE SYNCSITY (4 dark icon cards)
+   ════════════════════════════════════════════════════════════════════ */
+.why {
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+}
+.why__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.why__head { text-align: center; margin-bottom: 56px; }
+.why__head h2 {
+  font-size: clamp(28px, 3.4vw, 38px); font-weight: 700;
+  color: #14213D; margin: 0 0 8px;
+}
+.why__head .accent-bar {
+  width: 64px; height: 3px; background: #FCA311;
+  margin: 0 auto 18px; border-radius: 2px;
+}
+.why__head p {
+  color: #475569; font-size: 16px;
+  max-width: 640px; margin: 0 auto;
+}
+.why__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+@media (max-width: 980px) { .why__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .why__grid { grid-template-columns: 1fr; } }
+.why-card {
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 14px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(20,33,61,0.06);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(20,33,61,0.12);
+  border-color: #d1d9e6;
+}
+.why-card__icon {
+  width: 56px; height: 56px; margin: 0 auto 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: #14213D; color: #fff;
+  transition: transform 220ms ease, background 220ms ease;
+}
+.why-card:hover .why-card__icon { transform: scale(1.06); background: #1a2c52; }
+.why-card__icon svg { width: 24px; height: 24px; }
+.why-card h3 {
+  font-size: 17px; font-weight: 700; color: #14213D;
+  margin: 0 0 12px; line-height: 1.3;
+}
+.why-card p { font-size: 14.5px; line-height: 1.55; color: #475569; margin: 0; }
+
+/* ════════════════════════════════════════════════════════════════════
+   GLOBAL AI SOLUTIONS FOR ENTERPRISES (4 pastel cards)
+   ════════════════════════════════════════════════════════════════════ */
+.solutions-section {
+  padding: 80px 0;
+  background: #fff;
+}
+.solutions-section__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.solutions-section__head { text-align: center; margin-bottom: 48px; }
+.eyebrow-pill {
+  display: inline-block; padding: 6px 14px;
+  background: #E6F0FB; color: #0066D7;
+  border-radius: 9999px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.04em; margin-bottom: 16px;
+}
+.solutions-section__head h2 {
+  font-size: clamp(30px, 3.8vw, 44px); font-weight: 700;
+  color: #14213D; margin: 0 0 14px; letter-spacing: -0.01em;
+}
+.solutions-section__head .accent-bar {
+  width: 64px; height: 3px; background: #3385DF;
+  margin: 0 auto 18px; border-radius: 2px;
+}
+.solutions-section__head p {
+  color: #475569; font-size: 16px; line-height: 1.55;
+  max-width: 720px; margin: 0 auto;
+}
+.solutions-section__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+@media (max-width: 980px) { .solutions-section__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .solutions-section__grid { grid-template-columns: 1fr; } }
+.sol-card {
+  border-radius: 14px; padding: 28px 22px;
+  display: block; text-decoration: none;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.sol-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(20,33,61,0.12); }
+.sol-card--blue   { background: #E8F2FE; }
+.sol-card--green  { background: #E6F8EF; }
+.sol-card--purple { background: #F0E9FE; }
+.sol-card--peach  { background: #FFF1E6; }
+.sol-card__icon {
+  width: 48px; height: 48px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 12px; background: #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(20,33,61,0.06);
+  transition: transform 220ms ease;
+}
+.sol-card:hover .sol-card__icon { transform: scale(1.08) rotate(-3deg); }
+.sol-card__icon svg { width: 22px; height: 22px; }
+.sol-card--blue   .sol-card__icon svg { color: #3385DF; }
+.sol-card--green  .sol-card__icon svg { color: #36B37E; }
+.sol-card--purple .sol-card__icon svg { color: #7c5bff; }
+.sol-card--peach  .sol-card__icon svg { color: #FCA311; }
+.sol-card h3 {
+  font-size: 17px; font-weight: 700; color: #14213D;
+  margin: 0 0 10px; line-height: 1.3;
+}
+.sol-card p {
+  font-size: 14px; line-height: 1.55; color: #475569;
+  margin: 0 0 18px;
+}
+.sol-card__more {
+  font-size: 13.5px; font-weight: 600; color: #14213D;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: gap 200ms ease;
+}
+.sol-card__more::after { content: '→'; transition: transform 200ms ease; }
+.sol-card:hover .sol-card__more { gap: 8px; }
+.sol-card:hover .sol-card__more::after { transform: translateX(2px); }
+
+/* ════════════════════════════════════════════════════════════════════
+   READY TO TRANSFORM (dark gradient CTA banner)
+   ════════════════════════════════════════════════════════════════════ */
+.transform-cta {
+  padding: 24px 0 80px;
+  background: #fff;
+}
+.transform-cta__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.transform-cta__inner {
+  background: linear-gradient(135deg, #0A1022 0%, #14213D 50%, #003D81 100%);
+  border-radius: 16px;
+  padding: 44px 48px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.transform-cta__inner::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 90% 110%, rgba(51,133,223,0.30) 0%, transparent 55%);
+  pointer-events: none;
+}
+@media (max-width: 880px) {
+  .transform-cta__inner { grid-template-columns: 1fr; padding: 32px 28px; }
+}
+.transform-cta__pill {
+  display: inline-block; padding: 5px 14px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 9999px; color: #fff; font-size: 12px;
+  font-weight: 600; margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
+.transform-cta h2 {
+  font-size: clamp(22px, 2.6vw, 30px); font-weight: 700;
+  color: #fff; margin: 0 0 10px; letter-spacing: -0.01em;
+  position: relative; z-index: 1;
+}
+.transform-cta p {
+  font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.82);
+  margin: 0; max-width: 620px;
+  position: relative; z-index: 1;
+}
+.transform-cta__btn {
+  background: linear-gradient(135deg, #3385DF 0%, #0066D7 100%);
+  color: #fff; padding: 14px 26px; border-radius: 9999px;
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  white-space: nowrap; position: relative; z-index: 1;
+  box-shadow: 0 8px 22px rgba(51,133,223,0.32);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.transform-cta__btn:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(51,133,223,0.44); }
+.transform-cta__btn::after { content: '→'; transition: transform 200ms ease; }
+.transform-cta__btn:hover::after { transform: translateX(3px); }
+
+/* ════════════════════════════════════════════════════════════════════
+   CASE STUDIES (3 gradient/image cards)
+   ════════════════════════════════════════════════════════════════════ */
+.cases {
+  padding: 80px 0;
+  background: #f8fafc;
+  border-top: 1px solid #eef2f7;
+}
+.cases__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.cases__head { text-align: center; margin-bottom: 48px; }
+.cases__head h2 {
+  font-size: clamp(28px, 3.4vw, 38px); font-weight: 700;
+  color: #14213D; margin: 0 0 12px;
+}
+.cases__head .accent-bar {
+  width: 64px; height: 3px; background: #3385DF;
+  margin: 0 auto 18px; border-radius: 2px;
+}
+.cases__head p {
+  color: #475569; font-size: 15px; max-width: 640px; margin: 0 auto;
+}
+.cases__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+@media (max-width: 980px) { .cases__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+.case-card {
+  border-radius: 16px; overflow: hidden; color: #fff;
+  position: relative; min-height: 380px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 24px;
+  box-shadow: 0 12px 28px rgba(20,33,61,0.10);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.case-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(20,33,61,0.18); }
+.case-card--blue {
+  background:
+    linear-gradient(180deg, rgba(0,20,43,0.45) 0%, rgba(0,20,43,0.85) 100%),
+    linear-gradient(135deg, #14213D 0%, #003D81 100%);
+}
+.case-card--purple {
+  background:
+    linear-gradient(180deg, rgba(91,63,234,0.30) 0%, rgba(40,15,150,0.85) 100%),
+    linear-gradient(135deg, #5b3fea 0%, #7c5bff 100%);
+}
+.case-card--teal {
+  background:
+    linear-gradient(180deg, rgba(13,148,136,0.30) 0%, rgba(154,52,18,0.85) 100%),
+    linear-gradient(135deg, #14b8a6 0%, #c2410c 100%);
+}
+.case-card__top { flex: 0 0 auto; }
+.case-card__metric {
+  font-size: 36px; font-weight: 700; color: #fff;
+  line-height: 1; margin: 0 0 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.30);
+}
+.case-card__label {
+  font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.95);
+  margin: 0 0 8px; text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+}
+.case-card__small {
+  font-size: 12.5px; color: rgba(255,255,255,0.78);
+  margin: 0;
+}
+.case-card__quote {
+  font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,0.95);
+  margin: 0 0 16px; font-style: italic;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+}
+.case-card__bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.18);
+}
+.case-card__brand { font-weight: 600; font-size: 14px; }
+.case-card__arrow {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 200ms ease, background 200ms ease;
+}
+.case-card:hover .case-card__arrow { transform: translateX(3px); background: rgba(255,255,255,0.30); }
+.case-card__arrow svg { width: 14px; height: 14px; color: #fff; }
+
+/* ════════════════════════════════════════════════════════════════════
+   FINAL AHA CTA (dark, Get Your Free 15-Minute Aha! Moment)
+   ════════════════════════════════════════════════════════════════════ */
+.aha-final {
+  padding: 80px 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(51,133,223,0.10), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(252,163,17,0.06), transparent 50%),
+    #050814;
+  text-align: center;
+}
+.aha-final__container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+.aha-final__pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; background: rgba(252,163,17,0.12);
+  border: 1px solid rgba(252,163,17,0.30);
+  border-radius: 9999px; color: #FCA311; font-size: 12px;
+  font-weight: 600; margin-bottom: 18px;
+}
+.aha-final h2 {
+  font-size: clamp(28px, 3.6vw, 42px); font-weight: 700;
+  color: #fff; margin: 0 0 16px; letter-spacing: -0.01em;
+}
+.aha-final h2 .accent { color: #66A3E7; }
+.aha-final p {
+  color: rgba(229,231,235,0.85); font-size: 16px;
+  line-height: 1.6; max-width: 620px; margin: 0 auto 28px;
+}
+.aha-final__form {
+  display: flex; gap: 10px; max-width: 480px;
+  margin: 0 auto 16px;
+}
+.aha-final__form input[type="email"] {
+  flex: 1; padding: 14px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px; color: #fff; font-size: 14.5px;
+}
+.aha-final__form input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+.aha-final__form input[type="email"]:focus {
+  outline: none; border-color: #3385DF;
+  box-shadow: 0 0 0 3px rgba(51,133,223,0.18);
+}
+.aha-final__form button {
+  background: linear-gradient(135deg, #3385DF 0%, #0066D7 100%);
+  color: #fff; padding: 0 22px; border-radius: 10px;
+  font-weight: 600; font-size: 14px; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(51,133,223,0.30);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.aha-final__form button:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(51,133,223,0.45); }
+@media (max-width: 540px) { .aha-final__form { flex-direction: column; } }
+.aha-final__fineprint {
+  font-size: 13px; color: rgba(229,231,235,0.65);
+  margin: 0;
+}
+.aha-final__fineprint .star { color: #FCA311; }
+
+/* Section reveal animation — runs on first paint */
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.why, .solutions-section, .transform-cta, .cases, .aha-final {
+  animation: sectionFadeIn 0.6s ease-out both;
+}
+
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
 
 .hero-home {
@@ -982,6 +1315,180 @@
     </div>
   </section>
 
+  <!-- ── WHY CHOOSE SYNCSITY — 4 dark icon cards ────────────────────── -->
+  <section class="why" id="why-syncsity">
+    <div class="why__container">
+      <div class="why__head">
+        <h2>Why Choose Syncsity?</h2>
+        <div class="accent-bar" aria-hidden="true"></div>
+        <p>Here's what sets us apart from the competition and why leading enterprises trust us with their AI transformation journey.</p>
+      </div>
+      <div class="why__grid">
+        <article class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <h3>Enterprise-Grade<br>Security</h3>
+          <p>Our solutions comply with the highest security standards, ensuring your data remains protected at all times.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Expert Team</h3>
+          <p>Our team consists of AI specialists, engineers, and business strategists with decades of combined experience.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h3>Global Reach</h3>
+          <p>We've successfully deployed our solutions across 25+ countries, serving clients in multiple industries.</p>
+        </article>
+
+        <article class="why-card">
+          <div class="why-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9"/></svg>
+          </div>
+          <h3>Proven Results</h3>
+          <p>Our clients consistently achieve remarkable ROI with our AI transformation solutions.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GLOBAL AI SOLUTIONS — 4 pastel cards ───────────────────────── -->
+  <section class="solutions-section" id="enterprise-services">
+    <div class="solutions-section__container">
+      <div class="solutions-section__head">
+        <span class="eyebrow-pill">Enterprise Services</span>
+        <h2>Global AI Solutions for Enterprises</h2>
+        <div class="accent-bar" aria-hidden="true"></div>
+        <p>Discover how Syncsity can transform your enterprise with AI-powered solutions and strategic consulting services that deliver measurable results.</p>
+      </div>
+      <div class="solutions-section__grid">
+
+        <a class="sol-card sol-card--blue" href="/solutions/voice-solutions">
+          <div class="sol-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3>AI Voice Operations</h3>
+          <p>Deploy voice agents that handle unlimited conversations 24/7 in 40+ languages with 90% cost savings. Replace your call center with AI.</p>
+          <span class="sol-card__more">Learn more</span>
+        </a>
+
+        <a class="sol-card sol-card--green" href="/solutions/lead-generation">
+          <div class="sol-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>AI Sales System</h3>
+          <p>Complete lead generation engine that finds prospects, manages outreach, books meetings, and fills your pipeline automatically. Build a machine that prints money.</p>
+          <span class="sol-card__more">Learn more</span>
+        </a>
+
+        <a class="sol-card sol-card--purple" href="/solutions/process-optimization">
+          <div class="sol-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Process Automation</h3>
+          <p>Intelligent automation that identifies and removes operational constraints without human intervention. Eliminate bottlenecks forever.</p>
+          <span class="sol-card__more">Learn more</span>
+        </a>
+
+        <a class="sol-card sol-card--peach" href="/solutions/workforce-transformation">
+          <div class="sol-card__icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Workforce Intelligence</h3>
+          <p>Automatically capture knowledge, generate training, and optimize workforce performance without adding overhead. Build self-improving teams.</p>
+          <span class="sol-card__more">Learn more</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── READY TO TRANSFORM CTA BANNER ──────────────────────────────── -->
+  <section class="transform-cta">
+    <div class="transform-cta__container">
+      <div class="transform-cta__inner">
+        <div>
+          <span class="transform-cta__pill">Global Enterprise Partners</span>
+          <h2>Ready to transform your enterprise with AI?</h2>
+          <p>Schedule a consultation to discover how Syncsity's solutions can drive efficiency and growth for your organization worldwide.</p>
+        </div>
+        <a href="../booking.html" class="transform-cta__btn">Book a Strategy Session</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CASE STUDIES — 3 gradient cards ────────────────────────────── -->
+  <section class="cases" id="case-studies">
+    <div class="cases__container">
+      <div class="cases__head">
+        <h2>Clients We've Worked With</h2>
+        <div class="accent-bar" aria-hidden="true"></div>
+        <p>Some of the results we've helped our clients achieve through AI-powered automation</p>
+      </div>
+      <div class="cases__grid">
+
+        <article class="case-card case-card--blue">
+          <div class="case-card__top">
+            <p class="case-card__metric">5+ Years</p>
+            <p class="case-card__label">Partnership</p>
+            <p class="case-card__small">From a couple students weekly to full users daily</p>
+          </div>
+          <div>
+            <p class="case-card__quote">"This team has been essential to our growth for over 5 years, helping us surpass the 7-figure mark."</p>
+            <div class="case-card__bottom">
+              <span class="case-card__brand">Sec-Curity</span>
+              <span class="case-card__arrow" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card case-card--purple">
+          <div class="case-card__top">
+            <p class="case-card__metric">400k</p>
+            <p class="case-card__label">Pre-Launch Clients</p>
+            <p class="case-card__small">Generated in just 4 months</p>
+          </div>
+          <div>
+            <p class="case-card__quote">"This team generated 400,000 eager clients for our fintech app in just 4 months, before it even launched!"</p>
+            <div class="case-card__bottom">
+              <span class="case-card__brand">Bankiom</span>
+              <span class="case-card__arrow" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card case-card--teal">
+          <div class="case-card__top">
+            <p class="case-card__metric">$700k+</p>
+            <p class="case-card__label">Monthly Revenue</p>
+            <p class="case-card__small">Through automated logistics</p>
+          </div>
+          <div>
+            <p class="case-card__quote">"This team fully automated our logistics processes, boosting our revenue to over $700,000 a month."</p>
+            <div class="case-card__bottom">
+              <span class="case-card__brand">Dftw Internals</span>
+              <span class="case-card__arrow" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ── CLIENT LOGOS — live spec: section py-12 bg-syncsity-black/30,
        18 logos in marquee, blue-400 divider ─────────────────────────── -->
   <section class="clients" id="client-logos">
@@ -1206,6 +1713,27 @@
         <a href="/assess" class="btn">Get Started Today</a>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ── FINAL AHA CTA — Get Your Free 15-Minute Aha! Moment ────────── -->
+  <section class="aha-final">
+    <div class="aha-final__container">
+      <span class="aha-final__pill" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+        Free Value. No Obligation.
+      </span>
+      <h2>Get Your Free 15-Minute <span class="accent">Aha! Moment</span></h2>
+      <p>In a 15-minute call, we'll hand you one zero-cost fix you can apply today to boost conversions or deepen customer connections&mdash;whether you work with us or not.</p>
+
+      <form class="aha-final__form" action="/assess" method="get" novalidate>
+        <input type="email" name="email" placeholder="Your email" required aria-label="Email address" />
+        <button type="submit">Get Your Free Aha! Moment &rarr;</button>
+      </form>
+
+      <p class="aha-final__fineprint">
+        <span class="star">&#9733;</span> No obligation. Guaranteed actionable insight. No additional cost to implement.
+      </p>
     </div>
   </section>
 
