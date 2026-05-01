@@ -3,301 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Syncsity — speak to a senior operator</title>
-<meta name="description" content="Press, partnerships, considered engagements, or general questions. Every message goes to edward@syncsity.com — read by a human, replied to within one business day.">
+<title>Contact Syncsity — open door, real human</title>
+<meta name="description" content="No chatbots, no support tickets, no auto-replies. Edward reads every message and replies within one UK business day. Or take the free 15-minute assessment and we'll have answered before we'd even open this email.">
 <link rel="canonical" href="https://syncsity.com/contact.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact Syncsity — speak to a senior operator">
-<meta property="og:description" content="We read every message. Replies within one business day from edward@syncsity.com.">
+<meta property="og:title" content="Contact Syncsity — open door, real human">
+<meta property="og:description" content="Every message goes to edward@syncsity.com. Read by a human. Replied within one business day.">
 <meta property="og:image" content="https://syncsity.com/assets/img/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/assets/css/static-page.css">
+
 <style>
-:root {
-  --navy-darker: #060b1a;
-  --navy-dark: #0a1022;
-  --navy: #14213d;
-  --navy-light: #1a2a4a;
-  --blue-300: #66a3e7;
-  --blue-400: #3385df;
-  --blue-500: #0066d7;
-  --orange: #fca311;
-  --green: #36b37e;
-  --error: #ff5630;
-  --text: rgba(255,255,255,0.94);
-  --text-muted: rgba(255,255,255,0.72);
-  --text-dim: rgba(255,255,255,0.50);
-  --border: rgba(255,255,255,0.10);
-  --border-strong: rgba(255,255,255,0.20);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 16px; line-height: 1.6;
-  color: var(--text);
-  background: var(--navy-dark);
-  -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-}
-a { color: var(--blue-300); text-decoration: none; transition: color 150ms ease; }
-a:hover { color: #fff; }
-img { display: block; max-width: 100%; height: auto; }
-button { font: inherit; color: inherit; cursor: pointer; }
+  /* Living-space additions */
+  .live-strip {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 8px 14px;
+    background: rgba(54,179,126,0.08);
+    border: 1px solid rgba(54,179,126,0.30);
+    border-radius: 9999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: #6ee0a8;
+    margin-bottom: 20px;
+  }
+  .live-strip__dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #36b37e;
+    box-shadow: 0 0 0 4px rgba(54,179,126,0.15);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:0.4;} }
 
-/* ── Page background — animated gradient + grid ── */
-.bg-stage {
-  position: fixed; inset: 0; z-index: -1;
-  background:
-    radial-gradient(900px 500px at 20% 0%, rgba(51,133,223,0.18), transparent 60%),
-    radial-gradient(800px 500px at 90% 30%, rgba(252,163,17,0.10), transparent 60%),
-    linear-gradient(180deg, var(--navy-darker) 0%, var(--navy) 100%);
-}
-.bg-stage::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 30%, transparent 90%);
-}
+  .routing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width:880px) { .routing { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width:540px) { .routing { grid-template-columns: 1fr; } }
+  .route-card {
+    display: block;
+    padding: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: transform 200ms ease, border-color 200ms ease, background-color 200ms ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+  .route-card:hover { transform: translateY(-3px); border-color: var(--blue-400); background: rgba(51,133,223,0.06); color: inherit; }
+  .route-card__icon {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    background: rgba(51,133,223,0.10);
+    color: var(--blue-300);
+    border-radius: 10px;
+    margin-bottom: 14px;
+  }
+  .route-card__icon--orange { background: rgba(252,163,17,0.10); color: var(--orange); }
+  .route-card__icon--green  { background: rgba(54,179,126,0.10); color: #6ee0a8; }
+  .route-card h3 { font-size: 1.05rem; margin-bottom: 6px; color: #fff; }
+  .route-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; margin-bottom: 14px; }
+  .route-card__meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; }
+  .route-card__cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--blue-300); font-size: 0.92rem; font-weight: 600;
+    margin-top: 4px;
+  }
 
-/* ── Nav ── */
-.nav {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(10,16,34,0.65);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--border);
-}
-.nav__inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 24px;
-}
-.nav__brand img { height: 36px; width: auto; }
-.nav__links { display: none; gap: 28px; align-items: center; }
-.nav__links a { color: var(--text-muted); font-size: 14px; font-weight: 500; }
-.nav__links a:hover, .nav__links a.is-active { color: #fff; }
-.nav__cta { display: flex; align-items: center; gap: 10px; }
-.nav__cta .btn { padding: 10px 18px; font-size: 14px; }
-@media (min-width: 880px) { .nav__links { display: flex; } }
+  .edward-quote {
+    position: relative;
+    padding: 32px 32px 32px 80px;
+    background: linear-gradient(135deg, rgba(252,163,17,0.06), rgba(51,133,223,0.04));
+    border: 1px solid rgba(252,163,17,0.20);
+    border-radius: 20px;
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+  .edward-quote::before {
+    content: '"';
+    position: absolute; left: 24px; top: -8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 96px;
+    color: var(--orange);
+    opacity: 0.45;
+    line-height: 1;
+  }
+  .edward-quote p { font-size: 17px; line-height: 1.6; color: var(--text); font-style: italic; margin-bottom: 14px; }
+  .edward-quote .signature {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 18px;
+    font-family: 'Inter', sans-serif; font-style: normal;
+  }
+  .edward-quote .signature .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-400), var(--orange));
+    display: grid; place-items: center;
+    font-weight: 700; color: #0a1022; font-size: 15px;
+    flex-shrink: 0;
+  }
+  .edward-quote .signature .who { font-size: 14px; color: #fff; font-weight: 600; }
+  .edward-quote .signature .role { font-size: 12px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; }
 
-/* ── Buttons ── */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 14px 28px;
-  font-weight: 600; font-size: 15px; line-height: 1;
-  border-radius: 9999px; border: 1px solid transparent;
-  text-decoration: none;
-  transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
-  white-space: nowrap;
-}
-.btn:hover { transform: translateY(-1px); color: #fff; }
-.btn--primary {
-  background: linear-gradient(135deg, var(--blue-400) 0%, var(--blue-500) 100%);
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(51,133,223,0.30);
-}
-.btn--primary:hover { box-shadow: 0 12px 32px rgba(51,133,223,0.45); }
-.btn--orange {
-  background: var(--orange); color: var(--navy-dark);
-  box-shadow: 0 8px 24px rgba(252,163,17,0.30);
-}
-.btn--orange:hover { background: #ffb340; color: var(--navy-dark); box-shadow: 0 12px 32px rgba(252,163,17,0.45); }
-.btn--ghost {
-  background: transparent; color: #fff; border-color: var(--border-strong);
-}
-.btn--ghost:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
-.btn--block { width: 100%; }
-.btn--lg { padding: 18px 32px; font-size: 16px; }
+  .inline-faq { display: flex; flex-direction: column; gap: 4px; }
+  .inline-faq details {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: 0;
+    transition: border-color 200ms ease, background-color 200ms ease;
+  }
+  .inline-faq details[open] { border-color: var(--border-strong); background: rgba(255,255,255,0.04); }
+  .inline-faq summary {
+    cursor: pointer; padding: 18px 20px;
+    font-weight: 600; color: #fff; font-size: 15px;
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .inline-faq summary::-webkit-details-marker { display: none; }
+  .inline-faq summary::after {
+    content: '+'; color: var(--blue-300); font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 400;
+    transition: transform 200ms ease;
+  }
+  .inline-faq details[open] summary::after { transform: rotate(45deg); }
+  .inline-faq details p { padding: 0 20px 18px; color: var(--text-muted); line-height: 1.65; font-size: 14.5px; }
 
-/* ── Layout ── */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.container--md { max-width: 920px; }
-.container--sm { max-width: 720px; }
-.section { padding: 80px 0; }
-.section--hero { padding: 96px 0 48px; }
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    margin: 32px 0;
+  }
+  @media (max-width:720px) { .meta-grid { grid-template-columns: repeat(2, 1fr); } }
+  .meta-stat {
+    padding: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .meta-stat__num { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #fff; font-weight: 700; letter-spacing: -0.02em; }
+  .meta-stat__num small { font-size: 14px; color: var(--orange); }
+  .meta-stat__label { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
 
-/* ── Eyebrow + headings ── */
-.eyebrow {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 11px; letter-spacing: 0.20em; text-transform: uppercase;
-  color: var(--blue-300); font-weight: 500;
-}
-h1 { font-size: clamp(2.5rem, 4vw + 1rem, 4.5rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
-h2 { font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
-h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
-p.lead { font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.2rem); color: var(--text-muted); line-height: 1.7; }
-
-/* ── Hero ── */
-.hero { text-align: center; }
-.hero__pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 14px;
-  background: rgba(51,133,223,0.10);
-  border: 1px solid rgba(51,133,223,0.30);
-  border-radius: 9999px;
-  font-size: 13px; color: var(--blue-300);
-  margin-bottom: 24px;
-}
-.hero__title { margin-bottom: 20px; }
-.hero__title .accent { color: var(--blue-300); }
-.hero__lede { max-width: 680px; margin: 0 auto; }
-
-/* ── Contact card ── */
-.contact-grid {
-  display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start;
-}
-@media (max-width: 880px) { .contact-grid { grid-template-columns: 1fr; gap: 32px; } }
-
-.form-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 40px;
-  position: relative;
-  overflow: hidden;
-}
-.form-card::before {
-  content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: linear-gradient(135deg, rgba(51,133,223,0.50), rgba(252,163,17,0.30));
-  border-radius: 24px;
-  z-index: -1;
-  opacity: 0.30;
-  filter: blur(20px);
-}
-@media (max-width: 720px) { .form-card { padding: 28px; } }
-
-.flash {
-  margin-bottom: 24px; padding: 14px 18px;
-  border-radius: 12px;
-  font-size: 14px;
-  display: none;
-  border: 1px solid var(--border);
-}
-.flash.is-success { display: block; background: rgba(54,179,126,0.10); border-color: rgba(54,179,126,0.40); color: #6ee0a8; }
-.flash.is-error   { display: block; background: rgba(255,86,48,0.10); border-color: rgba(255,86,48,0.40); color: #ffb4a0; }
-
-/* Floating labels */
-.field { position: relative; margin-bottom: 22px; }
-.field__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 540px) { .field__row { grid-template-columns: 1fr; gap: 0; } }
-
-.input, .textarea, .select {
-  width: 100%;
-  padding: 22px 16px 10px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 16px;
-  font-family: inherit;
-  transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
-  appearance: none; -webkit-appearance: none;
-}
-.input::placeholder, .textarea::placeholder { color: transparent; }
-.input:hover, .textarea:hover, .select:hover { border-color: var(--border-strong); }
-.input:focus, .textarea:focus, .select:focus {
-  outline: none;
-  border-color: var(--blue-400);
-  background: rgba(255,255,255,0.06);
-  box-shadow: 0 0 0 4px rgba(51,133,223,0.15);
-}
-.textarea { min-height: 140px; resize: vertical; padding-top: 28px; }
-.select { padding-right: 44px;
-  background-image: linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.40) 50%),
-                    linear-gradient(135deg, rgba(255,255,255,0.40) 50%, transparent 50%);
-  background-position: calc(100% - 22px) 24px, calc(100% - 16px) 24px;
-  background-size: 6px 6px; background-repeat: no-repeat;
-}
-
-.field__label {
-  position: absolute; left: 16px; top: 16px;
-  font-size: 14px; color: var(--text-dim);
-  pointer-events: none;
-  transition: top 150ms ease, font-size 150ms ease, color 150ms ease;
-}
-.input:focus + .field__label,
-.input:not(:placeholder-shown) + .field__label,
-.textarea:focus + .field__label,
-.textarea:not(:placeholder-shown) + .field__label,
-.select:not([data-empty="true"]) + .field__label,
-.select:focus + .field__label {
-  top: 8px; font-size: 11px; color: var(--blue-300);
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: 0.10em; text-transform: uppercase;
-}
-
-.field__hint { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
-
-.checkbox-row {
-  display: flex; align-items: flex-start; gap: 12px;
-  font-size: 13px; color: var(--text-muted); line-height: 1.5;
-  margin: 22px 0;
-}
-.checkbox-row input[type=checkbox] {
-  width: 18px; height: 18px;
-  margin-top: 1px;
-  accent-color: var(--blue-400);
-}
-
-.submit-row {
-  display: flex; align-items: center; gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-.submit-meta { color: var(--text-dim); font-size: 13px; font-family: 'JetBrains Mono', monospace; }
-
-/* ── Side info card ── */
-.side-card {
-  display: flex; flex-direction: column; gap: 24px;
-}
-.info-block {
-  padding: 24px 28px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-.info-block h3 {
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--text-dim);
-  font-family: 'JetBrains Mono', monospace;
-  margin-bottom: 10px; font-weight: 600;
-}
-.info-block p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
-.info-block a { color: #fff; font-weight: 500; }
-.info-block .big {
-  font-size: 18px; color: #fff; font-weight: 600; letter-spacing: -0.01em;
-  margin-bottom: 4px;
-}
-
-/* ── Footer ── */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 32px 0 48px;
-  margin-top: 80px;
-  font-size: 13px; color: var(--text-dim);
-  text-align: center;
-}
-.footer a { color: var(--text-muted); margin: 0 10px; }
-.footer a:hover { color: #fff; }
-
-/* Reveal animation */
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.reveal { animation: reveal 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-.reveal--d1 { animation-delay: 100ms; }
-.reveal--d2 { animation-delay: 200ms; }
-.reveal--d3 { animation-delay: 300ms; }
+  .room-divider {
+    display: flex; align-items: center; gap: 16px; margin: 0 0 28px;
+  }
+  .room-divider__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border-strong), transparent); }
+  .room-divider__label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
 </style>
 </head>
 <body>
@@ -306,186 +162,296 @@ p.lead { font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.2rem); color: var(--text-m
 
 <header class="nav">
   <div class="nav__inner">
-    <a href="/" class="nav__brand" aria-label="Syncsity home">
-      <img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity">
-    </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="/why-us">Why Syncsity</a>
+    <a href="/" class="nav__brand"><img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
+    <nav class="nav__links">
+      <a href="/transform">Transform</a>
+      <a href="/solutions">Solutions</a>
+      <a href="/assess">Diagnose</a>
+      <a href="/why-syncsity">Why Syncsity</a>
       <a href="/pricing">Pricing</a>
       <a href="/blog">Insights</a>
-      <a href="/contact.html" class="is-active">Contact</a>
     </nav>
     <div class="nav__cta">
-      <a href="/auth/login" class="btn btn--ghost" id="auth-btn">Log in</a>
-      <a href="/assess" class="btn btn--primary">Free assessment</a>
+      <a href="/auth/login" class="btn btn--ghost btn--sm" id="auth-btn">Log in</a>
+      <a href="/assess" class="btn btn--primary btn--sm">Free assessment</a>
     </div>
   </div>
 </header>
 
 <main>
-  <section class="section section--hero hero">
-    <div class="container container--sm">
-      <span class="hero__pill reveal">★ Direct line to a senior operator</span>
-      <h1 class="hero__title reveal reveal--d1">Talk to a <span class="accent">human</span>. Not a chatbot.</h1>
-      <p class="lead hero__lede reveal reveal--d2">
-        Every message goes to <strong style="color:#fff;">edward@syncsity.com</strong> — read by a human,
-        replied to within one business day. For most enquiries, the
-        <a href="/assess">free 15-minute assessment</a> is faster — you'll get a useful
-        answer before we'd reply.
+
+  <!-- ── ZONE 1: HERO / OPEN DOOR ─────────────────────────────────────── -->
+  <section class="section section--hero">
+    <div class="container container--md">
+      <div class="live-strip reveal">
+        <span class="live-strip__dot" aria-hidden="true"></span>
+        <span>Reading every message · Edward · UK working hours</span>
+      </div>
+      <h1 class="reveal reveal--d1">Open door.</h1>
+      <p class="lead reveal reveal--d2" style="margin-top: 20px; max-width: 700px; margin-left:auto; margin-right:auto;">
+        No chatbots, no support tickets, no auto-replies. Every message hits one inbox —
+        <strong style="color:#fff;">edward@syncsity.com</strong> — and gets a real reply
+        within one UK business day. For most enquiries, the
+        <a href="/assess">free 15-minute assessment</a> is faster: you'll have a useful answer
+        before we'd open this email.
       </p>
     </div>
   </section>
 
-  <section class="section" style="padding-top: 24px;">
+  <!-- ── ZONE 2: ROUTING — "WHAT BRINGS YOU IN?" ──────────────────────── -->
+  <section class="section section--tight">
     <div class="container container--md">
-      <div class="contact-grid">
+      <div class="room-divider">
+        <span class="room-divider__line"></span>
+        <span class="room-divider__label">What brings you in?</span>
+        <span class="room-divider__line"></span>
+      </div>
 
-        <!-- ── FORM ── -->
-        <div class="form-card reveal reveal--d1">
-          <div id="contact-flash" class="flash" role="status"></div>
-
-          <form id="contact-form" action="/api/contact" method="POST" novalidate>
-            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-            <input type="hidden" name="_return" value="/contact.html">
-            <input type="hidden" name="gdpr_consent" value="1">
-            <input type="hidden" name="name" id="hidden-name">
-
-            <div class="field__row">
-              <div class="field">
-                <input type="text" id="firstName" name="firstName" class="input" placeholder="First name" required autocomplete="given-name" maxlength="80">
-                <label class="field__label" for="firstName">First name</label>
-              </div>
-              <div class="field">
-                <input type="text" id="lastName" name="lastName" class="input" placeholder="Last name" required autocomplete="family-name" maxlength="80">
-                <label class="field__label" for="lastName">Last name</label>
-              </div>
-            </div>
-
-            <div class="field__row">
-              <div class="field">
-                <input type="email" id="email" name="email" class="input" placeholder="Work email" required autocomplete="email" maxlength="254">
-                <label class="field__label" for="email">Work email</label>
-              </div>
-              <div class="field">
-                <input type="tel" id="phone" name="phone" class="input" placeholder="Phone (optional)" autocomplete="tel" maxlength="40">
-                <label class="field__label" for="phone">Phone (optional)</label>
-              </div>
-            </div>
-
-            <div class="field">
-              <input type="text" id="company" name="company" class="input" placeholder="Company" autocomplete="organization" maxlength="200">
-              <label class="field__label" for="company">Company</label>
-            </div>
-
-            <div class="field">
-              <select id="subject" name="subject" class="select" data-empty="true" required>
-                <option value="" disabled selected hidden></option>
-                <option value="Engagement">Engagement enquiry</option>
-                <option value="Strategy session">Strategy Session (£950)</option>
-                <option value="Partnership">Partnership / collaboration</option>
-                <option value="Press">Press / media</option>
-                <option value="General">General question</option>
-              </select>
-              <label class="field__label" for="subject">What's this about?</label>
-            </div>
-
-            <div class="field">
-              <textarea id="message" name="message" class="textarea" placeholder="Your message" required minlength="20" maxlength="5000"></textarea>
-              <label class="field__label" for="message">Your message</label>
-              <div class="field__hint">The more specific, the faster we can be useful. Brutal honesty welcomed — only Edward reads this.</div>
-            </div>
-
-            <label class="checkbox-row">
-              <input type="checkbox" name="gdpr_consent_visible" checked required>
-              <span>I'm OK with Syncsity processing this message to reply to me. I can <a href="/privacy">read the privacy policy</a> any time.</span>
-            </label>
-
-            <div class="submit-row">
-              <button type="submit" class="btn btn--primary btn--lg">Send message <span aria-hidden="true">→</span></button>
-              <span class="submit-meta">→ edward@syncsity.com</span>
-            </div>
-          </form>
-        </div>
-
-        <!-- ── SIDE INFO ── -->
-        <aside class="side-card reveal reveal--d2">
-          <div class="info-block">
-            <h3>Direct email</h3>
-            <p class="big"><a href="mailto:edward@syncsity.com">edward@syncsity.com</a></p>
-            <p>Reply within one business day, UK working hours.</p>
+      <div class="routing reveal">
+        <a href="/assess" class="route-card">
+          <div class="route-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           </div>
+          <h3>Diagnose my business</h3>
+          <p>15-minute assessment, free Revenue Intelligence Report.</p>
+          <span class="route-card__meta">Most popular · 92% of visitors</span>
+          <div class="route-card__cta">Start the diagnostic →</div>
+        </a>
 
-          <div class="info-block">
-            <h3>Faster path</h3>
-            <p class="big">Take the free assessment</p>
-            <p>15 minutes, AI-written Revenue Intelligence Report. Most "what does Syncsity do?" enquiries are answered in the report.</p>
-            <p style="margin-top:14px;"><a href="/assess" style="color:var(--blue-300);">Start the assessment →</a></p>
+        <a href="/booking.html" class="route-card">
+          <div class="route-card__icon route-card__icon--orange">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
+          <h3>Strategy Session</h3>
+          <p>£950 · 30 min with a senior operator. Diagnosis pressure-test.</p>
+          <span class="route-card__meta">Fee credited against engagement</span>
+          <div class="route-card__cta">Book on Calendly →</div>
+        </a>
 
-          <div class="info-block">
-            <h3>Headquarters</h3>
-            <p class="big">London, United Kingdom</p>
-            <p>By appointment only. UK GDPR + DPA 2018 aligned.</p>
+        <a href="#message" class="route-card">
+          <div class="route-card__icon route-card__icon--green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
+          <h3>Considered engagement</h3>
+          <p>You've read about us, you have a real brief. Send the form.</p>
+          <span class="route-card__meta">Reply within 1 business day</span>
+          <div class="route-card__cta">Write a message ↓</div>
+        </a>
 
-          <div class="info-block" style="background: linear-gradient(135deg, rgba(252,163,17,0.10), rgba(51,133,223,0.06)); border-color: rgba(252,163,17,0.30);">
-            <h3 style="color:var(--orange);">Considered engagement?</h3>
-            <p class="big">Book the £950 Strategy Session</p>
-            <p>30 minutes with a senior operator. Fee credited against any subsequent engagement.</p>
-            <p style="margin-top:14px;"><a href="/booking.html" style="color:var(--orange);">Book on Calendly →</a></p>
+        <a href="#message" class="route-card">
+          <div class="route-card__icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
           </div>
-        </aside>
-
+          <h3>Press / partnership / other</h3>
+          <p>Media, partnerships, hiring, anything else. We read everything.</p>
+          <span class="route-card__meta">Edward replies personally</span>
+          <div class="route-card__cta">Write a message ↓</div>
+        </a>
       </div>
     </div>
   </section>
 
+  <!-- ── ZONE 3: EDWARD'S VOICE ──────────────────────────────────────── -->
+  <section class="section section--tight">
+    <div class="container container--sm">
+      <div class="edward-quote reveal">
+        <p>
+          When you write in, I read it. Properly — not skimmed. I'm not running a sales team
+          off this inbox. If we're a fit, you'll know inside two emails. If we're not, I'll
+          tell you who to talk to instead. Either way, I'm not going to drip-sequence you for
+          eight months.
+        </p>
+        <div class="signature">
+          <div class="avatar">EH</div>
+          <div>
+            <div class="who">Edward Hadome</div>
+            <div class="role">Founder · Syncsity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ZONE 4: THE FORM ────────────────────────────────────────────── -->
+  <section class="section" id="message">
+    <div class="container container--md">
+      <div class="room-divider">
+        <span class="room-divider__line"></span>
+        <span class="room-divider__label">Write a message</span>
+        <span class="room-divider__line"></span>
+      </div>
+
+      <div class="form-card card reveal" style="padding: 40px;">
+        <div id="contact-flash" class="flash" role="status"></div>
+
+        <form id="contact-form" action="/api/contact" method="POST" novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <input type="hidden" name="_return" value="/contact.html">
+          <input type="hidden" name="name" id="hidden-name">
+
+          <div class="field__row">
+            <div class="field">
+              <input type="text" id="firstName" name="firstName" class="input" placeholder="First name" required autocomplete="given-name" maxlength="80">
+              <label class="field__label" for="firstName">First name</label>
+            </div>
+            <div class="field">
+              <input type="text" id="lastName" name="lastName" class="input" placeholder="Last name" required autocomplete="family-name" maxlength="80">
+              <label class="field__label" for="lastName">Last name</label>
+            </div>
+          </div>
+
+          <div class="field__row">
+            <div class="field">
+              <input type="email" id="email" name="email" class="input" placeholder="Work email" required autocomplete="email" maxlength="254">
+              <label class="field__label" for="email">Work email</label>
+            </div>
+            <div class="field">
+              <input type="text" id="company" name="company" class="input" placeholder="Company" autocomplete="organization" maxlength="200">
+              <label class="field__label" for="company">Company</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <select id="subject" name="subject" class="select" data-empty="true" required>
+              <option value="" disabled selected hidden></option>
+              <option value="Engagement">Considered engagement</option>
+              <option value="Strategy session">Strategy Session (£950)</option>
+              <option value="Partnership">Partnership / collaboration</option>
+              <option value="Press">Press / media</option>
+              <option value="Hiring">Hiring / careers</option>
+              <option value="General">General question</option>
+            </select>
+            <label class="field__label" for="subject">What's this about?</label>
+          </div>
+
+          <div class="field">
+            <textarea id="message" name="message" class="textarea" placeholder="Your message" required minlength="20" maxlength="5000"></textarea>
+            <label class="field__label" for="message">Your message</label>
+            <div class="field__hint">The more specific, the faster Edward can be useful. Brutal honesty welcome.</div>
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" name="gdpr_consent_visible" value="1" required checked>
+            <span>I'm OK with Syncsity processing this message to reply to me. <a href="/privacy.html">Privacy policy</a>.</span>
+          </label>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn--primary btn--lg">Send message →</button>
+            <span class="submit-meta">→ edward@syncsity.com</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ZONE 5: BEFORE-YOU-SEND FAQ ─────────────────────────────────── -->
+  <section class="section">
+    <div class="container container--sm">
+      <div class="room-divider">
+        <span class="room-divider__line"></span>
+        <span class="room-divider__label">Before you send — the questions we get most</span>
+        <span class="room-divider__line"></span>
+      </div>
+
+      <div class="inline-faq reveal">
+        <details>
+          <summary>How fast do you actually reply?</summary>
+          <p>Within one UK business day, every time. Average over the last 30 days: ~4 hours. The exception is weekends — replies will land Monday morning.</p>
+        </details>
+        <details>
+          <summary>Will you reply if I'm not your target client?</summary>
+          <p>Yes — usually with a redirect to who can help, plus a paragraph on what your archetype's most common trap is. We say no often, and we say it kindly.</p>
+        </details>
+        <details>
+          <summary>Do you take cold pitches from agencies / sales teams?</summary>
+          <p>Honestly, no. They go to a no-reply folder. If you're a service provider with something genuinely complementary, write a real human note — those we read and sometimes act on.</p>
+        </details>
+        <details>
+          <summary>What's the fastest way to actually engage you?</summary>
+          <p>Take the <a href="/assess">free 15-minute assessment</a>. The Revenue Intelligence Report it produces is the most useful 90 seconds of work we'll ever do for you for free, and it makes any subsequent call 10× more useful.</p>
+        </details>
+        <details>
+          <summary>Do you do free discovery calls?</summary>
+          <p>No. The free assessment IS our discovery — and it's better than any call because it's evidence-based, not vibes-based. Paid Strategy Sessions (£950 · 30 min) start where the assessment ends.</p>
+        </details>
+        <details>
+          <summary>Where are you based?</summary>
+          <p>London, United Kingdom. We work with operators across UK, US, and EU. Servers in Helsinki, Finland (EU). UK GDPR + DPA 2018 aligned.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ZONE 6: META / TRUST STATS ──────────────────────────────────── -->
+  <section class="section section--tight">
+    <div class="container container--md">
+      <div class="meta-grid reveal">
+        <div class="meta-stat">
+          <div class="meta-stat__num">~4<small>h</small></div>
+          <div class="meta-stat__label">Average reply time</div>
+        </div>
+        <div class="meta-stat">
+          <div class="meta-stat__num">100<small>%</small></div>
+          <div class="meta-stat__label">Read by a human</div>
+        </div>
+        <div class="meta-stat">
+          <div class="meta-stat__num">0</div>
+          <div class="meta-stat__label">Auto-replies sent</div>
+        </div>
+        <div class="meta-stat">
+          <div class="meta-stat__num">0</div>
+          <div class="meta-stat__label">Drip sequences</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year">2026</span> Syncsity Ltd · London, UK · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/llms.txt">LLMs.txt</a></p>
+      <div class="footer__top">
+        <div>
+          <img src="/lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:42px;margin-bottom:14px;">
+          <p class="muted" style="font-size:14px;max-width:340px;">Empowering ambitious operators through operational excellence and strategic AI implementation.</p>
+        </div>
+        <div><h4>Quick Links</h4><ul><li><a href="/">Home</a></li><li><a href="/why-syncsity">Why Syncsity</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/about-us">About</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/blog">Blog</a></li></ul></div>
+        <div><h4>Our Solutions</h4><ul><li><a href="/solutions/voice-solutions">AI Voice</a></li><li><a href="/solutions/lead-generation">AI Sales</a></li><li><a href="/solutions/process-optimization">Process Automation</a></li><li><a href="/solutions/workforce-transformation">Workforce Intelligence</a></li></ul></div>
+        <div><h4>Services</h4><ul><li><a href="/transform/market-domination">Market Domination</a></li><li><a href="/transform/revenue-acceleration">Revenue Acceleration</a></li><li><a href="/transform/operational-supremacy">Operational Supremacy</a></li><li><a href="/assess">Free Assessment</a></li><li><a href="/booking.html">Strategy Session</a></li></ul></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Syncsity Ltd · London, UK · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.html">Sitemap</a> · <a href="/llms.txt">LLMs.txt</a></span>
+        <span class="mono dim">Built for operators, by operators.</span>
+      </div>
     </div>
   </footer>
 </main>
 
 <script>
 (function(){
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Auth-aware login button (matches what the SPA shim does)
   if (/(?:^|;\s*)(?:syncsity_session|PHPSESSID)=/.test(document.cookie || '')) {
-    var b = document.getElementById('auth-btn');
-    if (b) { b.href = '/dashboard'; b.textContent = 'Dashboard'; }
+    var b = document.getElementById('auth-btn'); if (b) { b.href='/dashboard'; b.textContent='Dashboard'; }
   }
-
-  // Floating-label state for select (selects don't have :placeholder-shown)
   var sel = document.getElementById('subject');
   if (sel) {
-    var sync = function () { sel.setAttribute('data-empty', sel.value === '' ? 'true' : 'false'); };
-    sel.addEventListener('change', sync);
-    sync();
+    var sync = function(){ sel.setAttribute('data-empty', sel.value === '' ? 'true' : 'false'); };
+    sel.addEventListener('change', sync); sync();
   }
-
-  // Combine firstName + lastName into hidden name on submit
   var form = document.getElementById('contact-form');
   if (form) {
-    form.addEventListener('submit', function (e) {
-      var fn = (document.getElementById('firstName')||{}).value || '';
-      var ln = (document.getElementById('lastName') ||{}).value || '';
-      var hn = document.getElementById('hidden-name');
-      if (hn) hn.value = (fn + ' ' + ln).trim();
+    form.addEventListener('submit', function(){
+      var fn=(document.getElementById('firstName')||{}).value||'';
+      var ln=(document.getElementById('lastName')||{}).value||'';
+      document.getElementById('hidden-name').value = (fn+' '+ln).trim();
     });
   }
-
-  // Flash messages from URL
   var qs = new URLSearchParams(location.search);
   var flash = document.getElementById('contact-flash');
   if (flash) {
     if (qs.get('sent') === '1') {
       flash.classList.add('is-success');
-      flash.innerHTML = '<strong>Message received.</strong> We\'ll be in touch within one business day from edward@syncsity.com.';
-      // Scroll the flash into view
-      flash.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      flash.innerHTML = '<strong>Message in.</strong> Edward will reply within one UK business day from edward@syncsity.com. Confirmation just landed in your inbox too.';
+      flash.scrollIntoView({behavior:'smooth', block:'center'});
     } else if (qs.get('error')) {
       flash.classList.add('is-error');
       flash.textContent = qs.get('error');
@@ -493,6 +459,5 @@ p.lead { font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.2rem); color: var(--text-m
   }
 })();
 </script>
-
 </body>
 </html>
