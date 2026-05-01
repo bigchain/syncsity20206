@@ -135,13 +135,58 @@ ul, ol { list-style: none; }
   padding: 96px 28px 40px;
   display: flex; flex-direction: column; gap: 4px;
 }
-.nav__drawer a {
+.nav__drawer a.nav__drawer__flat {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 8px;
-  color: #fff; font-size: 18px; font-weight: 500;
+  color: #fff; font-size: 18px; font-weight: 600;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  text-decoration: none;
 }
-.nav__drawer a:hover { color: var(--blue-400); }
+.nav__drawer a.nav__drawer__flat:hover { color: var(--blue-400); }
+
+/* Accordion sections (Transform / Solutions / Resources) */
+.nav__drawer__section { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.nav__drawer__head {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 18px 8px;
+  background: transparent; border: 0; cursor: pointer;
+  color: #fff; font-size: 18px; font-weight: 600; text-align: left;
+}
+.nav__drawer__head:hover { color: var(--blue-400); }
+.nav__drawer__head__chev {
+  width: 10px; height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 200ms ease;
+  margin-right: 6px;
+}
+.nav__drawer__section.is-open .nav__drawer__head__chev {
+  transform: rotate(-135deg) translateY(0);
+}
+.nav__drawer__body {
+  display: none;
+  padding: 0 8px 12px;
+}
+.nav__drawer__section.is-open .nav__drawer__body { display: block; }
+.nav__drawer a.nav__drawer__sub {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 12px 14px;
+  color: rgba(255,255,255,0.92); font-size: 15px; font-weight: 500;
+  border: 0; border-radius: 8px; text-decoration: none;
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 6px;
+}
+.nav__drawer a.nav__drawer__sub:hover { background: rgba(255,255,255,0.08); color: #fff; }
+.nav__drawer__sub__label { color: #fff; font-weight: 600; }
+.nav__drawer__sub__desc  { color: rgba(255,255,255,0.62); font-size: 13px; }
+.nav__drawer a.nav__drawer__sub--all {
+  background: transparent; color: var(--blue-400); font-weight: 600;
+  margin-top: 4px;
+}
+.nav__drawer a.nav__drawer__sub--all .nav__drawer__sub__label { color: var(--blue-400); }
+.nav__drawer a.nav__drawer__sub--all::after { content: ' →'; }
+
 .nav__drawer__ctas {
   display: flex; flex-direction: column; gap: 12px;
   margin-top: 24px;
