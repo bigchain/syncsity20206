@@ -21,9 +21,28 @@
 
 <link rel="stylesheet" href="../assets/css/static-page.css" />
 <style>
+/* ── Page-wide overflow guard ─────────────────────────────────────────── */
+html, body { overflow-x: hidden; }
+body { max-width: 100vw; }
+
 /* ── Nav overrides — match live SPA Radix nav exactly ────────────────── */
-.nav { background: rgba(10,16,34,0.65); border-bottom: 1px solid rgba(255,255,255,0.08); }
-.nav__links { gap: 4px; align-items: center; }   /* space-x-1 + vertical centering */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,16,34,0.65);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  width: 100%; box-sizing: border-box;
+}
+.nav__inner {
+  max-width: 1280px; width: 100%;
+  margin: 0 auto; padding: 14px 24px;
+  box-sizing: border-box;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+.nav__brand { flex-shrink: 0; min-width: 0; }
+.nav__brand img { height: 32px; width: auto; max-width: 160px; display: block; }
+@media (min-width: 640px) { .nav__brand img { height: 36px; max-width: 200px; } }
+.nav__links { gap: 4px; align-items: center; flex: 0 1 auto; min-width: 0; }   /* space-x-1 + vertical centering */
 
 /* Top-level nav items only (NOT anchors inside the dropdown panels).
    Two cases: direct anchor child of .nav__links, OR direct anchor child
@@ -571,83 +590,90 @@
    CASE STUDIES (3 gradient/image cards)
    ════════════════════════════════════════════════════════════════════ */
 .cases {
-  padding: 80px 0;
-  background: #f8fafc;
+  padding: 80px 0 100px;
+  background: #f5f7fa;
   border-top: 1px solid #eef2f7;
 }
-.cases__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
-.cases__head { text-align: center; margin-bottom: 48px; }
+.cases__container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.cases__head { text-align: center; margin-bottom: 56px; }
 .cases__head h2 {
-  font-size: clamp(28px, 3.4vw, 38px); font-weight: 700;
-  color: #14213D; margin: 0 0 12px;
+  font-size: clamp(36px, 4.4vw, 52px); font-weight: 700;
+  color: #14213D; margin: 0 0 4px;
+  letter-spacing: -0.02em; line-height: 1.1;
 }
 .cases__head .accent-bar {
-  width: 64px; height: 3px; background: #3385DF;
-  margin: 0 auto 18px; border-radius: 2px;
+  width: 72px; height: 4px; background: #3385DF;
+  margin: 6px auto 20px; border-radius: 2px;
 }
 .cases__head p {
-  color: #475569; font-size: 15px; max-width: 640px; margin: 0 auto;
+  color: #475569; font-size: 17px; max-width: 760px; margin: 0 auto;
+  line-height: 1.5;
 }
 .cases__grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
 }
-@media (max-width: 980px) { .cases__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+@media (max-width: 980px) { .cases__grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; } }
+
+/* Case card — clean solid gradients, no dark overlay killing the colors */
 .case-card {
-  border-radius: 16px; overflow: hidden; color: #fff;
-  position: relative; min-height: 380px;
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: 24px;
-  box-shadow: 0 12px 28px rgba(20,33,61,0.10);
-  transition: transform 220ms ease, box-shadow 220ms ease;
+  border-radius: 18px; overflow: hidden; color: #fff;
+  position: relative; min-height: 520px;
+  display: flex; flex-direction: column;
+  padding: 36px 32px 28px;
+  box-shadow: 0 20px 40px rgba(20,33,61,0.12);
+  transition: transform 240ms ease, box-shadow 240ms ease;
 }
-.case-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(20,33,61,0.18); }
+.case-card:hover { transform: translateY(-6px); box-shadow: 0 32px 60px rgba(20,33,61,0.20); }
+/* Subtle texture/highlight on top so the cards don't read flat */
+.case-card::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 0% 0%, rgba(255,255,255,0.08) 0%, transparent 50%);
+}
+
 .case-card--blue {
-  background:
-    linear-gradient(180deg, rgba(0,20,43,0.45) 0%, rgba(0,20,43,0.85) 100%),
-    linear-gradient(135deg, #14213D 0%, #003D81 100%);
+  background: linear-gradient(165deg, #0E1A33 0%, #08111F 100%);
 }
 .case-card--purple {
-  background:
-    linear-gradient(180deg, rgba(91,63,234,0.30) 0%, rgba(40,15,150,0.85) 100%),
-    linear-gradient(135deg, #5b3fea 0%, #7c5bff 100%);
+  background: linear-gradient(165deg, #5b3fea 0%, #4d2ce8 100%);
 }
 .case-card--teal {
-  background:
-    linear-gradient(180deg, rgba(13,148,136,0.30) 0%, rgba(154,52,18,0.85) 100%),
-    linear-gradient(135deg, #14b8a6 0%, #c2410c 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #1f7d72 35%, #b3522e 70%, #c2410c 100%);
 }
-.case-card__top { flex: 0 0 auto; }
+
+.case-card > * { position: relative; z-index: 1; }
+
+.case-card__top { flex: 0 0 auto; margin-bottom: auto; }
 .case-card__metric {
-  font-size: 36px; font-weight: 700; color: #fff;
-  line-height: 1; margin: 0 0 4px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.30);
+  font-size: 52px; font-weight: 700; color: #fff;
+  line-height: 1; margin: 0 0 6px;
+  letter-spacing: -0.02em;
 }
 .case-card__label {
-  font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.95);
-  margin: 0 0 8px; text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+  font-size: 17px; font-weight: 600; color: #fff;
+  margin: 0 0 10px;
 }
 .case-card__small {
-  font-size: 12.5px; color: rgba(255,255,255,0.78);
-  margin: 0;
+  font-size: 14px; color: rgba(255,255,255,0.78);
+  margin: 0; line-height: 1.45;
 }
+
 .case-card__quote {
-  font-size: 14.5px; line-height: 1.5; color: rgba(255,255,255,0.95);
-  margin: 0 0 16px; font-style: italic;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+  font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.95);
+  margin: 24px 0 20px; font-style: italic; font-weight: 500;
 }
 .case-card__bottom {
   display: flex; align-items: center; justify-content: space-between;
-  padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.18);
+  padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.18);
 }
-.case-card__brand { font-weight: 600; font-size: 14px; }
+.case-card__brand { font-weight: 600; font-size: 15px; color: #fff; }
 .case-card__arrow {
-  width: 28px; height: 28px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: rgba(255,255,255,0.18);
   display: inline-flex; align-items: center; justify-content: center;
   transition: transform 200ms ease, background 200ms ease;
 }
-.case-card:hover .case-card__arrow { transform: translateX(3px); background: rgba(255,255,255,0.30); }
-.case-card__arrow svg { width: 14px; height: 14px; color: #fff; }
+.case-card:hover .case-card__arrow { transform: translateX(3px); background: rgba(255,255,255,0.32); }
+.case-card__arrow svg { width: 16px; height: 16px; color: #fff; }
 
 /* ════════════════════════════════════════════════════════════════════
    FINAL AHA CTA (dark, Get Your Free 15-Minute Aha! Moment)
@@ -716,6 +742,128 @@
 }
 .why, .solutions-section, .transform-cta, .cases, .aha-final {
   animation: sectionFadeIn 0.6s ease-out both;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE PASS — comprehensive
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Tablet & below (≤980px) ─────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .container { padding: 0 20px; }
+  .hero-home { padding: 32px 0 28px; min-height: auto; }
+  .outcome-row { margin: 24px auto 14px; }
+  .stats-strip { padding: 32px 0 48px; }
+  .pillars { padding: 56px 0 72px; }
+  .why, .solutions-section, .cases, .about, .aha-final { padding: 56px 0; }
+  .transform-cta { padding: 16px 0 56px; }
+  .transform-cta__inner { padding: 32px 28px; }
+}
+
+/* Phones (≤640px) ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .container, .nav__inner,
+  .why__container, .solutions-section__container,
+  .transform-cta__container, .cases__container,
+  .about__container, .aha-final__container,
+  .pillars__inner, .stats-strip__inner,
+  .clients__head, .footer-home__inner { padding-left: 16px; padding-right: 16px; }
+
+  /* Nav */
+  .nav__inner { padding: 12px 16px; gap: 8px; }
+  .nav__brand img { height: 28px; }
+  .nav__cta { gap: 8px; }
+  .nav__cta .btn--primary {
+    height: 36px; padding: 0 14px; font-size: 13px;
+  }
+
+  /* Hero */
+  .hero-home { padding: 28px 0 24px; }
+  .hero-home__title { letter-spacing: -0.02em; }
+  .hero-home__lede { font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+  .outcome-row { padding: 12px; margin: 18px auto 14px; }
+  .outcome-grid { gap: 12px; }
+  .outcome { padding: 12px; }
+  .outcome__title { font-size: 15px; }
+  .outcome__copy { font-size: 13px; }
+  .aha-card { padding: 18px 16px; }
+  .aha-card__copy { font-size: 13.5px; }
+
+  /* Stats */
+  .stats-strip__inner { padding: 18px 14px; }
+  .stat__icon { padding: 10px; margin-bottom: 8px; }
+  .stat__icon svg { width: 20px; height: 20px; }
+  .stat__value { font-size: 18px; }
+  .stat__label { font-size: 11.5px; }
+
+  /* Pillars */
+  .pillar { padding: 24px 22px; }
+  .pillar__title { font-size: 19px; }
+  .pillar__desc { font-size: 14px; }
+
+  /* Why-choose / Enterprise */
+  .why__head h2, .cases__head h2 { font-size: 28px !important; }
+  .solutions-section__head h2 { font-size: 26px; }
+  .why__head p, .solutions-section__head p, .cases__head p { font-size: 14.5px; }
+  .why-card, .sol-card { padding: 22px 18px; }
+
+  /* Transform CTA banner */
+  .transform-cta__inner { padding: 28px 22px; gap: 20px; }
+  .transform-cta h2 { font-size: 22px; line-height: 1.25; }
+  .transform-cta p { font-size: 14px; }
+  .transform-cta__btn { width: 100%; justify-content: center; }
+
+  /* Cases */
+  .cases__grid { gap: 18px; }
+  .case-card { min-height: 440px; padding: 28px 24px 22px; }
+  .case-card__metric { font-size: 42px; }
+  .case-card__quote { font-size: 14.5px; }
+
+  /* About */
+  .about__hero h1 { font-size: 36px; }
+  .about__hero h2 { font-size: 18px; }
+  .about__hero p { font-size: 15px; }
+  .mission__title { font-size: 22px; }
+  .mission__body { font-size: 14.5px; }
+  .mission__stat { padding: 18px; }
+  .mission__stat-value { font-size: 22px; }
+  .mission__stat-label { font-size: 12px; }
+  .sets-apart { padding: 24px; }
+  .sets-apart__title { font-size: 20px; }
+  .about-h2 { font-size: 26px !important; }
+  .value-card { padding: 28px 20px; }
+  .result-card { padding: 22px 18px; }
+
+  /* Final Aha */
+  .aha-final h2 { font-size: 26px; }
+  .aha-final p { font-size: 14.5px; }
+  .aha-final__form input[type="email"] { font-size: 14px; padding: 12px 14px; }
+  .aha-final__form button { padding: 12px 20px; height: auto; }
+
+  /* Footer */
+  .footer-home { padding: 40px 0 24px; }
+  .footer-home__cols { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+
+/* Very small phones (≤380px) — last-mile prevent text overflow ───── */
+@media (max-width: 380px) {
+  .nav__cta .btn--primary { display: none; }
+  .nav__brand img { height: 26px; }
+  .hero-home__title { font-size: 30px; }
+  .case-card__metric { font-size: 36px; }
+  .footer-home__cols { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Reduce-motion preference — disable section fade-in & marquee */
+@media (prefers-reduced-motion: reduce) {
+  .why, .solutions-section, .transform-cta, .cases, .aha-final,
+  .hero-home__title, .outcome-row { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .clients__track { animation: none !important; }
+  .case-card, .why-card, .sol-card, .value-card, .result-card,
+  .pillar, .nav__menu, .transform-cta__btn, .nav__menu__card {
+    transition: none !important;
+  }
 }
 
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
