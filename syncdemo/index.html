@@ -53,6 +53,80 @@
   height: 40px; padding: 0 18px; font-size: 14px; font-weight: 600;
 }
 
+/* ── Nav hover dropdowns (Radix-style) ───────────────────────────────── */
+.nav__has-menu { position: relative; }
+.nav__menu {
+  position: absolute; top: calc(100% + 6px);
+  left: 50%; transform: translateX(-50%) translateY(-6px);
+  background: #fff; color: #14213D;
+  border-radius: 12px; box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+  z-index: 200;
+}
+.nav__has-menu:hover .nav__menu,
+.nav__has-menu:focus-within .nav__menu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+/* Hover-bridge so cursor can travel the gap between button and panel */
+.nav__has-menu::before {
+  content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 12px;
+}
+.nav__menu--solutions { width: min(720px, 92vw); padding: 24px; }
+.nav__menu--transform { width: min(360px, 92vw); padding: 14px; }
+.nav__menu--resources { width: min(280px, 92vw); padding: 14px; }
+
+/* Solutions: 2x2 grid of cards */
+.nav__menu__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+.nav__menu__card {
+  display: block; padding: 14px;
+  border-radius: 8px; transition: background 150ms ease;
+  text-decoration: none;
+}
+.nav__menu__card:hover { background: #f5f7fa; }
+.nav__menu__card__head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+}
+.nav__menu__card__head svg { width: 20px; height: 20px; color: #14213D; }
+.nav__menu__card__head h3 {
+  font-size: 15px; font-weight: 700; color: #14213D; margin: 0;
+}
+.nav__menu__card__tag {
+  font-size: 14px; font-weight: 600; color: #FCA311;
+  margin: 0 0 6px;
+}
+.nav__menu__card__body {
+  font-size: 13px; line-height: 1.5; color: #475569; margin: 0 0 10px;
+}
+.nav__menu__card__more {
+  font-size: 13px; font-weight: 600; color: #14213D;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.nav__menu__card__more::after { content: '→'; }
+
+.nav__menu__footer {
+  margin-top: 16px; padding-top: 14px; border-top: 1px solid #e5e7eb;
+}
+.nav__menu__footer a {
+  font-size: 14px; font-weight: 600; color: #14213D;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.nav__menu__footer a::after { content: '→'; }
+
+/* Simple link list for Transform / Resources */
+.nav__menu__list a {
+  display: block; padding: 10px 12px; border-radius: 6px;
+  font-size: 14px; font-weight: 600; color: #14213D;
+}
+.nav__menu__list a:hover { background: #f5f7fa; color: #14213D; }
+.nav__menu__list small { display: block; font-weight: 500; color: #64748b; font-size: 12px; margin-top: 2px; }
+
+/* Hide dropdowns under 880px (mobile drawer takes over) */
+@media (max-width: 879px) { .nav__menu { display: none !important; } }
+
 /* ── Page-local: home hero, stats, pillars ──────────────────────────── */
 
 .hero-home {
@@ -190,29 +264,46 @@
 }
 @media (max-width: 560px) { .aha-form { flex-direction: column; } }
 
-/* ── Stats strip ─────────────────────────────────────────────────────── */
+/* ── Stats strip — live spec: mt-12 py-6 px-4 bg-syncsity-blue-900/30
+   backdrop-blur-sm rounded-xl, grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6
+   gap-4 sm:gap-6 ───────────────────────────────────────────────────── */
 .stats-strip {
-  padding: 56px 0;
-  border-top: 1px solid var(--border);
-  background: linear-gradient(180deg, #050814 0%, #0a1022 100%);
+  padding: 48px 0 64px;     /* gives breathing room on either side of the card */
+  background: transparent;
 }
 .stats-strip__inner {
-  max-width: 1200px; margin: 0 auto; padding: 0 24px;
-  display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px;
+  max-width: 1200px; margin: 0 auto;
+  padding: 24px 16px;        /* py-6 px-4 */
+  background: #00142b4d;     /* syncsity-blue-900 at 30% (#00142B alpha 0x4D) */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 12px;       /* rounded-xl */
 }
-.stat { text-align: center; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* default: grid-cols-2 */
+  gap: 16px;                               /* gap-4 */
+}
+@media (min-width: 640px)  { .stats-grid { gap: 24px; } }                    /* sm:gap-6 */
+@media (min-width: 768px)  { .stats-grid { grid-template-columns: repeat(3, 1fr); } }   /* md:grid-cols-3 */
+@media (min-width: 1024px) { .stats-grid { grid-template-columns: repeat(6, 1fr); } }   /* lg:grid-cols-6 */
+
+.stat { display: flex; flex-direction: column; align-items: center; }
 .stat__icon {
-  width: 56px; height: 56px; margin: 0 auto 14px;
+  margin-bottom: 12px;       /* mb-3 */
+  padding: 12px;             /* p-3 */
+  border-radius: 9999px;     /* rounded-full */
+  background: rgba(255,255,255,0.10);
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  color: #fff;
 }
-.stat__icon svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2; }
-.stat__value { color: #fff; font-size: 26px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
-.stat__label { color: var(--text-muted); font-size: 13px; }
-@media (max-width: 980px) { .stats-strip__inner { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 520px) { .stats-strip__inner { grid-template-columns: repeat(2, 1fr); } }
+.stat__icon svg { width: 24px; height: 24px; color: #fff; }   /* w-6 h-6 text-white */
+.stat__value {
+  color: #fff; font-weight: 700;            /* font-bold */
+  font-size: 20px; line-height: 1;          /* text-xl */
+  margin-bottom: 0;
+}
+@media (min-width: 640px) { .stat__value { font-size: 24px; } }   /* sm:text-2xl */
+.stat__label { color: rgba(255,255,255,0.70); font-size: 12px; }   /* text-xs text-white/70 */
 
 /* ── Pillars (3 cards) ───────────────────────────────────────────────── */
 .pillars { padding: 80px 0 100px; background: #050814; }
@@ -303,12 +394,97 @@
   <div class="nav__inner">
     <a href="/" class="nav__brand" aria-label="Syncsity home"><img src="../lovable-uploads/03f35f21-123f-4f10-84a1-f2a66d97bc2b.png" alt="Syncsity" style="height:36px;width:auto;"></a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="/transform" class="has-chevron">Transform</a>
-      <a href="/solutions" class="has-chevron">Solutions</a>
+
+      <div class="nav__has-menu">
+        <a href="/transform" class="has-chevron">Transform</a>
+        <div class="nav__menu nav__menu--transform" role="menu" aria-label="Transform">
+          <div class="nav__menu__list">
+            <a href="/transform/market-domination" role="menuitem">
+              Market Domination
+              <small>Become the undisputed leader in your market</small>
+            </a>
+            <a href="/transform/revenue-acceleration" role="menuitem">
+              Revenue Acceleration
+              <small>Scale revenue without expanding teams</small>
+            </a>
+            <a href="/transform/operational-supremacy" role="menuitem">
+              Operational Supremacy
+              <small>Eliminate waste, remove constraints</small>
+            </a>
+          </div>
+          <div class="nav__menu__footer">
+            <a href="/transform">View All Programmes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav__has-menu">
+        <a href="/solutions" class="has-chevron">Solutions</a>
+        <div class="nav__menu nav__menu--solutions" role="menu" aria-label="Solutions">
+          <div class="nav__menu__grid">
+
+            <a class="nav__menu__card" href="/solutions/voice-solutions" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>
+                <h3>AI Voice Operations</h3>
+              </div>
+              <p class="nav__menu__card__tag">Replace Your Call Center with AI</p>
+              <p class="nav__menu__card__body">Deploy voice agents that handle unlimited conversations 24/7 in 40+ languages with 90% cost savings.</p>
+              <span class="nav__menu__card__more">Learn More</span>
+            </a>
+
+            <a class="nav__menu__card" href="/solutions/lead-generation" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+                <h3>AI Sales System</h3>
+              </div>
+              <p class="nav__menu__card__tag">Build a Machine That Prints Money</p>
+              <p class="nav__menu__card__body">Complete lead generation engine that finds prospects, manages outreach, books meetings, and fills your pipeline automatically.</p>
+              <span class="nav__menu__card__more">Learn More</span>
+            </a>
+
+            <a class="nav__menu__card" href="/solutions/process-optimization" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                <h3>Process Automation</h3>
+              </div>
+              <p class="nav__menu__card__tag">Eliminate Bottlenecks Forever</p>
+              <p class="nav__menu__card__body">Intelligent automation that identifies and removes operational constraints without human intervention.</p>
+              <span class="nav__menu__card__more">Learn More</span>
+            </a>
+
+            <a class="nav__menu__card" href="/solutions/workforce-transformation" role="menuitem">
+              <div class="nav__menu__card__head">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/></svg>
+                <h3>Workforce Intelligence</h3>
+              </div>
+              <p class="nav__menu__card__tag">Build Self-Improving Teams</p>
+              <p class="nav__menu__card__body">Automatically capture knowledge, generate training, and optimize workforce performance without adding overhead.</p>
+              <span class="nav__menu__card__more">Learn More</span>
+            </a>
+
+          </div>
+          <div class="nav__menu__footer">
+            <a href="/solutions">View All Solutions</a>
+          </div>
+        </div>
+      </div>
+
       <a href="/solutions/operational-diagnostics">Diagnose</a>
       <a href="/why-syncsity">Why Syncsity</a>
       <a href="/pricing">Pricing</a>
-      <a href="/blog" class="has-chevron">Resources</a>
+
+      <div class="nav__has-menu">
+        <a href="/blog" class="has-chevron">Resources</a>
+        <div class="nav__menu nav__menu--resources" role="menu" aria-label="Resources">
+          <div class="nav__menu__list">
+            <a href="/blog" role="menuitem">Blog<small>Insights & manifesto</small></a>
+            <a href="/calculators" role="menuitem">Calculators<small>ROI &amp; constraint cost</small></a>
+            <a href="/case-studies" role="menuitem">Case Studies<small>Customer results</small></a>
+          </div>
+        </div>
+      </div>
+
     </nav>
     <div class="nav__cta">
       <a href="/auth/login" class="btn btn--ghost btn--sm" id="auth-btn">Log in</a>
@@ -378,58 +554,63 @@
     </div>
   </section>
 
-  <!-- ── STATS STRIP ──────────────────────────────────────────────────── -->
+  <!-- ── STATS STRIP — live spec: lucide icons 24px in white/10 circles,
+       grid-cols-2/3/6 responsive, blue-900/30 card ──────────────────── -->
   <section class="stats-strip">
-    <div class="stats-strip__inner">
+    <div class="container">
+      <div class="stats-strip__inner">
+        <div class="stats-grid">
 
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20"/><path d="M12 2a15.3 15.3 0 0 0 0 20"/></svg>
-        </span>
-        <div class="stat__value">40%</div>
-        <div class="stat__label">Efficiency Gain</div>
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <span class="stat__value">40%</span>
+            <span class="stat__label">Efficiency Gain</span>
+          </div>
+
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            </div>
+            <span class="stat__value">30 Days</span>
+            <span class="stat__label">To First Results</span>
+          </div>
+
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+            </div>
+            <span class="stat__value">3x</span>
+            <span class="stat__label">ROI in Year 1</span>
+          </div>
+
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="stat__value">$700k+</span>
+            <span class="stat__label">Monthly Revenue</span>
+          </div>
+
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="stat__value">400k+</span>
+            <span class="stat__label">Leads Generated</span>
+          </div>
+
+          <div class="stat">
+            <div class="stat__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+            </div>
+            <span class="stat__value">90%</span>
+            <span class="stat__label">Cost Reduction</span>
+          </div>
+
+        </div>
       </div>
-
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9"/></svg>
-        </span>
-        <div class="stat__value">30 Days</div>
-        <div class="stat__label">To First Results</div>
-      </div>
-
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-        </span>
-        <div class="stat__value">3x</div>
-        <div class="stat__label">ROI in Year 1</div>
-      </div>
-
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5A3.5 3.5 0 0 0 6 8.5v0A3.5 3.5 0 0 0 9.5 12h5A3.5 3.5 0 0 1 18 15.5v0a3.5 3.5 0 0 1-3.5 3.5H6"/></svg>
-        </span>
-        <div class="stat__value">$700k+</div>
-        <div class="stat__label">Monthly Revenue</div>
-      </div>
-
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </span>
-        <div class="stat__value">400k+</div>
-        <div class="stat__label">Leads Generated</div>
-      </div>
-
-      <div class="stat">
-        <span class="stat__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </span>
-        <div class="stat__value">90%</div>
-        <div class="stat__label">Cost Reduction</div>
-      </div>
-
     </div>
   </section>
 
