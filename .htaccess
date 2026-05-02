@@ -79,6 +79,23 @@ RewriteRule ^old-lovable-build/?.* - [F,L]
     RewriteEngine On
     RewriteBase /
 
+    # ─── Migrated pages: legacy .html URLs serve the .php replacement ──────
+    # Internal rewrite (NOT 301) so existing inbound links stay valid AND
+    # users get the new universal-partial design. The .html files still
+    # exist on disk; this just intercepts the request before the
+    # "Don't rewrite real files" guard below.
+    RewriteRule ^terms\.html$    /terms.php    [L]
+    RewriteRule ^privacy\.html$  /privacy.php  [L]
+    RewriteRule ^sitemap\.html$  /sitemap.php  [L]
+    RewriteRule ^booking\.html$  /booking.php  [L]
+    RewriteRule ^demo\.html$     /demo.php     [L]
+    RewriteRule ^contact\.html$  /contact.php  [L]
+
+    # Extension-less canonical URLs (if a user types /terms instead of /terms.php)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(terms|privacy|sitemap|booking|demo|contact)$ /$1.php [L]
+
     # Don't rewrite real files / directories
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
