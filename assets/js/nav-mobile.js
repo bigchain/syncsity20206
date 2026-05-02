@@ -85,6 +85,17 @@
 
     var drawer = el('div', 'nav__drawer');
     drawer.setAttribute('aria-hidden', 'true');
+    /* Inline-style fallback so neither stale CSS nor cascade specificity
+       can ever leave the drawer visible in flow. The CSS classes still
+       apply for `.is-open` state — open() / close() update the inline
+       style explicitly. */
+    drawer.style.position      = 'fixed';
+    drawer.style.inset         = '0';
+    drawer.style.display       = 'none';
+    drawer.style.visibility    = 'hidden';
+    drawer.style.opacity       = '0';
+    drawer.style.pointerEvents = 'none';
+    drawer.style.zIndex        = '100';
 
     var inner = el('div', 'nav__drawer__inner');
 
