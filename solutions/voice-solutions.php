@@ -202,29 +202,208 @@ include __DIR__ . '/../partials/site-head.php';
 .voice-feat h4 { color: #fff; font-size: 15px; font-weight: 700; margin: 0 0 6px; }
 .voice-feat p  { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; margin: 0; }
 
-/* How it works */
-.voice-how { padding: 96px 0; background: #0a1022; }
-.voice-how__container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-.voice-how__steps {
-  display: flex; flex-direction: column; gap: 16px; max-width: 880px; margin: 0 auto;
+/* Pricing Plans — light section */
+.voice-pricing {
+  padding: 96px 0;
+  background: linear-gradient(180deg, #f5f7fa 0%, #fff 100%);
 }
-.voice-step {
-  display: grid; grid-template-columns: 56px 1fr; gap: 24px; align-items: flex-start;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px; padding: 24px 28px;
-  transition: border-color 200ms ease;
+.voice-pricing__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.voice-pricing__head { text-align: center; margin-bottom: 56px; }
+.voice-pricing__head h2 {
+  font-size: clamp(28px, 3.6vw, 42px); font-weight: 700;
+  margin: 0 0 12px; letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #14213D 0%, #0066D7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.voice-step:hover { border-color: rgba(51,133,223,0.30); }
-.voice-step__num {
-  width: 44px; height: 44px;
+.voice-pricing__head p { color: #475569; font-size: 16px; max-width: 640px; margin: 0 auto; }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  align-items: stretch; max-width: 1100px; margin: 0 auto;
+}
+@media (max-width: 880px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; } }
+.pricing-tier {
+  background: #fff; border: 1px solid #eef2f7;
+  border-radius: 16px; padding: 32px;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.pricing-tier:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(20,33,61,0.10); }
+.pricing-tier--popular {
+  border-color: #14213D;
+  box-shadow: 0 18px 40px rgba(20,33,61,0.12);
+}
+.pricing-tier__badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: #14213D; color: #fff;
+  padding: 6px 16px; border-radius: 9999px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+}
+.pricing-tier h3 { color: #14213D; font-size: 22px; font-weight: 700; margin: 0 0 6px; }
+.pricing-tier__intro { color: #475569; font-size: 14px; margin: 0 0 22px; line-height: 1.5; min-height: 42px; }
+.pricing-tier__fee-label { color: #64748b; font-size: 13px; margin: 0 0 4px; }
+.pricing-tier__price { font-size: 36px; font-weight: 700; color: #14213D; line-height: 1; margin: 0; letter-spacing: -0.02em; }
+.pricing-tier__when { color: #64748b; font-size: 12px; margin: 4px 0 22px; }
+.pricing-tier__incl-label { color: #64748b; font-size: 13px; margin: 0 0 4px; }
+.pricing-tier__calls { color: #14213D; font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+.pricing-tier__per-call { color: #64748b; font-size: 12px; margin: 0 0 22px; }
+.pricing-tier ul { list-style: none; padding: 0; margin: 0 0 28px; flex: 1; }
+.pricing-tier li {
+  font-size: 14px; color: #334155; line-height: 1.5;
+  padding: 8px 0 8px 26px; position: relative;
+}
+.pricing-tier li::before {
+  content: ''; position: absolute; left: 0; top: 12px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #36B37E url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/10px no-repeat;
+}
+.pricing-tier__cta {
   display: inline-flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--blue-400), var(--blue-500));
-  color: #fff; font-weight: 700; font-size: 18px;
-  border-radius: 50%;
+  width: 100%; padding: 12px 20px;
+  background: #fff; border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  font-weight: 600; font-size: 14px; color: #14213D;
+  text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease;
 }
-.voice-step h3 { color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 6px; }
-.voice-step p  { color: var(--text-muted); font-size: 14.5px; line-height: 1.55; margin: 0; }
+.pricing-tier__cta:hover { background: #f5f7fa; border-color: #cbd5e1; }
+.pricing-tier--popular .pricing-tier__cta { background: #14213D; color: #fff; border-color: #14213D; }
+.pricing-tier--popular .pricing-tier__cta:hover { background: #1a2c52; }
+.pricing-extras {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  max-width: 760px; margin: 36px auto 0;
+}
+@media (max-width: 720px) { .pricing-extras { grid-template-columns: 1fr; } }
+.pricing-extras__item {
+  background: #ecfdf5; border: 1px solid #d1fae5;
+  border-radius: 10px; padding: 12px 14px;
+  font-size: 13.5px; color: #065f46; line-height: 1.5;
+}
+.pricing-extras__item strong { color: #047857; }
+.pricing-guarantee {
+  background: #f1f5f9; border: 1px solid #e2e8f0;
+  border-radius: 10px; padding: 12px 16px;
+  font-size: 13.5px; color: #334155; line-height: 1.5;
+  max-width: 760px; margin: 12px auto 0; text-align: center;
+}
+.pricing-guarantee strong { color: #14213D; }
+.pricing-cta-row {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-top: 32px;
+}
+.pricing-cta-row .btn--ghost-light {
+  background: #fff; border: 1px solid #e5e7eb;
+  color: #14213D; padding: 12px 22px; border-radius: 9999px;
+  font-weight: 600; font-size: 14px; text-decoration: none;
+}
+.pricing-cta-row .btn--ghost-light:hover { background: #f5f7fa; }
+.pricing-cta-row .btn--text {
+  background: transparent; color: #14213D;
+  padding: 12px 22px;
+  font-weight: 600; font-size: 14px; text-decoration: none;
+}
+
+/* Implementation Process — light timeline section */
+.voice-impl {
+  padding: 96px 0;
+  background: #f1f5f9;
+  border-top: 1px solid #e5e7eb;
+}
+.voice-impl__container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.voice-impl__head { text-align: center; margin-bottom: 56px; }
+.voice-impl__head h2 {
+  font-size: clamp(28px, 3.6vw, 42px); font-weight: 700;
+  margin: 0 0 12px; letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #14213D 0%, #0066D7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.voice-impl__head p { color: #475569; font-size: 16px; max-width: 720px; margin: 0 auto; }
+.impl-phase { margin-bottom: 32px; position: relative; }
+.impl-phase__pill {
+  display: block; width: max-content; margin: 0 auto 18px;
+  background: #14213D; color: #fff;
+  padding: 8px 20px; border-radius: 9999px;
+  font-size: 14px; font-weight: 600;
+}
+.impl-phase__cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  max-width: 880px; margin: 0 auto;
+  position: relative;
+}
+.impl-phase__cards::before {
+  content: ''; position: absolute;
+  left: 50%; top: -32px; bottom: -32px; width: 1px;
+  background: #cbd5e1; transform: translateX(-50%);
+  z-index: 0;
+}
+@media (max-width: 720px) {
+  .impl-phase__cards { grid-template-columns: 1fr; }
+  .impl-phase__cards::before { display: none; }
+}
+.impl-card {
+  background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 12px; padding: 22px 24px;
+  position: relative; z-index: 1;
+}
+.impl-card__head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.impl-card__head svg { width: 18px; height: 18px; color: #36B37E; flex-shrink: 0; }
+.impl-card h3 { color: #14213D; font-size: 16.5px; font-weight: 700; margin: 0; }
+.impl-card p { color: #475569; font-size: 13.5px; line-height: 1.55; margin: 0; }
+.impl-support {
+  background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 14px; padding: 28px 32px;
+  max-width: 560px; margin: 24px auto 0; text-align: center;
+}
+.impl-support h3 { color: #14213D; font-size: 17px; font-weight: 700; margin: 0 0 14px; }
+.impl-support__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px;
+  text-align: left;
+}
+@media (max-width: 540px) { .impl-support__grid { grid-template-columns: 1fr; } }
+.impl-support__item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: #475569;
+}
+.impl-support__item svg { width: 14px; height: 14px; color: #94a3b8; flex-shrink: 0; }
+
+/* How it works — 4-step horizontal grid (light section, matches live) */
+.voice-how { padding: 96px 0; background: #fff; border-top: 1px solid #e5e7eb; }
+.voice-how__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.voice-how__head { text-align: center; margin-bottom: 56px; }
+.voice-how__head h2 {
+  font-size: clamp(28px, 3.6vw, 42px); font-weight: 700;
+  margin: 0 0 12px; letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #14213D 0%, #0066D7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.voice-how__head p { color: #475569; font-size: 16px; max-width: 760px; margin: 0 auto; line-height: 1.55; }
+.voice-how__grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  max-width: 1080px; margin: 0 auto;
+}
+@media (max-width: 980px) { .voice-how__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .voice-how__grid { grid-template-columns: 1fr; } }
+.how-step {
+  background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 14px; padding: 28px 24px;
+  text-align: center;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.how-step:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(20,33,61,0.08); border-color: #cbd5e1; }
+.how-step__num {
+  width: 44px; height: 44px; margin: 0 auto 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #f1f5f9; color: #64748b;
+  border-radius: 50%; font-weight: 600; font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.how-step h3 { color: #14213D; font-size: 17px; font-weight: 700; margin: 0 0 10px; }
+.how-step p  { color: #475569; font-size: 13.5px; line-height: 1.55; margin: 0; }
 
 /* Comparison */
 .voice-compare { padding: 96px 0; background: linear-gradient(180deg, #0a1022 0%, #050814 100%); }
@@ -448,52 +627,193 @@ include __DIR__ . '/../partials/site-head.php';
     </div>
   </section>
 
-  <!-- ── HOW IT WORKS ─────────────────────────────────────────────── -->
-  <section class="voice-how">
-    <div class="voice-how__container">
-      <div class="section-head">
-        <span class="section-head__eyebrow">Implementation</span>
-        <h2>How Our AI Voice Agents Work</h2>
+  <!-- ── PRICING PLANS ─────────────────────────────────────────────── -->
+  <section class="voice-pricing" id="pricing">
+    <div class="voice-pricing__container">
+      <div class="voice-pricing__head">
+        <h2>Pricing Plans</h2>
+        <p>Transparent pricing with plans to suit businesses at every stage of growth.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="pricing-tier">
+          <h3>Starter</h3>
+          <p class="pricing-tier__intro">For small teams and proof-of-concept</p>
+          <p class="pricing-tier__fee-label">Setup Fee</p>
+          <p class="pricing-tier__price">&pound;3,500</p>
+          <p class="pricing-tier__when">one-time</p>
+          <p class="pricing-tier__incl-label">Included Calls</p>
+          <p class="pricing-tier__calls">Pre-paid blocks (min. 250)</p>
+          <p class="pricing-tier__per-call">Equivalent to &pound;1.95 per call</p>
+          <ul>
+            <li>24/7 availability</li>
+            <li>Standard integrations</li>
+            <li>Email support</li>
+          </ul>
+          <a href="/booking.php" class="pricing-tier__cta">Get Started</a>
+        </article>
+
+        <article class="pricing-tier pricing-tier--popular">
+          <span class="pricing-tier__badge">Most Popular</span>
+          <h3>Business</h3>
+          <p class="pricing-tier__intro">For growing operations needing predictability</p>
+          <p class="pricing-tier__fee-label">Setup Fee</p>
+          <p class="pricing-tier__price">&pound;1,300</p>
+          <p class="pricing-tier__when">one-time</p>
+          <p class="pricing-tier__incl-label">Included Calls</p>
+          <p class="pricing-tier__calls">5,000 calls per month</p>
+          <p class="pricing-tier__per-call">Equivalent to &pound;0.50 per call</p>
+          <ul>
+            <li>All Starter features</li>
+            <li>Advanced integrations</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="/booking.php" class="pricing-tier__cta">Get Started</a>
+        </article>
+
+        <article class="pricing-tier">
+          <h3>Enterprise</h3>
+          <p class="pricing-tier__intro">For large-scale deployments with custom needs</p>
+          <p class="pricing-tier__fee-label">Setup Fee</p>
+          <p class="pricing-tier__price">Custom</p>
+          <p class="pricing-tier__when">tailored to your needs</p>
+          <p class="pricing-tier__incl-label">Included Calls</p>
+          <p class="pricing-tier__calls">Unlimited</p>
+          <p class="pricing-tier__per-call">Contact us for pricing</p>
+          <ul>
+            <li>All Business features</li>
+            <li>Custom integrations</li>
+            <li>Dedicated account manager</li>
+          </ul>
+          <a href="/contact.php" class="pricing-tier__cta">Contact Sales</a>
+        </article>
+      </div>
+
+      <div class="pricing-extras">
+        <div class="pricing-extras__item"><strong>Transparent Billing:</strong> Know your committed spend upfront.</div>
+        <div class="pricing-extras__item"><strong>Flex Up or Down:</strong> Adjust your block size or switch tiers anytime.</div>
+      </div>
+      <p class="pricing-guarantee"><strong>90-Day Performance Guarantee:</strong> See measurable cost reduction in three months or your next month is on us.</p>
+
+      <div class="pricing-cta-row">
+        <a href="/assess" class="btn btn--primary">Start Free Voice Demo &rarr;</a>
+        <a href="/calculators" class="btn--ghost-light">Calculate Your Savings</a>
+        <a href="/contact.php" class="btn--text">Speak to an Expert</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IMPLEMENTATION PROCESS — light timeline ─────────────────── -->
+  <section class="voice-impl">
+    <div class="voice-impl__container">
+      <div class="voice-impl__head">
+        <h2>Implementation Process</h2>
         <p>We'll have your AI Voice Agents up and running in as little as three weeks with our streamlined process.</p>
       </div>
 
-      <ol class="voice-how__steps">
-        <li class="voice-step">
-          <span class="voice-step__num" aria-hidden="true">1</span>
-          <div>
-            <h3>Discovery &amp; Scoping</h3>
-            <p>We'll analyse your current call centre operations, identify key use cases, and establish KPIs for measuring success.</p>
+      <div class="impl-phase">
+        <span class="impl-phase__pill">Discovery &amp; Planning</span>
+        <div class="impl-phase__cards">
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>Discovery Workshop</h3>
+            </div>
+            <p>We'll analyze your current call center operations, identify key use cases, and establish KPIs for measuring success.</p>
           </div>
-        </li>
-        <li class="voice-step">
-          <span class="voice-step__num" aria-hidden="true">2</span>
-          <div>
-            <h3>Voice ID &amp; Conversation Design</h3>
-            <p>We'll gather your existing resources &mdash; FAQs, call scripts, playbooks, recordings &mdash; and craft your custom Voice Agents with the right personality, language capabilities, and domain expertise.</p>
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>Knowledge Collection</h3>
+            </div>
+            <p>We'll gather your existing resources&mdash;FAQs, call scripts, playbooks, and call recordings&mdash;to inform your Voice Agents.</p>
           </div>
-        </li>
-        <li class="voice-step">
-          <span class="voice-step__num" aria-hidden="true">3</span>
-          <div>
-            <h3>Integration &amp; Testing</h3>
-            <p>We integrate the voice agent with your CRM, ticketing, scheduling, and knowledge base, then rigorously test across scenarios and edge cases to ensure exceptional performance.</p>
+        </div>
+      </div>
+
+      <div class="impl-phase">
+        <span class="impl-phase__pill">Development &amp; Integration</span>
+        <div class="impl-phase__cards">
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>Voice Agent Development</h3>
+            </div>
+            <p>Our team crafts your custom Voice Agents with the right personality, language capabilities, and domain expertise.</p>
           </div>
-        </li>
-        <li class="voice-step">
-          <span class="voice-step__num" aria-hidden="true">4</span>
-          <div>
-            <h3>Launch &amp; Go-live</h3>
-            <p>Launch your voice agents and begin the continuous improvement cycle based on real-world performance data.</p>
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>System Integration</h3>
+            </div>
+            <p>We connect your Voice Agents with your CRM, ticketing systems, knowledge base, and other critical business tools.</p>
           </div>
-        </li>
-        <li class="voice-step">
-          <span class="voice-step__num" aria-hidden="true">5</span>
-          <div>
-            <h3>Continuous Optimisation</h3>
-            <p>After launch we keep optimising your Voice Agents based on call outcomes, customer feedback, and evolving business needs. The AI gets sharper every week.</p>
+        </div>
+      </div>
+
+      <div class="impl-phase">
+        <span class="impl-phase__pill">Testing &amp; Launch</span>
+        <div class="impl-phase__cards">
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>Quality Assurance</h3>
+            </div>
+            <p>We rigorously test your Voice Agents across different scenarios and edge cases to ensure exceptional performance.</p>
           </div>
-        </li>
-      </ol>
+          <div class="impl-card">
+            <div class="impl-card__head">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+              <h3>Go-Live &amp; Optimization</h3>
+            </div>
+            <p>We deploy your Voice Agents and begin the continuous improvement cycle based on real-world performance data.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="impl-support">
+        <h3>Ongoing Support</h3>
+        <p style="color:#64748b;font-size:13.5px;margin:0 0 16px;">After launch, we continue to optimize your Voice Agents with:</p>
+        <div class="impl-support__grid">
+          <div class="impl-support__item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>Weekly performance reports</div>
+          <div class="impl-support__item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>Monthly optimization meetings</div>
+          <div class="impl-support__item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>Regular knowledge updates</div>
+          <div class="impl-support__item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>Continuous AI training</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW OUR AI VOICE AGENTS WORK — 4-step grid ──────────────── -->
+  <section class="voice-how">
+    <div class="voice-how__container">
+      <div class="voice-how__head">
+        <h2>How Our AI Voice Agents Work</h2>
+        <p>We combine cutting-edge natural language processing, voice synthesis, and conversational design to create voice agents that sound and respond just like humans.</p>
+      </div>
+
+      <div class="voice-how__grid">
+        <article class="how-step">
+          <span class="how-step__num">01</span>
+          <h3>Custom Voice Design</h3>
+          <p>We create a voice identity that matches your brand and use case requirements.</p>
+        </article>
+        <article class="how-step">
+          <span class="how-step__num">02</span>
+          <h3>Conversation Design</h3>
+          <p>Our team designs conversation flows optimized for your specific business objectives.</p>
+        </article>
+        <article class="how-step">
+          <span class="how-step__num">03</span>
+          <h3>Integration &amp; Testing</h3>
+          <p>We integrate the voice agent with your systems and rigorously test for quality and accuracy.</p>
+        </article>
+        <article class="how-step">
+          <span class="how-step__num">04</span>
+          <h3>Deployment &amp; Optimization</h3>
+          <p>Launch your voice agents and continuously optimize based on performance data.</p>
+        </article>
+      </div>
     </div>
   </section>
 

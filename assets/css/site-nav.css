@@ -9,6 +9,36 @@
 html, body { overflow-x: hidden; }
 body { max-width: 100vw; }
 
+/* ── Mobile drawer: NEVER renders unless explicitly opened ───────────────
+   Defensive belt-and-braces. Was leaking into page flow on some pages
+   when nav-mobile.js injected the drawer markup but a CSS reset (or
+   stale cache) bypassed the static-page.css `display:none`. Force it
+   here in site-nav.css too with !important so cache + cascade can't
+   reveal it. */
+.nav__drawer {
+  position: fixed !important;
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+.nav__drawer.is-open {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+/* Above 880px the hamburger and drawer simply do not exist visually */
+@media (min-width: 880px) {
+  .nav__burger { display: none !important; }
+  .nav__drawer, .nav__drawer.is-open {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}
+
 /* ── Accessibility: skip-link + focus ring ──────────────────────────── */
 .skip-link {
   position: absolute; top: -100px; left: 8px;

@@ -122,14 +122,18 @@ ul, ol { list-style: none; }
 @media (max-width: 559px) { .nav__cta .btn--orange { display: none; } }
 
 .nav__drawer {
-  position: fixed; inset: 0; z-index: 100;
+  position: fixed !important; inset: 0; z-index: 100;
   background: rgba(5,8,20,0.92);
   backdrop-filter: saturate(160%) blur(18px);
   -webkit-backdrop-filter: saturate(160%) blur(18px);
-  display: none;
+  display: none !important;
   opacity: 0; transition: opacity 200ms ease;
 }
-.nav__drawer.is-open { display: flex; opacity: 1; }
+.nav__drawer.is-open { display: flex !important; opacity: 1; }
+@media (min-width: 880px) {
+  .nav__burger { display: none !important; }
+  .nav__drawer, .nav__drawer.is-open { display: none !important; }
+}
 .nav__drawer__inner {
   margin: 0 auto; width: 100%; max-width: 480px;
   padding: 96px 28px 40px;
