@@ -117,9 +117,12 @@ RewriteRule ^old-lovable-build/?.* - [F,L]
     RewriteRule ^api/([a-zA-Z0-9_-]+)$ /api/$1.php [L,QSA]
 
     # /auth/foo, /assess/foo, /dashboard/foo → respective .php files
+    # /solutions/foo, /transform/foo, /why-syncsity, etc. — rebuilt SPA pages
+    # As we replace SPA routes with .php files, this catches them BEFORE the
+    # SPA fallback so they serve the new design instead of the React bundle.
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{DOCUMENT_ROOT}/$1/$2.php -f
-    RewriteRule ^(auth|assess|dashboard)/([a-zA-Z0-9_-]+)$ /$1/$2.php [L,QSA]
+    RewriteRule ^(auth|assess|dashboard|solutions|transform)/([a-zA-Z0-9_-]+)$ /$1/$2.php [L,QSA]
 
     # SPA fallback: anything else not a real file/directory → /index.html
     # so React Router renders the right page.
