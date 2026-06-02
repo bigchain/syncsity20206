@@ -6,13 +6,18 @@
  * is preserved in git for revival if needed; this page intercepts the /calculators
  * route via DirectoryIndex / static file resolution before the SPA fallback fires.
  *
- * Math model (all values defensible against published industry benchmarks):
- *   - Process inefficiency  = 3% of revenue (Bain Operational Excellence Index, mid-market median)
- *   - Senior firefighting   = hours × £100/h × 4.33 weeks (UK senior operator blended cost)
+ * Math model (rules of thumb, plainly labelled — no fake academic citations):
+ *   - Process inefficiency  = 3% of revenue (mid-market range commonly cited as 2-5%)
  *   - Concentration risk    = % × revenue × (8% baseline + 0.5%/pt above 30%)
  *   - Onboarding drag       = 15% turnover × extra ramp weeks × half-salary loss
  *
- * The biggest leak wins the "top constraint" label and selects the visual cue.
+ * Firefighting hours are shown separately as a hidden-cost callout, NOT added
+ * to the headline total — they're a symptom of the other leaks, and adding
+ * them double-counts. Director time is valued at £200/h (fully-loaded UK
+ * mid-market director — salary + on-costs + opportunity cost).
+ *
+ * The biggest leak wins the "top driver" label. The framing is "where your
+ * number is most sensitive" — not a diagnosis. The diagnosis is /assess.
  * Sub-£10K results say so honestly — no padding to hit the headline number.
  */
 $page_path_prefix = '/';
@@ -97,6 +102,24 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   .constraint__body { flex: 1; }
   .constraint__label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; }
   .constraint__name { font-size: 17px; font-weight: 700; color: #fff; margin-top: 2px; }
+  .constraint__sub { font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.45; }
+
+  .firefight-card {
+    margin-top: 16px; padding: 14px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.03); border: 1px dashed var(--border-strong);
+    font-size: 13px; color: var(--text-muted); line-height: 1.55;
+  }
+  .firefight-card strong { color: #fff; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+  .leak-disclaimer {
+    font-size: 12px; color: var(--text-dim);
+    font-weight: 500; line-height: 1.5; margin-bottom: 4px;
+  }
+
+  /* Mobile: non-sticky display so it doesn't dominate the viewport */
+  @media (max-width: 879px) {
+    .leak-display { position: static; padding: 24px; }
+  }
 
   .leak-breakdown { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border); }
   .leak-breakdown__title { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); font-weight: 700; margin-bottom: 10px; }
@@ -215,6 +238,7 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         <!-- Live reveal -->
         <div>
           <div class="leak-display reveal reveal--d1">
+            <p class="leak-disclaimer">Estimate from your slider inputs &amp; industry rules of thumb.</p>
             <div class="leak-eyebrow">Your monthly leak</div>
             <div class="leak-number" id="leak-monthly">£0</div>
             <div class="leak-annual">≈ <span id="leak-annual">£0</span> per year</div>
@@ -225,8 +249,9 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 <!-- SVG injected by JS based on top leak -->
               </div>
               <div class="constraint__body">
-                <div class="constraint__label">Top constraint</div>
+                <div class="constraint__label">Top driver of your number</div>
                 <div class="constraint__name" id="constraint-name">—</div>
+                <div class="constraint__sub">The slider moving your total the most — that's where the diagnosis would dig first.</div>
               </div>
             </div>
 
@@ -234,22 +259,25 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
               <div class="leak-breakdown__title">Where it comes from / month</div>
               <div class="leak-row" data-key="process"><span>Process inefficiency</span><span class="leak-row__value" id="leak-process">£0</span></div>
               <div class="leak-row" data-key="concentration"><span>Customer concentration risk</span><span class="leak-row__value" id="leak-concentration">£0</span></div>
-              <div class="leak-row" data-key="firefighting"><span>Senior firefighting</span><span class="leak-row__value" id="leak-firefighting">£0</span></div>
               <div class="leak-row" data-key="onboarding"><span>Onboarding drag</span><span class="leak-row__value" id="leak-onboarding">£0</span></div>
             </div>
 
+            <div class="firefight-card">
+              And <strong id="firefight-hours">15 hrs/week</strong> of senior firefighting — roughly <strong id="firefight-cost">£13,000</strong>/month of director time. Counted separately because firefighting is usually a <em>symptom</em> of the leaks above, not a fourth one. Different problem, same root.
+            </div>
+
             <div class="leak-cta">
-              <a href="/assess" class="btn btn--orange btn--lg">Get the full diagnosis — free, 15 min →</a>
+              <a href="/assess" class="btn btn--orange btn--lg">Sliders give a range. Get the line. →</a>
             </div>
           </div>
 
           <details class="method">
-            <summary>How the math works</summary>
-            <p><strong>Process inefficiency:</strong> 3% of revenue, monthly. Source: Bain Operational Excellence Index — mid-market median process waste sits between 2.5% and 4.5% of revenue. We use 3% as conservative.</p>
-            <p><strong>Senior firefighting:</strong> <code>hours × £100/h × 4.33 weeks</code>. £100/hour reflects blended senior-operator cost (salary + on-costs + opportunity cost) at UK mid-market scale.</p>
-            <p><strong>Customer concentration risk:</strong> expected monthly loss = <code>% × revenue × (8% + 0.5%/pt above 30%)</code>. Baseline 8% annual churn probability for any major customer; risk premium ramps when concentration crosses 30%. Validated against UK ICAEW SME risk benchmarks.</p>
-            <p><strong>Onboarding drag:</strong> <code>15% turnover × extra ramp weeks × £40K avg salary × 50% productivity loss / 12</code>. Turnover figure from CIPD UK 2024 labour-market data; 4-week productive baseline from McKinsey onboarding study.</p>
-            <p>Numbers are estimates — useful for direction-setting, not for board presentation. The full Revenue Intelligence Report uses your actual figures and industry-specific benchmarks.</p>
+            <summary>How the math works (and where it doesn't)</summary>
+            <p><strong>Process inefficiency:</strong> 3% of revenue, monthly. Mid-market process-waste estimates from public consulting writing range 2-5% of revenue depending on sector and how much optimisation work has already been done. We use 3% as a conservative midpoint, not as a specific cited number.</p>
+            <p><strong>Senior firefighting:</strong> <code>hours × £200/h × 4.33 weeks</code>. £200/hour reflects fully-loaded UK mid-market director time (salary + on-costs + opportunity cost) — typical range is £200-350/h depending on seniority. Shown as a separate callout because firefighting is usually a <em>symptom</em> of the other leaks; adding it to the total would double-count.</p>
+            <p><strong>Customer concentration risk:</strong> expected monthly loss = <code>% × revenue × (8% + 0.5%/pt above 30%)</code>. 8% baseline reflects informal mid-market churn benchmarks for major accounts; the risk premium above 30% concentration captures the well-documented non-linear jump in vulnerability when any single customer becomes too large to lose. Not from a specific published index.</p>
+            <p><strong>Onboarding drag:</strong> <code>15% turnover × extra ramp weeks × £40K avg salary × 50% productivity loss / 12</code>. 15% turnover is in line with CIPD UK labour-market data for mid-market companies; the 4-week "productive" baseline and 50% ramp-loss are informed estimates, not specific citations.</p>
+            <p><strong>What this isn't:</strong> a substitute for analysis. The leaks are independent in the model but overlap in reality. The constraint "winner" is whichever slider moves your total most — not a verdict on your business. The 15-minute Revenue Intelligence Report uses your actual figures and applies industry-specific benchmarks instead of the rules of thumb above.</p>
           </details>
         </div>
 
@@ -299,8 +327,9 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     constraintName: document.getElementById('constraint-name'),
     process:        document.getElementById('leak-process'),
     concentration:  document.getElementById('leak-concentration'),
-    firefighting:   document.getElementById('leak-firefighting'),
     onboarding:     document.getElementById('leak-onboarding'),
+    firefightHours: document.getElementById('firefight-hours'),
+    firefightCost:  document.getElementById('firefight-cost'),
   };
 
   // ── Formatters ──
@@ -323,11 +352,12 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   const NAMES = {
     process:       'Process inefficiency',
     concentration: 'Customer concentration',
-    firefighting:  'Senior firefighting',
     onboarding:    'Onboarding drag',
   };
 
   // ── Model ──
+  // Firefighting is computed separately and NOT added to total — it's a
+  // symptom of the other leaks, adding it would double-count.
   function calc(state) {
     const R = state.revenue;
     const T = state.team;
@@ -336,7 +366,6 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     const C = state.conc;
 
     // Monthly £
-    const firefighting = F * 100 * 4.33;
     const process = (R * 0.03) / 12;
 
     const concPct = C / 100;
@@ -349,10 +378,13 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     const extraWeeks = Math.max(0, W - 4);
     const onboarding = (turnoverPerYear * extraWeeks * (40000 / 52) * 0.5) / 12;
 
-    const leaks = { process, concentration, firefighting, onboarding };
-    const total = process + concentration + firefighting + onboarding;
+    // Separate callout, not in the headline total
+    const firefightingCost = F * 200 * 4.33;
+
+    const leaks = { process, concentration, onboarding };
+    const total = process + concentration + onboarding;
     const topKey = Object.keys(leaks).reduce((a, b) => leaks[a] > leaks[b] ? a : b);
-    return { leaks, total, topKey };
+    return { leaks, total, topKey, firefightingCost, firefightingHours: F };
   }
 
   // ── Animated counter ──
@@ -392,7 +424,7 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     displays.rampup.textContent    = state.rampup + (state.rampup === 1 ? ' week' : ' weeks');
     displays.conc.textContent      = state.conc + '%';
 
-    const { leaks, total, topKey } = calc(state);
+    const { leaks, total, topKey, firefightingCost, firefightingHours } = calc(state);
 
     monthlyTarget = total;
     animateMonthly();
@@ -400,15 +432,18 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
     out.process.textContent       = fmtMoney(leaks.process);
     out.concentration.textContent = fmtMoney(leaks.concentration);
-    out.firefighting.textContent  = fmtMoney(leaks.firefighting);
     out.onboarding.textContent    = fmtMoney(leaks.onboarding);
+
+    // Firefighting callout
+    out.firefightHours.textContent = firefightingHours + ' hrs/week';
+    out.firefightCost.textContent  = fmtMoney(firefightingCost);
 
     // Highlight winning row
     document.querySelectorAll('.leak-row').forEach(row => {
       row.classList.toggle('leak-row--winner', row.dataset.key === topKey);
     });
 
-    // Constraint card + icon
+    // Driver card + icon (framing is "where the diagnosis would dig", not "the answer")
     out.constraintIcon.innerHTML = ICONS[topKey];
     out.constraintName.textContent = NAMES[topKey];
 
@@ -418,13 +453,13 @@ $h = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
       out.monthly.classList.add('leak-number--low');
       out.constraint.classList.add('constraint--low');
       out.headline.textContent =
-        "Under £10K/month — you're already running tighter than the mid-market median. The deeper question is where the upside hides, not where the leak is.";
+        "Under £10K/month on these three categories. The deeper question is where the upside hides, not where this kind of leak is. The full report finds the upside.";
     } else {
       out.monthly.classList.remove('leak-number--low');
       out.constraint.classList.remove('constraint--low');
       const annualLoss = total * 12;
       out.headline.textContent =
-        "That's " + fmtMoney(annualLoss) + " a year sitting under " + NAMES[topKey].toLowerCase() + ". Most operators are surprised by which leak wins.";
+        "That's roughly " + fmtMoney(annualLoss) + " a year sitting under " + NAMES[topKey].toLowerCase() + " on this estimate. Your actual number depends on what you've already optimised — that's what the 15-minute report maps.";
     }
   }
 
