@@ -94,7 +94,7 @@ RewriteRule ^old-lovable-build/?.* - [F,L]
     # Extension-less canonical URLs (if a user types /terms instead of /terms.php)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(terms|privacy|sitemap|booking|demo|contact)$ /$1.php [L]
+    RewriteRule ^(terms|privacy|sitemap|booking|demo|contact|calculators)$ /$1.php [L]
 
     # Don't rewrite real files / directories
     RewriteCond %{REQUEST_FILENAME} -f [OR]
