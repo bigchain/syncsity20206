@@ -722,7 +722,7 @@
         <div><h4>Company</h4><ul><li><a href="/about-us">About</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/booking.html">Book a session</a></li><li><a href="mailto:edward@syncsity.com">edward@syncsity.com</a></li></ul></div>
       </div>
       <div class="footer__bottom">
-        <span>© <span id="year">2026</span> Syncsity Ltd · London, UK · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.html">Sitemap</a> · <a href="/llms.txt">LLMs.txt</a></span>
+        <span>© <span id="year">2026</span> Syncsity, a trading name of EDWARD HADOME LIMITED (SC316025) · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.html">Sitemap</a> · <a href="/llms.txt">LLMs.txt</a></span>
         <span class="mono dim">Built for operators, by operators.</span>
       </div>
     </div>

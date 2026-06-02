@@ -85,7 +85,7 @@ function email_layout_close(): void
                     <a href="https://syncsity.com/contact" style="color:#7e8aa3;text-decoration:none;">Contact</a>
                   </p>
                   <p style="margin:0;font-family:Inter,Arial,sans-serif;font-size:11px;color:#a0acc4;line-height:1.6;">
-                    © <?= $year ?> Syncsity Ltd · London, United Kingdom<br>
+                    © <?= $year ?> Syncsity, a trading name of EDWARD HADOME LIMITED (SC316025)<br>
                     You're receiving this because you took the free Aha! Assessment.
                   </p>
                 </td>

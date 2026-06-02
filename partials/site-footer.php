@@ -50,7 +50,8 @@ $h = $h ?? fn($s) => htmlspecialchars((string)$s, ENT_QUOTES | ENT_HTML5, 'UTF-8
       </div>
     </div>
     <div class="footer-home__bottom">
-      <span>&copy; <span id="year"><?= date('Y') ?></span> Syncsity. All rights reserved.</span>
+     <span>&copy; <span id="year"><?= date('Y') ?></span> Syncsity, a trading name of EDWARD HADOME LIMITED (Company number SC316025). All rights reserved.</span>
+
       <span><a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a> &middot; <a href="/sitemap.html">Sitemap</a></span>
     </div>
   </div>

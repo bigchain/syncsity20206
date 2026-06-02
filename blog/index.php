@@ -147,7 +147,7 @@ $pageDesc  = 'Operator-grade essays on constraint, leverage, and the patterns we
         <div><h4>Services</h4><ul><li><a href="/transform/market-domination">Market Domination</a></li><li><a href="/transform/revenue-acceleration">Revenue Acceleration</a></li><li><a href="/transform/operational-supremacy">Operational Supremacy</a></li><li><a href="/assess">Free Assessment</a></li><li><a href="/booking.html">Strategy Session</a></li></ul></div>
       </div>
       <div class="footer__bottom">
-        <span>© <span id="year">2026</span> Syncsity Ltd · London, UK · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.html">Sitemap</a> · <a href="/llms.txt">LLMs.txt</a></span>
+        <span>© <span id="year">2026</span> Syncsity, a trading name of EDWARD HADOME LIMITED (SC316025) · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.html">Sitemap</a> · <a href="/llms.txt">LLMs.txt</a></span>
         <span class="mono dim">Built for operators, by operators.</span>
       </div>
     </div>

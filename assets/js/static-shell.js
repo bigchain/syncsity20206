@@ -92,7 +92,7 @@
           '</div>' +
         '</div>' +
         '<div class="footer__bottom">' +
-          '<span>© ' + year + ' Syncsity Ltd · London, UK · ' +
+          '<span>© ' + year + ' Syncsity, a trading name of EDWARD HADOME LIMITED (SC316025) · ' +
             '<a href="/privacy.html">Privacy</a> · ' +
             '<a href="/terms.html">Terms</a> · ' +
             '<a href="/sitemap.html">Sitemap</a> · ' +

@@ -44,7 +44,7 @@ if (!defined('SYNC_ROOT')) define('SYNC_ROOT', dirname(__DIR__));
     </div>
 
     <div class="footer-bottom">
-      <span>© <span data-year>2025</span> Syncsity Ltd · London, United Kingdom</span>
+      <span>© <span data-year>2025</span> Syncsity, a trading name of EDWARD HADOME LIMITED (Company number SC316025). All rights reserved.</span>
       <span class="mono dim">Built for operators, by operators.</span>
     </div>
   </div>

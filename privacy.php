@@ -77,7 +77,7 @@ include __DIR__ . '/partials/site-head.php';
     <div class="container container--md">
       <article class="prose">
         <h2>Who we are</h2>
-        <p>Syncsity Ltd ("Syncsity", "we", "us") is a UK-incorporated company providing AI-driven business assessment and transformation services. The data controller for this site is Syncsity Ltd. Our contact email is <a href="mailto:edward@syncsity.com">edward@syncsity.com</a>.</p>
+        <p>Syncsity is a trading name of EDWARD HADOME LIMITED (Company number SC316025), a UK-incorporated company providing AI-driven business assessment and transformation services ("Syncsity", "we", "us"). The data controller for this site is EDWARD HADOME LIMITED. Our contact email is <a href="mailto:edward@syncsity.com">edward@syncsity.com</a>.</p>
 
         <h2>What we collect</h2>
         <ul>
