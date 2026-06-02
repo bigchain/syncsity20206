@@ -3,7 +3,9 @@
 > The single source of truth for everything we set out to build, what's done,
 > what's pending, and how it all hangs together. Read this before any new work.
 >
-> **Last updated:** 2026-05-01 · **Status:** Live · **Repo:** `bigchain/syncsity20206`
+> **For session handover and quick orientation, read `HANDOVER.md` first.**
+>
+> **Last updated:** 2026-05-04 · **Status:** Live · **Repo:** `bigchain/syncsity20206` · **Latest commit:** `1e121c0`
 
 ---
 
@@ -61,20 +63,51 @@ Take an existing Lovable-built marketing site and **add a real product layer und
 | Operational Supremacy | `/transform/operational-supremacy` | ✅ SPA | |
 | Calculators | `/calculators` | ✅ SPA | |
 
-### 3.2 New static pages (hand-written, match SPA nav)
+### 3.2 New static pages (now migrated to PHP partials — universal nav + footer)
 
-| Page | URL | Status | Notes |
-|------|-----|--------|-------|
-| Contact | `/contact.html` | ✅ | 4-step smart wizard, posts to `/api/contact` |
-| Demo | `/demo.html` | ✅ | Form posts to `/api/contact` (subject: Demo Request) |
-| Book a Session | `/booking.html` | ✅ | Calendly iframe |
-| Terms | `/terms.html` | ✅ | Long-form prose |
-| Privacy | `/privacy.html` | ✅ | UK GDPR-aligned |
-| Sitemap (HTML) | `/sitemap.html` | ✅ | Human-readable sitemap |
-| Insights / Blog | `/blog` | ✅ | Manifesto essay (~1000 words, dated 15 April 2026) |
-| Client login (legacy) | `/client-login.html` | ✅ | Redirect to `/auth/login` |
+| Page | URL | Status | File | Notes |
+|------|-----|--------|------|-------|
+| Contact | `/contact.html` → `/contact.php` | ✅ migrated | `contact.php` | 4-step smart wizard, posts to `/api/contact` |
+| Demo | `/demo.html` → `/demo.php` | ✅ migrated | `demo.php` | Form posts to `/api/contact` |
+| Book a Session | `/booking.html` → `/booking.php` | ✅ migrated | `booking.php` | Calendly iframe + Service/Offer JSON-LD |
+| Terms | `/terms.html` → `/terms.php` | ✅ migrated | `terms.php` | Long-form prose + WebPage/legal JSON-LD |
+| Privacy | `/privacy.html` → `/privacy.php` | ✅ migrated | `privacy.php` | UK GDPR-aligned |
+| Sitemap (HTML) | `/sitemap.html` → `/sitemap.php` | ✅ migrated | `sitemap.php` | 7-column link grid |
+| Insights / Blog | `/blog` | ✅ | `blog/index.php` | Manifesto essay |
+| Client login (legacy) | `/client-login.html` | ✅ | unchanged | 14-line meta-refresh redirect to `/auth/login` |
+| Demo home | `/syncdemo/index.html` | ✅ | `syncdemo/index.html` | Hand-written home page rebuild — preview of replacement for the SPA at `/` |
 
-All 7 share the same SPA-matching nav: **Transform · Solutions · Diagnose · Why Syncsity · Pricing · Resources** + **Log in · Free assessment · Book a Session**.
+**`.htaccess`** internally rewrites `/foo.html` → `/foo.php` for migrated pages (no 301, so old inbound links keep working). Extension-less URLs (`/terms`, `/privacy`, etc.) also serve the `.php` content.
+
+All migrated pages share the same universal nav (with hover dropdowns: Transform · Solutions · Resources) + 3 CTAs (Log in · Free assessment · Book a Session) + 4-column footer.
+
+### 3.2.1 Universal partials architecture (NEW)
+
+| File | Role |
+|------|------|
+| `partials/site-head.php` | Opens `<html><head>` with meta + 4 universal JSON-LD schemas (Organization, WebSite, WebPage, BreadcrumbList). Caller sets `$page_title`, `$page_description`, `$page_canonical`, `$page_breadcrumb`, `$page_extra_jsonld`. |
+| `partials/site-nav.php` | Skip-link + `<header class="nav">` with 6-item nav + 3 hover dropdowns (Transform 3-card / Solutions 4-card / Resources 2-card) + 3 CTAs. |
+| `partials/site-footer.php` | `<footer class="footer-home">` 4-column + bottom row + auth-aware Log-in→Dashboard JS + nav-mobile.js include + closes `</body></html>`. |
+| `assets/css/site-nav.css` | Universal nav + dropdowns + skip-link + drawer + footer styles. Includes `body.page--light` modifier for inner pages. Loaded by `site-head.php`. |
+| `assets/js/nav-mobile.js` | Accordion drawer for mobile (<880px). Walks only direct children of `.nav__links`, extracts sub-items from dropdown panels, builds expandable sections. Inline-style fallback so drawer never renders in flow even with stale CSS cache. |
+
+Page-specific PHP variables consumed by `site-head.php`:
+```php
+$page_path_prefix = '/';        // or '../' for nested paths
+$page_title       = 'Page Title | Syncsity';
+$page_description = '...';      // 140-160 chars
+$page_canonical   = 'https://syncsity.com/...';
+$page_breadcrumb  = [['Home','https://syncsity.com/'], [...]];
+$page_extra_jsonld = '...';     // raw JSON-LD <script> blocks (FAQPage, Service, etc.)
+```
+
+### 3.2.2 SPA-route migrations (NEW — replacing React routes with hand-written PHP)
+
+| Page | URL | Status | File | Theme |
+|------|-----|--------|------|-------|
+| AI Voice Operations | `/solutions/voice-solutions` | ✅ migrated | `solutions/voice-solutions.php` | LIGHT |
+
+`.htaccess` extended so `/solutions/foo` and `/transform/foo` route to the corresponding `.php` file BEFORE the SPA fallback fires. Unmigrated routes still serve the React bundle.
 
 ### 3.3 Product surfaces (PHP)
 
@@ -364,4 +397,121 @@ All six should return their expected status codes.
 
 This file replaces the older `REQUIREMENTS.md` as the master tracker. `REQUIREMENTS.md` remains for historical reference but new work should update **this** file.
 
-— Edward Hadome / Syncsity / 2026-05-01
+---
+
+## 11. Lessons Learned (do NOT repeat)
+
+These are bugs and mistakes that cost the user multiple round-trips. Internalise before starting work. The full version with reproduction details is in `HANDOVER.md` section 3.
+
+### 11.1 Theme awareness — check FIRST
+- **Home page is DARK theme** (navy bg + white text + dark glass nav)
+- **Inner pages are LIGHT theme** (white bg + navy text + white nav)
+- Default ≠ dark. Before drafting any new page, look at every screenshot the user has sent for that page family and decide light-vs-dark theme as a **foundational** call. Light pages need `<body class="page--light">`.
+
+### 11.2 The "hand-holding" pattern
+The user has flagged this twice ("you need to figure it out before presenting" / "so much hand holding :)"). The pattern: I default to a guess, the user has to spell out the missing detail (hero video URL, real Unsplash photos, light theme, etc.). The fix is exhaustive discovery BEFORE writing code:
+
+1. `grep -oE '"https://[^"]+"' assets/index-Cvwr8-XU.js` for all external URLs
+2. `grep -oE 'url\([^)]+\)' assets/index-Di5VW5bt.css` for all CSS background-image URLs
+3. Re-read every screenshot the user has sent for the page area
+4. State explicitly what's missing before substituting
+
+### 11.3 CSS selector traps
+- `.nav__links a` was matching dropdown card anchors too — fixed with `.nav__links > a, .nav__has-menu > a` direct-child selectors.
+- `.voice-step` referenced in animation rule but was renamed to `.how-step` — orphan classes break silently. Always grep before commit.
+
+### 11.4 Dropdown overflow
+Centring a wide dropdown panel under a leftmost or rightmost trigger pushes it off-screen. Per-menu anchor: `Transform → left:0`, `Solutions → centred`, `Resources → right:0`. Plus hard `max-width: calc(100vw - 32px)` cap.
+
+### 11.5 Mobile drawer leak
+`nav-mobile.js` previously cloned the entire `.nav__has-menu` wrapper including the hidden hover panel. On touch, `:hover`/`:focus-within` rendered the panel inline. Rewrite walks only direct children and extracts sub-items via `extractSubItems(menuEl)`. Plus defensive `!important` CSS in both stylesheets and inline-style fallback in JS.
+
+### 11.6 Heading hierarchy
+- One `<h1>` per page (was: hero h1 + About h1 — splits keyword authority)
+- No duplicate section headings (was: two "Clients We've Worked With" — case studies + logo marquee — renamed marquee to "Trusted by Ambitious Companies")
+
+### 11.7 Caches
+Multiple cache layers — browser, Apache 30-day for `/assets/*`, CDN. After a CSS/JS change, the user needs hard refresh (Ctrl+F5). Server needs `git pull` — without that, screenshots show old commit's output.
+
+### 11.8 Destructive shell commands
+The early `rm -rf public_html` wiped a WordPress install. Never propose destructive shell ops without an `mv` alternative. Never force-push, hard-reset, or `--no-verify` without explicit user confirmation. Auto mode is **not** a license for this.
+
+---
+
+## 12. Migration Recipe (proven)
+
+To migrate any SPA route or static page:
+
+### Step 1 — Pull all bundle content
+```bash
+grep -oE '"[A-Z][^"]{15,300}"' assets/index-Cvwr8-XU.js | sort -u > /tmp/strings.txt
+grep -oE '"https://[^"]+"' assets/index-Cvwr8-XU.js | sort -u > /tmp/urls.txt
+grep -oE 'url\([^)]+\)' assets/index-Di5VW5bt.css | sort -u > /tmp/cssurls.txt
+```
+Then narrow to your page topic with `grep -i 'voice|call cent|...'`.
+
+### Step 2 — Theme decision (DARK or LIGHT)
+Re-read all user screenshots for this area. Get this right BEFORE writing code.
+
+### Step 3 — Copy the closest template
+- Light inner page: `solutions/voice-solutions.php`
+- Dark prose page: `terms.php`
+
+### Step 4 — Set page variables at top
+```php
+$page_path_prefix = '/';        // or '../' for nested
+$page_title       = 'Title | Syncsity';
+$page_description = '...';
+$page_canonical   = 'https://syncsity.com/...';
+$page_breadcrumb  = [['Home','...'], [...]];
+$page_extra_jsonld = '...';
+```
+
+### Step 5 — Body content
+Keep `<?php include site-nav.php ?>`, the `<main>`, then `<?php include site-footer.php ?>`. Page-specific JS BEFORE the footer include (footer closes `</body></html>`).
+
+### Step 6 — `.htaccess`
+SPA routes already covered by the `^(auth|assess|dashboard|solutions|transform)/...` rule. Brand-new paths need a new rewrite.
+
+### Step 7 — Pre-commit audit
+- Single `<h1>` per page
+- All images have width/height
+- No orphan classes in animation/transition rules
+- `display: none !important` on `.nav__drawer` defensive rule still present
+- All section bgs match chosen theme
+- `prefers-reduced-motion` covers all hovers
+- `body.page--light` if light theme
+
+### Step 8 — Commit + push
+Detailed multi-paragraph commit message (see `git log --pretty=full` for examples). Push immediately. Tell user to pull on server.
+
+---
+
+## 13. Pages Pending (master backlog)
+
+### SPA solution routes (8 remaining)
+- [ ] `/solutions/lead-generation` — "AI Sales System"
+- [ ] `/solutions/process-optimization` — "Process Automation"
+- [ ] `/solutions/workforce-transformation` — "Workforce Intelligence"
+- [ ] `/solutions/operational-diagnostics`
+- [ ] `/solutions/advanced-ai-automation`
+- [ ] `/solutions/enterprise-ai-strategy`
+- [ ] `/solutions/human-ai-collaboration`
+- [ ] `/solutions/audience-intelligence`
+
+### SPA transform routes (3 remaining)
+- [ ] `/transform/market-domination`
+- [ ] `/transform/revenue-acceleration`
+- [ ] `/transform/operational-supremacy`
+
+### Top-level SPA routes
+- [ ] `/why-syncsity`
+- [ ] `/pricing` (general — different from per-solution pricing)
+- [ ] `/about-us`
+- [ ] `/calculators`
+- [ ] `/` (promote `/syncdemo/` to root)
+
+### Done
+- [x] `/solutions/voice-solutions` — first SPA migration, LIGHT theme, all 9 sections (hero / capabilities / features / pricing / implementation / how-it-works / comparison / FAQ / CTA)
+
+— Edward Hadome / Syncsity / handover updated 2026-05-04

@@ -87,78 +87,104 @@ include __DIR__ . '/../partials/site-head.php';
 ?>
 
 <style>
-/* ── Voice Operations page ─────────────────────────────────────────── */
-:root { --voice-glow: rgba(51,133,223,0.20); }
+/* ── Voice Operations page — LIGHT theme throughout (matches live) ── */
+/* Force light page bg and override the dark default from static-page.css */
+body, body.page--light { background: #fff !important; color: #14213D; }
 
-/* Hero */
+/* Hero — light, photo background, dark navy text, 3 simple pills */
 .voice-hero {
   position: relative; overflow: hidden;
-  padding: 80px 0 96px; isolation: isolate;
-  background:
-    radial-gradient(circle at 20% 20%, var(--voice-glow), transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(252,163,17,0.08), transparent 50%),
-    linear-gradient(180deg, #050814 0%, #0a1022 100%);
+  padding: 88px 0 96px; isolation: isolate;
+  background: #f5f7fa;
 }
 .voice-hero::before {
-  content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0.4;
+  content: ''; position: absolute; inset: 0; z-index: -2;
   background:
-    repeating-linear-gradient(0deg,  rgba(255,255,255,0.025) 0 1px, transparent 1px 96px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 96px);
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    linear-gradient(180deg, rgba(245,247,250,0.92) 0%, rgba(245,247,250,0.96) 100%),
+    url('https://images.unsplash.com/photo-1556745753-b2904692b3cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  filter: blur(2px);
 }
-.voice-hero__inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; text-align: center; }
+.voice-hero::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(51,133,223,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(0,184,217,0.06) 0%, transparent 50%);
+}
+.voice-hero__inner { max-width: 1080px; margin: 0 auto; padding: 0 24px; text-align: center; }
 .voice-hero__eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 14px;
-  background: rgba(51,133,223,0.10); color: var(--blue-300);
-  border: 1px solid rgba(51,133,223,0.24);
-  border-radius: 9999px; font-size: 12px; font-weight: 600;
-  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(20,33,61,0.10);
+  color: #14213D;
+  border-radius: 9999px; font-size: 13px; font-weight: 600;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
+.voice-hero__eyebrow svg { width: 15px; height: 15px; color: #14213D; }
 .voice-hero h1 {
-  font-size: clamp(36px, 5.4vw, 64px);
-  font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
-  color: #fff; margin: 20px auto 16px; max-width: 980px;
+  font-size: clamp(36px, 5.6vw, 68px);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.02em;
+  color: #14213D;
+  margin: 22px auto 18px; max-width: 1000px;
 }
-.voice-hero h1 .accent { color: var(--blue-400); display: block; }
 .voice-hero__lead {
-  color: rgba(229,231,235,0.88); font-size: 18px; line-height: 1.55;
-  max-width: 780px; margin: 0 auto 32px;
+  color: #475569; font-size: 18px; line-height: 1.55;
+  max-width: 760px; margin: 0 auto 32px;
+}
+.voice-hero__pills {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 32px;
+}
+.voice-hero__pill {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(20,33,61,0.08);
+  color: #14213D; padding: 10px 20px;
+  border-radius: 9999px; font-size: 14px; font-weight: 500;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .voice-hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-.voice-hero__metrics {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-  max-width: 920px; margin: 56px auto 0;
+.voice-hero__btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(180deg, #14213D 0%, #0a1022 100%);
+  color: #fff; padding: 16px 28px; border-radius: 12px;
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 8px 22px rgba(20,33,61,0.20);
 }
-@media (max-width: 720px) { .voice-hero__metrics { grid-template-columns: repeat(2, 1fr); } }
-.voice-metric {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px; padding: 20px;
-  text-align: center;
+.voice-hero__btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(20,33,61,0.28); }
+.voice-hero__btn-primary::after { content: '→'; }
+.voice-hero__btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 1px solid #e2e8f0;
+  color: #14213D; padding: 16px 28px; border-radius: 12px;
+  font-weight: 600; font-size: 15px; text-decoration: none;
+  transition: background 150ms ease, border-color 150ms ease;
 }
-.voice-metric__value { font-size: 28px; font-weight: 700; color: #fff; line-height: 1; margin-bottom: 6px; }
-.voice-metric__value .unit { font-size: 18px; color: var(--blue-300); }
-.voice-metric__label { font-size: 13px; color: var(--text-muted); }
+.voice-hero__btn-secondary:hover { background: #f5f7fa; border-color: #cbd5e1; }
+.voice-hero__btn-secondary::after { content: '→'; }
 
-/* Section heading shared */
+/* Section heading shared (LIGHT) */
 .section-head { text-align: center; margin-bottom: 56px; }
 .section-head__eyebrow {
   display: inline-block; padding: 4px 12px;
-  background: rgba(51,133,223,0.14); color: var(--blue-300);
+  background: #E6F0FB; color: #0066D7;
   border-radius: 9999px; font-size: 12px; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
 }
 .section-head h2 {
   font-size: clamp(28px, 3.6vw, 42px);
-  font-weight: 700; color: #fff; letter-spacing: -0.02em;
+  font-weight: 700; letter-spacing: -0.02em;
   margin: 16px 0 12px; line-height: 1.15;
+  background: linear-gradient(90deg, #14213D 0%, #0066D7 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.section-head p { color: var(--text-muted); font-size: 17px; max-width: 720px; margin: 0 auto; line-height: 1.55; }
+.section-head p { color: #475569; font-size: 17px; max-width: 720px; margin: 0 auto; line-height: 1.55; }
 
-/* Capabilities grid */
-.voice-capabilities { padding: 96px 0; background: #0a1022; }
+/* Capabilities grid — LIGHT */
+.voice-capabilities { padding: 96px 0; background: #fff; }
 .voice-capabilities__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 .voice-cap__grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
@@ -166,25 +192,32 @@ include __DIR__ . '/../partials/site-head.php';
 @media (max-width: 980px) { .voice-cap__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 540px) { .voice-cap__grid { grid-template-columns: 1fr; } }
 .voice-cap {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #fff; border: 1px solid #eef2f7;
   border-radius: 14px; padding: 28px;
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
-.voice-cap:hover { transform: translateY(-3px); border-color: rgba(51,133,223,0.30); background: rgba(51,133,223,0.04); }
+.voice-cap:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(20,33,61,0.10);
+  border-color: #cbd5e1;
+}
 .voice-cap__icon {
   width: 44px; height: 44px; margin-bottom: 18px;
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(51,133,223,0.18), rgba(51,133,223,0.08));
-  color: var(--blue-300);
+  background: linear-gradient(135deg, #E6F0FB, #CCE0F7);
+  color: #0066D7;
 }
 .voice-cap__icon svg { width: 22px; height: 22px; }
-.voice-cap h3 { color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 10px; }
-.voice-cap p { color: var(--text-muted); font-size: 14.5px; line-height: 1.55; margin: 0; }
+.voice-cap h3 { color: #14213D; font-size: 18px; font-weight: 700; margin: 0 0 10px; }
+.voice-cap p { color: #475569; font-size: 14.5px; line-height: 1.55; margin: 0; }
 
-/* Features section */
-.voice-features { padding: 96px 0; background: linear-gradient(180deg, #0a1022 0%, #050814 100%); }
+/* Features section — LIGHT */
+.voice-features {
+  padding: 96px 0;
+  background: linear-gradient(180deg, #fff 0%, #f5f7fa 100%);
+  border-top: 1px solid #eef2f7;
+}
 .voice-features__container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
 .voice-feat__grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
@@ -192,15 +225,14 @@ include __DIR__ . '/../partials/site-head.php';
 @media (max-width: 980px) { .voice-feat__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 540px) { .voice-feat__grid { grid-template-columns: 1fr; } }
 .voice-feat {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #fff; border: 1px solid #eef2f7;
   border-radius: 12px; padding: 24px;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
-.voice-feat:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.30); }
-.voice-feat svg { width: 22px; height: 22px; color: var(--blue-300); margin-bottom: 14px; }
-.voice-feat h4 { color: #fff; font-size: 15px; font-weight: 700; margin: 0 0 6px; }
-.voice-feat p  { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; margin: 0; }
+.voice-feat:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(20,33,61,0.10); }
+.voice-feat svg { width: 22px; height: 22px; color: #0066D7; margin-bottom: 14px; }
+.voice-feat h4 { color: #14213D; font-size: 15px; font-weight: 700; margin: 0 0 6px; }
+.voice-feat p  { color: #475569; font-size: 13.5px; line-height: 1.5; margin: 0; }
 
 /* Pricing Plans — light section */
 .voice-pricing {
@@ -405,65 +437,75 @@ include __DIR__ . '/../partials/site-head.php';
 .how-step h3 { color: #14213D; font-size: 17px; font-weight: 700; margin: 0 0 10px; }
 .how-step p  { color: #475569; font-size: 13.5px; line-height: 1.55; margin: 0; }
 
-/* Comparison */
-.voice-compare { padding: 96px 0; background: linear-gradient(180deg, #0a1022 0%, #050814 100%); }
+/* Comparison — LIGHT */
+.voice-compare { padding: 96px 0; background: #fff; border-top: 1px solid #eef2f7; }
 .voice-compare__container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 .compare-table {
   width: 100%; border-collapse: separate; border-spacing: 0;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #fff; border: 1px solid #eef2f7;
   border-radius: 16px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(20,33,61,0.06);
 }
 .compare-table th, .compare-table td {
   padding: 18px 22px; text-align: left;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid #eef2f7;
 }
 .compare-table thead th {
-  background: rgba(255,255,255,0.04);
-  color: #fff; font-weight: 700; font-size: 14px;
+  background: #f8fafc;
+  color: #14213D; font-weight: 700; font-size: 14px;
 }
-.compare-table thead th:nth-child(2) { color: var(--blue-300); }
+.compare-table thead th:nth-child(2) { color: #0066D7; }
 .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: 0; }
-.compare-table tbody th { color: var(--text-muted); font-weight: 500; font-size: 14px; }
-.compare-table tbody td { color: #fff; font-size: 14px; }
-.compare-table td:first-of-type { color: rgba(255,100,100,0.85); }
-.compare-table td:last-of-type { color: rgba(54,179,126,0.95); font-weight: 600; }
+.compare-table tbody th { color: #64748b; font-weight: 500; font-size: 14px; }
+.compare-table tbody td { color: #14213D; font-size: 14px; }
+.compare-table td:first-of-type { color: #b91c1c; }
+.compare-table td:last-of-type { color: #047857; font-weight: 600; }
 @media (max-width: 720px) { .compare-table th, .compare-table td { padding: 12px 14px; font-size: 13px; } }
 
-/* FAQ */
-.voice-faq { padding: 96px 0; background: #0a1022; }
+/* FAQ — LIGHT */
+.voice-faq { padding: 96px 0; background: #f5f7fa; border-top: 1px solid #eef2f7; }
 .voice-faq__container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 .faq-item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #fff; border: 1px solid #eef2f7;
   border-radius: 12px; margin-bottom: 12px;
-  transition: border-color 200ms ease;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
-.faq-item[open] { border-color: rgba(51,133,223,0.30); }
+.faq-item:hover { border-color: #cbd5e1; }
+.faq-item[open] { border-color: #3385DF; box-shadow: 0 8px 24px rgba(51,133,223,0.10); }
 .faq-item summary {
   list-style: none; cursor: pointer;
   padding: 22px 24px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  font-weight: 600; color: #fff; font-size: 16.5px; line-height: 1.4;
+  font-weight: 600; color: #14213D; font-size: 16.5px; line-height: 1.4;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before {
+  content: 'Q'; flex-shrink: 0;
+  width: 28px; height: 28px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #14213D; color: #fff;
+  border-radius: 50%; font-size: 13px; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  margin-right: 8px;
+}
 .faq-item summary::after {
   content: ''; width: 12px; height: 12px; flex-shrink: 0;
-  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  border-right: 2px solid #64748b; border-bottom: 2px solid #64748b;
   transform: rotate(45deg) translateY(-2px);
   transition: transform 200ms ease;
+  margin-left: auto;
 }
-.faq-item[open] summary::after { transform: rotate(-135deg) translateY(0); }
-.faq-item__body { padding: 0 24px 22px; color: var(--text-muted); font-size: 15px; line-height: 1.65; }
+.faq-item[open] summary::after { transform: rotate(-135deg) translateY(0); border-color: #14213D; }
+.faq-item__body { padding: 0 24px 22px 60px; color: #475569; font-size: 15px; line-height: 1.65; }
 
-/* Bottom CTA */
-.voice-cta { padding: 96px 0; background: linear-gradient(180deg, #050814 0%, #0a1022 100%); }
+/* Bottom CTA — keep dark gradient (it's a feature accent, not the main bg) */
+.voice-cta { padding: 96px 0; background: #fff; }
 .voice-cta__container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 .voice-cta__inner {
   background: linear-gradient(135deg, #0A1022 0%, #14213D 60%, #0066D7 140%);
   border-radius: 20px; padding: 56px 48px;
   text-align: center; position: relative; overflow: hidden;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  box-shadow: 0 24px 48px rgba(20,33,61,0.30);
 }
 .voice-cta__inner::before {
   content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -476,6 +518,8 @@ include __DIR__ . '/../partials/site-head.php';
 }
 .voice-cta p { color: rgba(255,255,255,0.85); font-size: 17px; line-height: 1.55; max-width: 640px; margin: 0 auto 28px; }
 .voice-cta__buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.voice-cta__buttons .btn--primary { background: linear-gradient(135deg, #3385DF, #0066D7); color: #fff; box-shadow: 0 8px 22px rgba(51,133,223,0.32); }
+.voice-cta__buttons .btn--orange { background: #FCA311; color: #fff; box-shadow: 0 8px 22px rgba(252,163,17,0.30); }
 
 @media (max-width: 720px) {
   .voice-hero { padding: 56px 0 64px; }
@@ -484,18 +528,25 @@ include __DIR__ . '/../partials/site-head.php';
   .voice-cta__inner { padding: 36px 24px; }
 }
 
-/* Section reveal */
-@keyframes voiceReveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.voice-capabilities, .voice-features, .voice-how, .voice-compare, .voice-faq, .voice-cta {
+/* Section reveal — apply to all major sections except the hero (which renders immediately) */
+@keyframes voiceReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.voice-capabilities, .voice-features, .voice-pricing, .voice-impl,
+.voice-how, .voice-compare, .voice-faq, .voice-cta {
   animation: voiceReveal 0.6s ease-out both;
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .voice-capabilities, .voice-features, .voice-how, .voice-compare, .voice-faq, .voice-cta { animation: none; }
-  .voice-cap, .voice-feat, .voice-step, .faq-item { transition: none; }
+  .voice-capabilities, .voice-features, .voice-pricing, .voice-impl,
+  .voice-how, .voice-compare, .voice-faq, .voice-cta { animation: none; }
+  .voice-cap, .voice-feat, .pricing-tier, .how-step, .impl-card,
+  .faq-item, .voice-hero__btn-primary, .voice-hero__btn-secondary { transition: none; }
 }
 </style>
 </head>
-<body>
+<body class="page--light">
 
 <?php include __DIR__ . '/../partials/site-nav.php'; ?>
 
@@ -505,21 +556,21 @@ include __DIR__ . '/../partials/site-head.php';
   <section class="voice-hero">
     <div class="voice-hero__inner">
       <span class="voice-hero__eyebrow">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
-        AI Voice Operations
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+        AI Voice Technology
       </span>
-      <h1>Replace Your Entire Call Center With <span class="accent">AI That Sounds More Human Than Humans.</span></h1>
+      <h1>Replace Your Entire Call Center With AI That Sounds More Human Than Humans</h1>
       <p class="voice-hero__lead">Handle unlimited conversations in 40+ languages, 24/7, with empathy and intelligence that deepens customer relationships.</p>
-      <div class="voice-hero__ctas">
-        <a href="/assess" class="btn btn--primary btn--lg">Start Free Voice Demo &rarr;</a>
-        <a href="/booking.php" class="btn btn--ghost btn--lg">Request Voice Agent Demo</a>
+
+      <div class="voice-hero__pills" aria-label="Key results">
+        <span class="voice-hero__pill">90% cost reduction</span>
+        <span class="voice-hero__pill">97% satisfaction scores</span>
+        <span class="voice-hero__pill">100% availability</span>
       </div>
 
-      <div class="voice-hero__metrics" aria-label="Key results">
-        <div class="voice-metric"><div class="voice-metric__value">90<span class="unit">%</span></div><div class="voice-metric__label">Cost reduction</div></div>
-        <div class="voice-metric"><div class="voice-metric__value">40<span class="unit">+</span></div><div class="voice-metric__label">Languages</div></div>
-        <div class="voice-metric"><div class="voice-metric__value">24/7</div><div class="voice-metric__label">Always on</div></div>
-        <div class="voice-metric"><div class="voice-metric__value">3<span class="unit">wk</span></div><div class="voice-metric__label">To go-live</div></div>
+      <div class="voice-hero__ctas">
+        <a href="/assess" class="voice-hero__btn-primary">Start Free Voice Demo</a>
+        <a href="/calculators" class="voice-hero__btn-secondary">Calculate Your Savings</a>
       </div>
     </div>
   </section>
